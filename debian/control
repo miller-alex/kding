@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Michael Rex <me@rexi.org>
 Build-Depends: cdbs, debhelper (>= 7), pkg-kde-tools, cmake, kdelibs5-dev (>= 4.2.0)
 Standards-Version: 3.8.0
-Homepage: http://www.rexi.org/software/kding/
+Homepage: http://kding.sourceforge.net/
 
 Package: kding
 Architecture: any
