@@ -119,6 +119,7 @@ void TranslationWidget::processSearchResults() {
     } else {
         displayHtml(m_htmlGenerator->resultPage(searchTerm, resultList));
         historyInput->addToHistory(searchTerm);
+        historyInput->setCurrentIndex(0);
         saveSettings();
     }
     
