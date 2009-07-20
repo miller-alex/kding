@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+    <!ENTITY kding "<application>KDing</application>">
+    <!ENTITY kappname "&kding;"><!-- Do *not* replace kappname-->
+    <!ENTITY % addindex "IGNORE">
+    <!ENTITY % German "INCLUDE"><!-- change language only here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from kde-genent.entities and $LANG/user.entities. -->
+]>
+
+<!-- The language must NOT be changed here. -->
+
+<book lang="&language;">
+
+    <bookinfo>
+        
+        <title>Das &kding;-Handbuch</title>
+
+        <authorgroup>
+            <author>
+                <firstname>Michael</firstname><surname>Rex</surname>
+                <affiliation><address><email>me@rexi.org</email></address></affiliation>
+            </author>
+        </authorgroup>
+
+        <copyright>
+            <year>2005-2009</year>
+            <holder>Michael Rex</holder>
+        </copyright>
+        
+        <legalnotice>&FDLNotice;</legalnotice>
+
+        <date>2009-07-09</date>
+        <releaseinfo>0.5</releaseinfo>
+
+        <abstract>
+            <para>
+                &kding; ist ein KDE-Port von Ding, einem Programm zur Suche in
+                W&ouml;rterb&uuml;chern. Es liegt im Systembereich der
+                Kontrolleiste und kann bei Aktivierung den aktuellen Inhalt der
+                Zwischenablage &uuml;bersetzen. Der Benutzer kann auch einzelne
+                W&ouml;rter oder Ausdr&uuml;cke eingeben, die dann
+                &uuml;bersetzt werden.
+            </para>
+        </abstract>
+
+        <keywordset>
+            <keyword>KDE</keyword>
+            <keyword>KDing</keyword>
+            <keyword>Ding</keyword>
+            <keyword>translation</keyword>
+            <keyword>German</keyword>
+            <keyword>English</keyword>
+            <keyword>Utilities</keyword>
+        </keywordset>
+
+    </bookinfo>
+
+    <chapter id="introduction">
+        <title>Einf&uuml;hrung</title>
+
+        <sect1 id="introduction-about">
+            <title>&Uuml;ber &kding;</title>
+
+            <para>
+                &kding; ist ein KDE-Port von
+                <ulink url="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
+                einem Programm zur Suche in W&ouml;rterb&uuml;chern. Es liegt im
+                Systembereich der Kontrolleiste und kann bei Aktivierung den
+                aktuellen Inhalt der Zwischenablage &uuml;bersetzen. Der
+                Benutzer kann auch einzelne W&ouml;rter oder Ausdr&uuml;cke
+                eingeben, die dann &uuml;bersetzt werden. &kding; ist daf&uuml;r
+                gedacht, zwischen deutsch und englisch zu &uuml;bersetzen. Es
+                kann allerdings mit jeder Sprache benutzt werden, f&uuml;r die
+                ein W&ouml;rterbuch f&uuml;r Ding verf&uuml;gbar ist.
+            </para>
+        </sect1>
+
+        <sect1 id="introdcution-reportbugs">
+            <title>Fehler melden</title>
+
+            <para>
+                Sollten Sie einen Fehler in &kding; entdecken, k&ouml;nnen Sie
+                KDEs Fehlerberichtsfunktion benutzen, um einen Fehlerbericht zu
+                verfassen. Im Kontextmen&uuml;; des Programms finden Sie den
+                Eintrag "Fehlerbericht". Klicken Sie einfach darauf und
+                verfassen Sie Ihren Fehlerbericht.
+            </para>
+        </sect1>
+
+    </chapter>
+
+    <chapter id="using-kding">
+        <title>Verwendung von &kding;</title>
+
+        <para>
+            &kding; zu benutzen ist wirklich einfach. Wenn Sie &kding; starten,
+            erscheint ein neues Symbol im Systembereich der Kontrolleiste mit
+            dem Logo von KDing. Wenn Sie auf dieses Symbol mit der linken
+            Maustaste klicken, wird das Hauptfenster von KDing angezeigt.
+            
+            <screenshot>
+                <screeninfo>Das Hauptfenster</screeninfo>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="mainwindow.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>&kding;s Hauptfenster</phrase>
+                    </textobject>
+                </mediaobject>
+            </screenshot>
+            
+            Dort k&ouml;nnen Sie einen Begriff eingeben, der dann &uuml;bersetzt
+            wird. Wenn sie mit der mittleren Maustaste auf das Symbol klicken,
+            wird der aktuelle Inhalt der Zwischenablage &uuml;bersetzt. Und wenn
+            Sie auf das Symbol mit der rechten Maustaste klicken, wird ein
+            Kontextmen&uuml; ge&ouml;ffnet. Dort k&ouml;nnen Sie z.B. auf "Wort
+            &uuml;bersetzen" klicken, um ebenfalls ein Fenster zu &ouml;ffnen,
+            in dem Sie ein Wort oder einen Ausdruck eingeben k&ouml;nnen, der
+            &uuml;bersetzt werden soll.
+            
+            <screenshot>
+                <screeninfo>&Uuml;bersetzung</screeninfo>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="translation.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>&Uuml;bersetzung</phrase>
+                    </textobject>
+                </mediaobject>
+            </screenshot>
+        </para>
+        
+        <para>
+            Sie k&ouml;nnen &kding;s Funktionen auch &uuml;ber Tastenk&uuml;rzel
+            aufrufen. Standardm&auml;&szlig;ig wird der aktuelle Inhalt der
+            Zwischenablage mit dem K&uuml;rzel Windows+Umschalt+T
+            &uuml;bersetzt. Der &Uuml;bersetzungsdialog kann mit
+            Windows+Umschalt+W ge&ouml;ffnet werden. Die Tastenk&uuml;rzel
+            k&ouml;nnen Sie mit dem Eintrag "Globale Kurzbefehle einrichten" des
+            Kontextmen&uuml;s nach Ihren W&uuml;nschen anpassen.
+        </para>
+        
+    </chapter>
+
+    <chapter id="credits">
+        <title>Danksagungen und Lizenz</title>
+
+        <para>
+            &kding;
+        </para>
+        
+        <para>
+            Programm-Copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+        </para>
+        
+<!--
+        <para>
+            Contributors:
+            <itemizedlist>
+                <listitem><para>Konqui the KDE Dragon <email>konqui@kde.org</email></para></listitem>
+                <listitem><para>Tux the Linux Penguin <email>tux@linux.org</email></para></listitem>
+            </itemizedlist>
+        </para>
+-->
+
+        <para>
+            Dokumentations-Copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+        </para>
+
+        &underFDL;               <!-- FDL: do not remove -->
+
+
+        &underGPL;        	 <!-- GPL License -->
+
+    </chapter>
+
+    <appendix id="installation">
+        <title>Installation</title>
+
+        <sect1 id="getting-kding">
+            <title>Wie kann man &kding; bekommen</title>
+            
+            <para>
+                &kding;s Website finden sie unter
+                <ulink url="http://kding.sourceforge.net/">http://kding.sourceforge.net/</ulink>.
+            </para>
+
+        </sect1>
+<!--
+        <sect1 id="requirements">
+            <title>Systemvoraussetzungen</title>
+            
+            <para>
+                
+            </para>
+        
+        </sect1>
+-->
+        <sect1 id="compilation">
+            <title>Wie man &kding; kompiliert</title>
+
+<!-- This entity contains the boilerplate text for standard -->
+<!-- compilation instructions.  If your application requires any -->
+<!-- special handling, remove it, and replace with your own text. -->
+
+            &install.compile.documentation;
+
+        </sect1>
+
+    </appendix>
+
+&documentation.index;
+</book>

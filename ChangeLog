@@ -1,0 +1,59 @@
+2009-07-17  Michael Rex  <me@rexi.org>
+
+        * released v0.5
+        * KDing ported to KDE4
+        * updated dictionary to v1.6
+
+2008-05-17  Michael Rex  <me@rexi.org>
+
+        * released v0.4.3
+        * bugfix for a race condition when calling egrep
+        * preliminary support for compiling with cmake added
+
+2008-02-17  Michael Rex  <me@rexi.org>
+
+        * released v0.4.2
+        * bugfix for an encoding issue with non-utf8 locales
+        * updated german translation
+
+2007-09-09  Michael Rex  <me@rexi.org>
+
+        * released v0.4.1
+        * updated documentation
+        * added statusbar
+
+2007-08-08  Michael Rex  <me@rexi.org>
+
+        * released v0.4
+        * removed the dependency on Ding: KDing can now search for translations
+          and display the results itself
+        * updated translation database to the one from Ding 1.5
+
+2005-09-19  Michael Rex  <me@rexi.org>
+
+        * released v0.3.1
+        * multiple calls of "Translate word" no longer create multiple
+          instances of the translation dialog, but rather show or hide it
+        * clicking the systray icon with the middle mouse button now opens the
+          translate dialog
+
+2005-09-19  Michael Rex  <me@rexi.org>
+
+        * released v0.3
+        * added German and English documentation
+        * some code cleanup
+        * switched Debian package building to cdbs
+
+2005-09-11  Michael Rex  <me@rexi.org>
+
+        * released v0.2.1
+        * added German translation
+        * added debian directory
+
+2005-09-08  Michael Rex  <me@rexi.org>
+
+        * redesigned input dialog, added history of searched terms
+
+2005-08-29  Michael Rex  <me@rexi.org>
+
+        * Released v0.1

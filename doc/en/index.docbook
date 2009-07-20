@@ -1,0 +1,207 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+    <!ENTITY kding "<application>KDing</application>">
+    <!ENTITY kappname "&kding;"><!-- Do *not* replace kappname-->
+    <!ENTITY % addindex "IGNORE">
+    <!ENTITY % English "INCLUDE"><!-- change language only here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from kde-genent.entities and $LANG/user.entities. -->
+]>
+
+<!-- The language must NOT be changed here. -->
+
+<book lang="&language;">
+
+    <bookinfo>
+        
+        <title>The &kding; Handbook</title>
+
+        <authorgroup>
+            <author>
+                <firstname>Michael</firstname><surname>Rex</surname>
+                <affiliation><address><email>me@rexi.org</email></address></affiliation>
+            </author>
+        </authorgroup>
+
+        <copyright>
+            <year>2005-2009</year>
+            <holder>Michael Rex</holder>
+        </copyright>
+        
+        <legalnotice>&FDLNotice;</legalnotice>
+
+        <date>2009-07-09</date>
+        <releaseinfo>0.5</releaseinfo>
+
+        <abstract>
+            <para>
+                &kding; is a KDE port of Ding, a dictionary lookup program. It
+                is a simple program sitting in KDE's system tray that can
+                translate the current clipboard content. The user can also enter
+                a single word or a phrase for translation.
+            </para>
+        </abstract>
+
+        <keywordset>
+            <keyword>KDE</keyword>
+            <keyword>KDing</keyword>
+            <keyword>Ding</keyword>
+            <keyword>translation</keyword>
+            <keyword>German</keyword>
+            <keyword>English</keyword>
+            <keyword>Utilities</keyword>
+        </keywordset>
+
+    </bookinfo>
+
+    <chapter id="introduction">
+        <title>Introduction</title>
+
+        <sect1 id="introduction-about">
+            <title>About &kding;</title>
+
+            <para>
+                &kding; is a KDE port of
+                <ulink url="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
+                a dictionary lookup program. It is a simple program sitting in
+                KDE's system tray that can translate the current clipboard
+                content. The user can also enter a single word or a phrase for
+                translation. KDing is intended to translate between German and
+                English, but it can be used for every language for which a word
+                list is available for Ding.
+            </para>
+        </sect1>
+
+        <sect1 id="introdcution-reportbugs">
+            <title>Reporting bugs</title>
+
+            <para>
+                If you happen to find a bug in &kding;, you can use KDE's bug
+                reporting feature. The program's context menu includes a "Report
+                Bug" item. Just click on it and write your bug report.
+            </para>
+        </sect1>
+
+    </chapter>
+
+    <chapter id="using-kding">
+        <title>Using &kding;</title>
+
+        <para>
+            Using &kding; is really simple. When you start &kding; a new icon
+            appears in the system tray. If you click on it with the left mouse
+            button the main window of &kding; is shown.
+            
+            <screenshot>
+                <screeninfo>Main Window</screeninfo>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="mainwindow.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>&kding;s main window</phrase>
+                    </textobject>
+                </mediaobject>
+            </screenshot>
+            
+            There you can enter a word or a phrase to translate. If you click
+            the icon with the middle mouse button it will translate the text
+            currently in the clipboard. If you click on the icon with the right
+            mouse button a menu will open. There you can select "Translate word"
+            to open a dialog where you can enter a word or a phrase to
+            translate, too.
+            
+            <screenshot>
+                <screeninfo>Translation</screeninfo>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="translation.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>Translation</phrase>
+                    </textobject>
+                </mediaobject>
+            </screenshot>
+        </para>
+        
+        <para>
+            You can access &kding;'s functions with keyboard shortcuts, too. By
+            default the current clipboard content can be translated with
+            Win+Shift+T. The translate dialog can be opened with Win+Shift+W.
+            You can change these shortcuts with "Configure global shortcuts"
+            from &kding;'s context menu.
+        </para>
+        
+    </chapter>
+
+    <chapter id="credits">
+        <title>Credits and License</title>
+
+        <para>
+            &kding;
+        </para>
+        
+        <para>
+            Program copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+        </para>
+        
+<!--
+        <para>
+            Contributors:
+            <itemizedlist>
+                <listitem><para>Konqui the KDE Dragon <email>konqui@kde.org</email></para></listitem>
+                <listitem><para>Tux the Linux Penguin <email>tux@linux.org</email></para></listitem>
+            </itemizedlist>
+        </para>
+-->
+
+        <para>
+            Documentation copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+        </para>
+
+        &underFDL;               <!-- FDL: do not remove -->
+
+
+        &underGPL;        	 <!-- GPL License -->
+
+    </chapter>
+
+    <appendix id="installation">
+        <title>Installation</title>
+
+        <sect1 id="getting-kding">
+            <title>How to obtain &kding;</title>
+            
+            <para>
+                The website for &kding; is
+                <ulink url="http://kding.sourceforge.net/">http://kding.sourceforge.net/</ulink>.
+            </para>
+
+        </sect1>
+
+<!--
+        <sect1 id="requirements">
+            <title>Requirements</title>
+            
+            <para>
+                
+            </para>
+        
+        </sect1>
+-->
+        <sect1 id="compilation">
+            <title>Compilation and Installation</title>
+
+<!-- This entity contains the boilerplate text for standard -->
+<!-- compilation instructions.  If your application requires any -->
+<!-- special handling, remove it, and replace with your own text. -->
+
+            &install.compile.documentation;
+
+        </sect1>
+
+    </appendix>
+
+&documentation.index;
+</book>

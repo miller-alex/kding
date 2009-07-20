@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    
+    <kcfgfile/>
+<!--    <kcfgfile name="kdingrc"/> -->
+    
+    <group name="General">
+        <entry name="CenterWindow" type="Bool">
+            <label>Center the application window on the desktop?</label>
+            <default>true</default>
+        </entry>
+        <entry name="RememberPosition" type="Bool">
+            <label>Remember position of the application window?</label>
+            <default>false</default>
+            <tooltip/>
+            <whatsthis/>
+        </entry>
+        <entry name="Position" type="Point">
+            <label>Position of the application window</label>
+        </entry>
+    </group>
+    
+    <group name="History">
+        <entry name="Recent" type="StringList">
+            <label>List of recently translated words</label>
+        </entry>
+    </group>
+</kcfg>

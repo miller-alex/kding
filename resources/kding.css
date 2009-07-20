@@ -1,0 +1,47 @@
+.keyword {
+    color: blue;
+}
+
+body {
+    margin: 0px;
+    font: 11pt "Bitstream Vera Sans",helvetica,sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+}
+
+th {
+    border-bottom: 1px solid black;
+    background-color: silver;
+}
+
+td {
+    vertical-align: top;
+    border-bottom: 1px dotted silver;
+}
+
+td.c0 {
+
+}
+
+td.c1 {
+    background-color: #eef6ff;
+}
+
+td.title {
+    vertical-align: middle;
+    border: 0px;
+}
+
+td.error {
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-14 15:12+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#. i18n: file: src/kding.kcfg:12
+#. i18n: ectx: label, entry (CenterWindow), group (General)
+#: build/src/settings.cpp:38 rc.cpp:6 rc.cpp:6
+msgid "Center the application window on the desktop?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:16
+#. i18n: ectx: label, entry (RememberPosition), group (General)
+#: build/src/settings.cpp:42 rc.cpp:9 rc.cpp:9
+msgid "Remember position of the application window?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:22
+#. i18n: ectx: label, entry (Position), group (General)
+#: build/src/settings.cpp:46 rc.cpp:12 rc.cpp:12
+msgid "Position of the application window"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:28
+#. i18n: ectx: label, entry (Recent), group (History)
+#: build/src/settings.cpp:53 rc.cpp:15 rc.cpp:15
+msgid "List of recently translated words"
+msgstr ""
+
+#. i18n: file: src/translationwidgetbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
+#: build/src/ui_translationwidgetbase.h:111 rc.cpp:18 rc.cpp:18
+msgid "Form"
+msgstr ""
+
+#. i18n: file: src/translationwidgetbase.ui:47
+#. i18n: ectx: property (text), widget (QLabel, labelText)
+#: build/src/ui_translationwidgetbase.h:113 rc.cpp:21 rc.cpp:21
+msgid "Enter the word or phrase you want to translate"
+msgstr ""
+
+#. i18n: file: src/translationwidgetbase.ui:71
+#. i18n: ectx: property (text), widget (QLabel, labelSearch)
+#: build/src/ui_translationwidgetbase.h:114 rc.cpp:24 rc.cpp:24
+msgid "Se&arch word:"
+msgstr ""
+
+#. i18n: file: resources/kdingui.rc:11
+#. i18n: ectx: Menu (settings)
+#: rc.cpp:3 rc.cpp:3
+msgid "&Settings"
+msgstr ""
+
+#: src/htmlgenerator.cpp:59
+msgctxt "table caption"
+msgid "German"
+msgstr ""
+
+#: src/htmlgenerator.cpp:61
+msgctxt "table caption"
+msgid "English"
+msgstr ""
+
+#: src/main.cpp:27
+msgid "KDing"
+msgstr ""
+
+#: src/main.cpp:28
+msgid "KDE port of Ding, the DIctionary Nice Grep"
+msgstr ""
+
+#: src/main.cpp:30
+msgid "(c) 2005-2009, Michael Rex"
+msgstr ""
+
+#: src/main.cpp:34
+msgid "Michael Rex"
+msgstr ""
+
+#: src/main.cpp:34
+msgid "Maintainer"
+msgstr ""
+
+#: src/main.cpp:35
+msgid "Frank Richter"
+msgstr ""
+
+#: src/main.cpp:35
+msgid ""
+"original author of Ding, for the inspiration for KDing and the dictionary"
+msgstr ""
+
+#: src/main.cpp:36
+msgid "Alexander Stein"
+msgstr ""
+
+#: src/main.cpp:36
+msgid "initial port to KDE4"
+msgstr ""
+
+#: src/main.cpp:42
+msgid "Translate the given phrase"
+msgstr ""
+
+#: src/mainwindow.cpp:49
+msgid "Dictionary version %1"
+msgstr ""
+
+#: src/mainwindow.cpp:71
+msgid "&Translate Clipboard Content"
+msgstr ""
+
+#: src/mainwindow.cpp:73 src/mainwindow.cpp:74
+msgid "Translates the current content of the clipboard."
+msgstr ""
+
+#: src/mainwindow.cpp:81
+msgid "Translate &Word..."
+msgstr ""
+
+#: src/mainwindow.cpp:83 src/mainwindow.cpp:84
+msgid "Opens a dialog where you can enter the word to be translated."
+msgstr ""
+
+#: src/mainwindow.cpp:91
+msgid "Configure &Global Shortcuts..."
+msgstr ""
+
+#: src/searchengine.cpp:81
+msgid "Searching for '%1'..."
+msgstr ""
+
+#: src/searchengine.cpp:236
+msgctxt "dictionary version"
+msgid "unknown"
+msgstr ""
+
+#: src/systemtrayicon.cpp:42
+msgid "KDing - translation tool"
+msgstr ""
+
+#: src/translationwidget.cpp:103
+msgid "Another search is currently running."
+msgstr ""
+
+#: src/translationwidget.cpp:125
+msgid "Found 1 match for '%2'."
+msgid_plural "Found %1 matches for '%2'."
+msgstr[0] ""
+msgstr[1] ""

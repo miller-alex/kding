@@ -1,0 +1,21 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="kding" version="1">
+
+<MenuBar>
+  <Menu name="file">
+    <Action name="kding_translate_clipboard"/>
+    <Action name="kding_translate_word"/>
+    <Separator/>
+  </Menu>
+  
+  <Menu noMerge="1" name="settings"><text>&amp;Settings</text>
+    <Action name="options_show_menubar"/>
+    <Action name="options_show_statusbar"/>
+    <Separator/>
+    <Action name="options_configure_keybinding"/>
+    <Action name="configure_global_shortcuts"/>
+    <Action name="options_configure"/>
+  </Menu>
+</MenuBar>
+
+</kpartgui>
