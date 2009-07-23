@@ -26,6 +26,7 @@
 #include <QRegExp>
 
 class MainWindow;
+class KProcess;
 
 class SearchEngine : public QObject {
     Q_OBJECT
@@ -77,7 +78,7 @@ private:
     QString determineDictionaryVersion();
     QString determineGrepVersion();
     
-    QProcess* m_process;
+    KProcess* m_process;
     QString m_searchTerm;
     ResultList* m_resultList;
 };

@@ -123,7 +123,7 @@ void TranslationWidget::processSearchResults() {
         saveSettings();
     }
     
-    QString msgStr = i18np("Found 1 match for '%2'.", "Found %1 matches for '%2'.", resultList.size()).arg(searchTerm);
+    QString msgStr = i18np("Found 1 match for '%2'.", "Found %1 matches for '%2'.", resultList.size(), searchTerm);
     emit statusMessage(msgStr);
     
     focusInputWidget();

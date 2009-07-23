@@ -20,6 +20,7 @@
 #include <KLocale>
 #include <KGlobal>
 #include <KDebug>
+#include <KProcess>
 #include <QFile>
 #include <QTextStream>
 #include <QByteArray>
@@ -46,6 +47,11 @@ SearchEngine::~SearchEngine() {
     
 }
 
+/**
+ * This is where the search is initiated. The KProcess is set up, its signals
+ * are connected to the corresponding slots of this class, and finally the
+ * process is started.
+ */
 void SearchEngine::search(QString phrase) {
     // if there is already another search process running emit a signal and
     // return without doing anything
@@ -63,11 +69,11 @@ void SearchEngine::search(QString phrase) {
     delete m_resultList;
     m_resultList = 0;
     
-    // now construct the QProcess object and set up all necessary connections
-    m_process = new QProcess();
+    // now construct the KProcess object and set up all necessary connections
+    m_process = new KProcess();
+    m_process->setOutputChannelMode(KProcess::OnlyStdoutChannel);
     
     connect(m_process, SIGNAL(started()), this, SIGNAL(searchStarted()));
-    //connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SIGNAL(searchFinished()));
     connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(processFinished(int, QProcess::ExitStatus)));
     connect(m_process, SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(monitorProcess(QProcess::ProcessState)));
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(processFailed(QProcess::ProcessError)));
@@ -78,15 +84,22 @@ void SearchEngine::search(QString phrase) {
         phrase = phrase.toUtf8();
     }
     
-    emit statusMessage(i18n("Searching for '%1'...").arg(phrase));
+    // set up the command to run
+    (*m_process) << SEARCH_CMD << SEARCH_ARGS << phrase << DEFAULT_DICTIONARY;
     
     // finally start searching
-    m_process->start(SEARCH_CMD, QStringList() << SEARCH_ARGS << phrase << DEFAULT_DICTIONARY);
+    emit statusMessage(i18n("Searching for '%1'...", phrase));
+    m_process->start();
 }
 
+/**
+ * This method reads the results from the KProcess and creates and sorts the
+ * ResultList from these.  After that, the search is finished and the objects
+ * interested in that are notified via the relevant signal.
+ */
 void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus) {
-    kdDebug() << "Exit code: " << exitCode;
-    kdDebug() << "Exit status: " << (exitStatus == QProcess::NormalExit ? "normal" : (exitStatus == QProcess::CrashExit ? " crashed" : "unknown"));
+    kdDebug() << "Exit code:" << exitCode;
+    kdDebug() << "Exit status:" << (exitStatus == QProcess::NormalExit ? "normal" : (exitStatus == QProcess::CrashExit ? "crashed" : "unknown"));
     
     m_resultList = new ResultList();
     while(m_process->canReadLine()) {
@@ -178,6 +191,10 @@ ResultList& SearchEngine::results() const {
     return *m_resultList;
 }
 
+/**
+ * This debug method is used to keep track of the current state of the process.
+ * It is connected to QProcess::stateChanged(QProcess::ProcessState).
+ */
 void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
     switch(newState) {
         case QProcess::NotRunning:
@@ -192,6 +209,10 @@ void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
     }
 }
 
+/**
+ * This debug method is used to give information on errors when running the
+ * process. It is connected to QProcess::error(QProcess::ProcessError).
+ */
 void SearchEngine::processFailed(QProcess::ProcessError error) {
     switch(error) {
         case QProcess::FailedToStart:
