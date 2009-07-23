@@ -17,7 +17,7 @@
 
 #include "systemtrayicon.h"
 #include "mainwindow.h"
-
+#include "settings.h"
 #include <KAboutData>
 #include <KAction>
 #include <KComponentData>
@@ -32,6 +32,7 @@
 SystemTrayIcon::SystemTrayIcon(MainWindow* parent) : KSystemTrayIcon("kding", parent) {
     initGui();
     createMenu();
+    updateSettings();
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
@@ -61,19 +62,34 @@ void SystemTrayIcon::createMenu() {
 
 void SystemTrayIcon::handleClicks(QSystemTrayIcon::ActivationReason reason) {
     // Trigger and Context are handled by KSystemTrayIcon, so only MiddleClick
-    // has to be handled here
+    // has to be handled here, unless TranslateOnLeftClick is enabled. In that
+    // case, we need to handle Trigger ourself, too
     switch(reason) {
         case QSystemTrayIcon::MiddleClick:
-            static_cast<MainWindow*>(parentWidget())->translateClipboard();
+            if(m_translateOnLeftClick) {
+                toggleActive();
+            } else {
+                static_cast<MainWindow*>(parentWidget())->translateClipboard();
+            }
             break;
         case QSystemTrayIcon::Unknown:
         case QSystemTrayIcon::Context:
         case QSystemTrayIcon::DoubleClick:
-        case QSystemTrayIcon::Trigger:
             // fallthrough intended to suppress compiler warnings
             // because of unhandled enumeration values
             break;
+        case QSystemTrayIcon::Trigger:
+            if(m_translateOnLeftClick) {
+                static_cast<MainWindow*>(parentWidget())->translateClipboard();
+            }
+            break;
     }
+}
+
+void SystemTrayIcon::updateSettings() {
+    // locally cached so it doesn't have to be read in every time the icon is
+    // clicked
+    m_translateOnLeftClick = Settings::self()->translateOnLeftClick();
 }
 
 #include "systemtrayicon.moc"

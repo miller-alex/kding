@@ -15,29 +15,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef SYSTEMTRAYICON_H
-#define SYSTEMTRAYICON_H
+#include "generalsettings.h"
 
-#include <KSystemTrayIcon>
+GeneralSettings::GeneralSettings(QWidget* parent) : QWidget(parent) {
+    setupUi(this);
+}
 
-class MainWindow;
-
-class SystemTrayIcon : public KSystemTrayIcon {
-    Q_OBJECT
-
-public:
-    SystemTrayIcon(MainWindow* parent);
-    ~SystemTrayIcon();
-
-private slots:
-    void handleClicks(QSystemTrayIcon::ActivationReason reason);
-    void updateSettings();
+GeneralSettings::~GeneralSettings() {
     
-private:
-    void initGui();
-    void createMenu();
-    
-    bool m_translateOnLeftClick;
-};
+}
 
-#endif
+#include "generalsettings.moc"

@@ -46,13 +46,11 @@ private slots:
     void showPreferences();
     void showShortcuts();
     void toggleMenuBar();
+    void saveSettings();
     
 private:
-    static const int SB_MESSAGE = 0;
-    
     void initGui();
     void setupActions();
-    void saveSettings();
     void centerWindow();
     
     SystemTrayIcon* m_systemTrayIcon;

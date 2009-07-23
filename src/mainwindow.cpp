@@ -19,6 +19,7 @@
 #include "systemtrayicon.h"
 #include "translationwidget.h"
 #include "settings.h"
+#include "generalsettings.h"
 #include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>
@@ -47,9 +48,6 @@ MainWindow::MainWindow() : KXmlGuiWindow(), m_systemTrayIcon(0), m_translationWi
     initGui();
     
     showStatusMessage(i18n("Dictionary version %1", m_translationWidget->dictionaryVersion()));
-    
-    // TODO: entfernen, sobald es die Options gibt
-    actionCollection()->action("options_configure")->setVisible(false);
 }
 
 MainWindow::~MainWindow() {
@@ -160,8 +158,18 @@ void MainWindow::clearStatusMessage() {
 }
 
 void MainWindow::showPreferences() {
-    kdDebug() << "TODO: Qt Designer widgets integration (see TechBase: KConfig XT)";
+    // an instance of the config dialog could already be created and cached,
+    // try showing it first
+    if(KConfigDialog::showDialog("settings")) {
+        return;
+    }
+    
+    // create an instance of the config dialog
     KConfigDialog* dialog = new KConfigDialog(this, "settings", Settings::self());
+    dialog->addPage(new GeneralSettings(), i18n("General Settings"), "configure");
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(saveSettings()));
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), m_systemTrayIcon, SLOT(updateSettings()));
+    
     dialog->show();
 }
 
@@ -195,11 +203,10 @@ void MainWindow::saveSettings() {
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event) {
+    // allow the window to be hidden by pressing Escape
     if(event->key() == Qt::Key_Escape) {
         hide();
     }
 }
-
-
 
 #include "mainwindow.moc"

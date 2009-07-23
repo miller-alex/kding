@@ -11,15 +11,26 @@
         <entry name="CenterWindow" type="Bool">
             <label>Center the application window on the desktop?</label>
             <default>true</default>
+            <tooltip>The window is always displayed in the center of the desktop</tooltip>
         </entry>
         <entry name="RememberPosition" type="Bool">
             <label>Remember position of the application window?</label>
             <default>false</default>
-            <tooltip/>
-            <whatsthis/>
+            <tooltip>The application stores its window position when exiting and reuses that on the next start</tooltip>
+        </entry>
+        <entry name="NoSpecialHandling" type="Bool">
+            <label>Let KDE place the application window</label>
+            <default>false</default>
+            <tooltip>Nothing special is done, the window's position is decided by KDE</tooltip>
         </entry>
         <entry name="Position" type="Point">
             <label>Position of the application window</label>
+        </entry>
+        <entry name="TranslateOnLeftClick" type="Bool">
+            <label>Should a left click on the system tray icon translate the clipboard content?</label>
+            <default>true</default>
+            <tooltip>Decides whether to start the translation or to show the main window after a left click on the system tray icon.</tooltip>
+            <whatsthis>If this is enabled, translation will start when the user clicks the system tray icon with the left mouse button, and the applications window will be shown when the icon is clicked with the middle mouse button. Otherwise, it's the other way round.</whatsthis>
         </entry>
     </group>
     
