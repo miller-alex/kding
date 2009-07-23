@@ -87,12 +87,7 @@ void TranslationWidget::displayHtml(QString html) {
 
 void TranslationWidget::startSearch() {
     QString phrase(historyInput->currentText());
-    
-    if(!phrase.isEmpty()) {
-        translate(phrase);
-    } else {
-        kdDebug() << "Input field is empty, doing nothing";
-    }
+    translate(phrase);
 }
 
 void TranslationWidget::stopSearch() {
@@ -104,6 +99,10 @@ void TranslationWidget::anotherSearchRunning() {
 }
 
 void TranslationWidget::translate(QString phrase) {
+    if(phrase.isEmpty()) {
+        return;
+    }
+    
     //KIcon("process-stop")
     //buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
     historyInput->setEditText(phrase);
