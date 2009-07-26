@@ -55,7 +55,9 @@ private slots:
     void monitorProcess(QProcess::ProcessState newState);
     
 private:
-    enum SortPriority { STARTS_WITH = 100, FIRST_LINE = 100, SINGLE_WORD = 80, IS_ABBREVIATION = 10 };
+    // this enum defines values that are added to the result's priority
+    // depending on the on the outcome of various regexp tests
+    enum SortPriority { STARTS_WITH = 100, CONTAINS = 80, IS_ABBREVIATION = 10 };
     
     static const QString SEARCH_CMD;
     static const QStringList SEARCH_ARGS;

@@ -117,59 +117,54 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
     emit searchFinished();
 }
 
+/**
+ * Sorts the results by priority. The algorithm to determine the priority of an
+ * item is taken from Ding.
+ */
 void SearchEngine::sortResultsByPriority(ResultList* resultList) {
-    // 
-    QRegExp startsWith_ger("^" + m_searchTerm + "(;| ::)", Qt::CaseInsensitive);
-    // 
-    QRegExp startsWith_eng(":: (to )?" + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
-    // 
-    QRegExp startsWith_ger_multiLine("^" + m_searchTerm + "(;| ).*\\|.* ::", Qt::CaseInsensitive);
-    // 
-    QRegExp startsWith_eng_multiLine(":: (to )?" + m_searchTerm + "(;.*| )\\|", Qt::CaseInsensitive);
-    // 
-    QRegExp singleWord("; " + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
-    // 
-    QRegExp firstLine_ger("^[^\\|]*" + m_searchTerm + ".*\\|.* ::", Qt::CaseInsensitive);
-    // 
-    QRegExp firstLine_eng(":: [^\\|]*" + m_searchTerm + ".*\\|", Qt::CaseInsensitive);
+    // the result starts with the search term
+    QRegExp startsWith_DE("^" + m_searchTerm + "(;| ::)", Qt::CaseInsensitive);
+    QRegExp startsWith_EN(":: (to )?" + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
+    // the result contains the search term somewhere
+    QRegExp contains("; " + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
     
-    kdDebug() << startsWith_ger.pattern();
-    kdDebug() << startsWith_eng.pattern();
-    kdDebug() << startsWith_ger_multiLine.pattern();
-    kdDebug() << startsWith_eng_multiLine.pattern();
-    kdDebug() << singleWord.pattern();
-    kdDebug() << firstLine_ger.pattern();
-    kdDebug() << firstLine_eng.pattern();
+    // the first line of a multi line result starts with the search term
+    QRegExp startsWith_multiLine_DE("^" + m_searchTerm + "(;| ).*\\|.* ::", Qt::CaseInsensitive);
+    QRegExp startsWith_multiLine_EN(":: (to )?" + m_searchTerm + "(;.*| )\\|", Qt::CaseInsensitive);
+    // the first line of a multi line result contains the search term somewhere
+    QRegExp firstLine_DE("^[^|]*" + m_searchTerm + ".*\\|.* ::", Qt::CaseInsensitive);
+    QRegExp firstLine_EN(":: [^|]*" + m_searchTerm + ".*\\|", Qt::CaseInsensitive);
     
     QMutableListIterator<ResultItem> iterator(*resultList);
     while(iterator.hasNext()) {
         ResultItem item = iterator.next();
         QString text = item.text();
         
+        // remove all text in brackets
         text.replace(ROUND_BRACKETS, "");
         text.replace(CURLY_BRACKETS, "");
         text.replace(SQUARE_BRACKETS, "");
         
         if(text.contains(MULTI_LINE)) { // this item is a multi line result
-            if(text.contains(startsWith_ger_multiLine) || text.contains(startsWith_eng_multiLine)) {
-                item.addToPriority(STARTS_WITH);
-                kdDebug() << "STARTS_WITH";
-            } else if(text.contains(firstLine_ger) || text.contains(firstLine_eng)) {
-                item.addToPriority(FIRST_LINE);
-                kdDebug() << "FIRST_LINE";
+            const int LINE_COUNT = text.count(MULTI_LINE);
+            item.setPriority(0);
+            
+            if(text.contains(startsWith_multiLine_DE) || text.contains(startsWith_multiLine_EN)) {
+                item.addToPriority(STARTS_WITH + LINE_COUNT);
+            } else if(text.contains(firstLine_DE) || text.contains(firstLine_EN)) {
+                item.addToPriority(LINE_COUNT);
             }
         } else { // this item is a single line result
-            if(text.contains(startsWith_ger) || text.contains(startsWith_eng)) {
+            item.setPriority(2);
+            
+            if(text.contains(startsWith_DE) || text.contains(startsWith_EN)) {
                 item.addToPriority(STARTS_WITH);
-                kdDebug() << "STARTS_WITH";
-            } else if(text.contains(singleWord)) {
-                item.addToPriority(SINGLE_WORD);
-                kdDebug() << "SINGLE_WORD";
+            } else if(text.contains(contains)) {
+                item.addToPriority(CONTAINS);
             }
             
             if(text.contains(ABBREVIATION)) {
                 item.addToPriority(IS_ABBREVIATION);
-                kdDebug() << "IS_ABBREVIATION";
             }
         }
         
@@ -177,10 +172,6 @@ void SearchEngine::sortResultsByPriority(ResultList* resultList) {
     }
     
     qStableSort(*resultList);
-    
-    foreach(ResultItem item, *resultList) {
-        kdDebug() << "xx" << item.priority();
-    }
 }
 
 QString SearchEngine::searchTerm() const {

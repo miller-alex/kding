@@ -59,8 +59,17 @@ void ResultItem::addToPriority(const int priority) {
 }
 
 bool ResultItem::operator<(const ResultItem& other) const {
-    // we want it to be sorted by priority, descending, hence the negation
-    return !(priority() < other.priority());
+    bool result = false;
+    
+    // check if the values are different, so we do not falsely state that, of
+    // two equal values, one is bigger than the other (because of the negation
+    // of the actual comparison's result)
+    if(priority() != other.priority()) {
+        // we want it to be sorted by priority, descending, hence the negation
+        result = !(priority() < other.priority());
+    }
+    
+    return result;
 }
 
 #include "resultlist.moc"
