@@ -98,8 +98,8 @@ void SearchEngine::search(QString phrase) {
  * interested in that are notified via the relevant signal.
  */
 void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus) {
-    kdDebug() << "Exit code:" << exitCode;
-    kdDebug() << "Exit status:" << (exitStatus == QProcess::NormalExit ? "normal" : (exitStatus == QProcess::CrashExit ? "crashed" : "unknown"));
+    kDebug() << "Exit code:" << exitCode;
+    kDebug() << "Exit status:" << (exitStatus == QProcess::NormalExit ? "normal" : (exitStatus == QProcess::CrashExit ? "crashed" : "unknown"));
     
     m_resultList = new ResultList();
     while(m_process->canReadLine()) {
@@ -189,13 +189,13 @@ ResultList& SearchEngine::results() const {
 void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
     switch(newState) {
         case QProcess::NotRunning:
-            kdDebug() << "Process is not running";
+            kDebug() << "Process is not running";
             break;
         case QProcess::Starting:
-            kdDebug() << "Process is starting";
+            kDebug() << "Process is starting";
             break;
         case QProcess::Running:
-            kdDebug() << "Process is running";
+            kDebug() << "Process is running";
             break;
     }
 }
@@ -207,22 +207,22 @@ void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
 void SearchEngine::processFailed(QProcess::ProcessError error) {
     switch(error) {
         case QProcess::FailedToStart:
-            kdDebug() << "Process failed to start";
+            kDebug() << "Process failed to start";
             break;
         case QProcess::Crashed:
-            kdDebug() << "Process crashed";
+            kDebug() << "Process crashed";
             break;
         case QProcess::Timedout:
-            kdDebug() << "Process timed out";
+            kDebug() << "Process timed out";
             break;
         case QProcess::WriteError:
-            kdDebug() << "Process could not be written to";
+            kDebug() << "Process could not be written to";
             break;
         case QProcess::ReadError:
-            kdDebug() << "Process could not be read from";
+            kDebug() << "Process could not be read from";
             break;
         case QProcess::UnknownError:
-            kdDebug() << "Process encountered an unknown error";
+            kDebug() << "Process encountered an unknown error";
             break;
     }
 }
@@ -236,14 +236,12 @@ QString SearchEngine::grepVersion() const {
 }
 
 QString SearchEngine::determineDictionaryVersion() {
-    /*
-     * The version of the dictionary is given in the first line of the file.
-     * As of v1.5 it is of the form
-     *   # Version :: 1.5 2007-04-09
-     * for release versions or
-     *   # Version :: devel 2007-06-10
-     * for development versions of the dictionary.
-     */
+    // The version of the dictionary is given in the first line of the file.
+    // As of v1.5 it is of the form
+    //   # Version :: 1.5 2007-04-09
+    // for release versions or
+    //   # Version :: devel 2007-06-10
+    // for development versions of the dictionary.
     
     QString version(i18nc("dictionary version", "unknown"));
     
@@ -262,7 +260,7 @@ QString SearchEngine::determineDictionaryVersion() {
         
         dictFile.close();
     } else {
-        kdError() << "Failed to open dictionary";
+        kError() << "Failed to open dictionary" << dictFile.fileName();
     }
     
     return version;

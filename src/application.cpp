@@ -32,7 +32,6 @@ int Application::newInstance() {
     KUniqueApplication::newInstance();
     
     if(m_mainWindow == 0) {
-        kdDebug() << "No MainWindow";
         m_mainWindow = new MainWindow();
     }
     

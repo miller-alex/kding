@@ -91,7 +91,7 @@ void TranslationWidget::startSearch() {
 }
 
 void TranslationWidget::stopSearch() {
-    kdDebug() << "TODO: stopSearch()";
+    kDebug() << "TODO: stopSearch()";
 }
 
 void TranslationWidget::anotherSearchRunning() {

@@ -43,7 +43,7 @@ QString HtmlGenerator::welcomePage() const {
         html = stream.readAll();
         welcomeFile.close();
     } else {
-        kdError() << "Failed to open " << WELCOME_FILE;
+        kError() << "Failed to open" << WELCOME_FILE;
     }
     
     return html;
@@ -83,7 +83,7 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
             
             ++bgClass;
         } else {
-            kdError() << "Bad line: splitter not found";
+            kError() << "Bad line: splitter not found in" << text;
         }
     }
     
