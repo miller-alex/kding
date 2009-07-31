@@ -16,17 +16,22 @@
  */
 
 #include "htmlgenerator.h"
+#include "searchengine.h"
 #include <KStandardDirs>
 #include <KLocale>
+#include <KAboutData>
+#include <KComponentData>
+#include <KGlobal>
 #include <KDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QApplication>
 
 const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    // capture left and right side in groups
 const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    // match opening brackets: { [
 const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    // match closing brackets: } ]
 
-HtmlGenerator::HtmlGenerator(QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "welcome.html")) {
+HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "html/kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "html/welcome.html")), RESULT_FILE(KStandardDirs::locate("appdata", "html/result.html")), NO_MATCHES_FILE(KStandardDirs::locate("appdata", "html/nomatches.html")), m_fontSize(fontSize) {
     
 }
 
@@ -35,15 +40,24 @@ HtmlGenerator::~HtmlGenerator() {
 }
 
 QString HtmlGenerator::welcomePage() const {
-    QString html = emptyPage();
-    QFile welcomeFile(WELCOME_FILE);
+    QString html = loadFile(WELCOME_FILE);
     
-    if(welcomeFile.open(QFile::ReadOnly)) {
-        QTextStream stream(&welcomeFile);
-        html = stream.readAll();
-        welcomeFile.close();
+    if(html.isEmpty()) {
+        html = emptyPage();
     } else {
-        kError() << "Failed to open" << WELCOME_FILE;
+        SearchEngine searchEngine;
+        
+        // replace placeholders
+        QString infocss = KStandardDirs::locate("data", "kdeui/about/kde_infopage.css"); // %1
+        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(KStandardDirs::locate("data", "kdeui/about/kde_infopage_rtl.css")) : ""; // %2
+        QString fontSize = QString::number(m_fontSize); // %3
+        QString appTitle = KGlobal::mainComponent().aboutData()->programName(); // %4
+        QString catchPhrase = i18n("Dictionary Lookup for KDE"); // %5
+        QString shortDescription = KGlobal::mainComponent().aboutData()->shortDescription(); // %6
+        QString description = i18n("Using dictionary version %1", searchEngine.dictionaryVersion()); // %7
+        QString welcomeCss = KStandardDirs::locate("appdata", "html/welcome.css"); // %8
+        
+        html = html.arg(infocss).arg(rtlcss).arg(fontSize).arg(appTitle).arg(catchPhrase).arg(shortDescription).arg(description).arg(welcomeCss);
     }
     
     return html;
@@ -54,51 +68,83 @@ QString HtmlGenerator::emptyPage() const {
 }
 
 QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList resultList) const {
-    QString html = "<html><body><table>";
-    html += "<tr><th width=\"50%\">";
-    html += i18nc("table caption", "German");
-    html += "</th><th width=\"50%\">";
-    html += i18nc("table caption", "English");
-    html += "</th></tr>";
+    QString html = loadFile(RESULT_FILE);
     
-    QRegExp term("(" + searchTerm + ")", Qt::CaseInsensitive);  // match the search term
-    
-    int bgClass = 0;    // counter used for alternating background colors
-    
-    foreach(ResultItem item, resultList) {
-        QString text = item.text();
+    if(html.isEmpty()) {
+        html = emptyPage();
+    } else {
+        // create the table
+        QRegExp term("(" + searchTerm + ")", Qt::CaseInsensitive);  // match the search term
+        int bgClass = 0;    // counter used for alternating background colors
+        QString table = "";
         
-        text.replace(term, "<span class=\"keyword\">\\1</span>");
-        text.replace("|", "<br>&nbsp;&nbsp;");
-        text.replace(OPEN_BRACKETS, "&nbsp;<i>\\1");
-        text.replace(CLOSE_BRACKETS, "\\1</i>");
-        if(SPLITTER.indexIn(text) != -1) {
-            QString german = SPLITTER.cap(1).trimmed();
-            QString english = SPLITTER.cap(2).trimmed();
+        foreach(ResultItem item, resultList) {
+            QString text = item.text();
             
-            html += "<tr><td class=\"c" + QString::number(bgClass % 2)
-                 + "\">" + german + "</td><td class=\"c"
-                 + QString::number(bgClass % 2)
-                 + "\">" + english + "</td></tr>";
-            
-            ++bgClass;
-        } else {
-            kError() << "Bad line: splitter not found in" << text;
+            text.replace(term, "<span class=\"keyword\">\\1</span>");
+            text.replace("|", "<br>&nbsp;&nbsp;");
+            text.replace(OPEN_BRACKETS, "&nbsp;<i>\\1");
+            text.replace(CLOSE_BRACKETS, "\\1</i>");
+            if(SPLITTER.indexIn(text) != -1) {
+                QString german = SPLITTER.cap(1).trimmed();
+                QString english = SPLITTER.cap(2).trimmed();
+                
+                table += "<tr><td class=\"line" + QString::number(bgClass % 2)
+                    + "\">" + german + "</td><td class=\"line"
+                    + QString::number(bgClass % 2)
+                    + "\">" + english + "</td></tr>";
+                
+                ++bgClass;
+            } else {
+                kError() << "Bad line: splitter not found in" << text;
+            }
         }
+        
+        // replace placeholders
+        QString captionGerman = i18nc("result table caption", "German"); // %2
+        QString captionEnglish = i18nc("result table caption", "English"); // %3
+        
+        html = html.arg(CSS_FILE).arg(captionGerman).arg(captionEnglish).arg(table);
     }
     
-    html += "</table></body></html>";
-
     return html;
 }
 
-QString HtmlGenerator::noResultsPage() const {
-    QString html = "<html><body><table><tr><td class=\"error\">No results</td></tr></table></body></html>";
+QString HtmlGenerator::noMatchesPage() const {
+    QString html = loadFile(NO_MATCHES_FILE);
+    
+    if(html.isEmpty()) {
+        html = emptyPage();
+    } else {
+        // replace placeholders
+        QString infocss = KStandardDirs::locate("data", "kdeui/about/kde_infopage.css"); // %1
+        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(KStandardDirs::locate("data", "kdeui/about/kde_infopage_rtl.css")) : ""; // %2
+        QString fontSize = QString::number(m_fontSize); // %3
+        QString message = i18n("No matches found"); // %74
+        
+        html = html.arg(infocss).arg(rtlcss).arg(fontSize).arg(message);
+    }
+    
     return html;
 }
 
 KUrl HtmlGenerator::styleSheetUrl() const {
     return KUrl::fromPath(CSS_FILE);
+}
+
+QString HtmlGenerator::loadFile(const QString filename) const {
+    QString contents = "";
+    QFile file(filename);
+    
+    if(file.open(QFile::ReadOnly)) {
+        QTextStream stream(&file);
+        contents = stream.readAll();
+        file.close();
+    } else {
+        kError() << "Failed to open" << filename;
+    }
+    
+    return contents;
 }
 
 #include "htmlgenerator.moc"

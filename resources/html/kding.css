@@ -1,14 +1,19 @@
-.keyword {
-    color: blue;
-}
+/* General settings */
 
 body {
     margin: 0px;
-    font: 11pt "Bitstream Vera Sans",helvetica,sans-serif;
+    font: 11pt "DejaVu Sans","Bitstream Vera Sans",helvetica,sans-serif;
+    /* background-color: #e8e8e8; */
 }
 
 h1 {
     text-align: center;
+}
+
+/* Result settings */
+
+.keyword {
+    color: blue;
 }
 
 table {
@@ -27,11 +32,11 @@ td {
     border-bottom: 1px dotted silver;
 }
 
-td.c0 {
-
+td.line0 {
+    
 }
 
-td.c1 {
+td.line1 {
     background-color: #eef6ff;
 }
 
@@ -40,8 +45,3 @@ td.title {
     border: 0px;
 }
 
-td.error {
-    color: red;
-    text-align: center;
-    vertical-align: middle;
-}

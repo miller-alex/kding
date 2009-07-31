@@ -28,13 +28,13 @@ class HtmlGenerator : public QObject {
     Q_OBJECT
 
 public:
-    HtmlGenerator(QObject* parent = 0);
+    HtmlGenerator(int fontSize, QObject* parent = 0);
     ~HtmlGenerator();
 
     QString welcomePage() const;
     QString emptyPage() const;
     QString resultPage(const QString searchTerm, const ResultList resultList) const;
-    QString noResultsPage() const;
+    QString noMatchesPage() const;
     KUrl styleSheetUrl() const;
     
 private:
@@ -44,6 +44,12 @@ private:
     
     const QString CSS_FILE;
     const QString WELCOME_FILE;
+    const QString RESULT_FILE;
+    const QString NO_MATCHES_FILE;
+    
+    QString loadFile(const QString filename) const;
+    
+    int m_fontSize;
 };
 
 #endif

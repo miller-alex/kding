@@ -25,14 +25,14 @@
 #include <KHTMLView>
 #include <KAction>
 #include <KActionCollection>
+#include <KGlobalSettings>
 #include <KDebug>
 #include <QSize>
 #include <QString>
 #include <QLineEdit>
+#include <QFont>
 
 TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searchEngine(0), m_htmlGenerator(0) {
-    m_htmlGenerator = new HtmlGenerator(this);
-    
     setupUi(this);
     initGui();
     
@@ -42,6 +42,14 @@ TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searc
     connect(m_searchEngine, SIGNAL(searchFinished()), this, SLOT(processSearchResults()));
     connect(m_searchEngine, SIGNAL(searchRunning()), this, SLOT(anotherSearchRunning()));
     connect(m_searchEngine, SIGNAL(statusMessage(QString)), this, SIGNAL(statusMessage(QString)));
+    
+    // calculate pixel size from point size
+    int pointSize = KGlobalSettings::generalFont().pointSize();
+    int pixelSize = (pointSize * m_htmlPart->view()->logicalDpiY() + 36) / 72;
+    m_htmlGenerator = new HtmlGenerator(pixelSize, this);
+    
+    // display the initial "Welcome" page
+    displayHtml(m_htmlGenerator->welcomePage());
 }
 
 TranslationWidget::~TranslationWidget() {
@@ -72,22 +80,25 @@ void TranslationWidget::initGui() {
     m_htmlPart->setMetaRefreshEnabled(false);
     m_htmlPart->setPluginsEnabled(false);
     
-    // display the initial "Welcome" page
-    displayHtml(m_htmlGenerator->welcomePage());
-    
     focusInputWidget();
 }
 
 void TranslationWidget::displayHtml(QString html) {
     m_htmlPart->begin();
-    m_htmlPart->setUserStyleSheet(m_htmlGenerator->styleSheetUrl());
+    //m_htmlPart->setUserStyleSheet(m_htmlGenerator->styleSheetUrl());
     m_htmlPart->write(html);
     m_htmlPart->end();
 }
 
 void TranslationWidget::startSearch() {
     QString phrase(historyInput->currentText());
-    translate(phrase);
+
+    if(phrase == "about:kding") {
+        displayHtml(m_htmlGenerator->welcomePage());
+        focusInputWidget();
+    } else {
+        translate(phrase);
+    }
 }
 
 void TranslationWidget::stopSearch() {
@@ -99,6 +110,8 @@ void TranslationWidget::anotherSearchRunning() {
 }
 
 void TranslationWidget::translate(QString phrase) {
+    phrase = phrase.trimmed();
+    
     if(phrase.isEmpty()) {
         return;
     }
@@ -114,7 +127,7 @@ void TranslationWidget::processSearchResults() {
     QString searchTerm = m_searchEngine->searchTerm();
     
     if(resultList.isEmpty()) {
-        displayHtml(m_htmlGenerator->noResultsPage());
+        displayHtml(m_htmlGenerator->noMatchesPage());
     } else {
         displayHtml(m_htmlGenerator->resultPage(searchTerm, resultList));
         historyInput->addToHistory(searchTerm);

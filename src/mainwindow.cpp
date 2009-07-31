@@ -47,7 +47,7 @@ MainWindow::MainWindow() : KXmlGuiWindow(), m_systemTrayIcon(0), m_translationWi
     setupGUI();
     initGui();
     
-    showStatusMessage(i18n("Dictionary version %1", m_translationWidget->dictionaryVersion()));
+    //showStatusMessage(i18n("Dictionary version %1", m_translationWidget->dictionaryVersion()));
 }
 
 MainWindow::~MainWindow() {
