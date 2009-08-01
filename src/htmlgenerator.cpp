@@ -22,16 +22,18 @@
 #include <KAboutData>
 #include <KComponentData>
 #include <KGlobal>
+#include <KGlobalSettings>
 #include <KDebug>
 #include <QFile>
 #include <QTextStream>
 #include <QApplication>
+#include <QFont>
 
 const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    // capture left and right side in groups
 const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    // match opening brackets: { [
 const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    // match closing brackets: } ]
 
-HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "html/kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "html/welcome.html")), RESULT_FILE(KStandardDirs::locate("appdata", "html/result.html")), NO_MATCHES_FILE(KStandardDirs::locate("appdata", "html/nomatches.html")), m_fontSize(fontSize) {
+HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "html/kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "html/welcome.html")), RESULT_FILE(KStandardDirs::locate("appdata", "html/result.html")), NO_MATCHES_FILE(KStandardDirs::locate("appdata", "html/nomatches.html")), m_fontSize(fontSize), m_fontFamily(KGlobalSettings::generalFont().family()) {
     
 }
 
@@ -101,10 +103,11 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
         }
         
         // replace placeholders
-        QString captionGerman = i18nc("result table caption", "German"); // %2
-        QString captionEnglish = i18nc("result table caption", "English"); // %3
+        QString fontSize = QString::number(m_fontSize); // %3
+        QString captionGerman = i18nc("result table caption", "German"); // %4
+        QString captionEnglish = i18nc("result table caption", "English"); // %5
         
-        html = html.arg(CSS_FILE).arg(captionGerman).arg(captionEnglish).arg(table);
+        html = html.arg(CSS_FILE).arg(m_fontFamily).arg(fontSize).arg(captionGerman).arg(captionEnglish).arg(table);
     }
     
     return html;

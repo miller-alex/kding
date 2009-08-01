@@ -50,6 +50,7 @@ private:
     QString loadFile(const QString filename) const;
     
     int m_fontSize;
+    QString m_fontFamily;
 };
 
 #endif
