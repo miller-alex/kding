@@ -128,6 +128,9 @@ void MainWindow::translateClipboard() {
         show();
     }
     
+    activateWindow();
+    raise();
+    
     m_translationWidget->translate(clipboard->text(QClipboard::Selection));
 }
 
@@ -135,6 +138,9 @@ void MainWindow::translateWord() {
     if(!isVisible()) {
         show();
     }
+    
+    activateWindow();
+    raise();
     
     m_translationWidget->focusInputWidget();
 }
@@ -145,6 +151,9 @@ void MainWindow::translate(QString phrase) {
     if(!isVisible()) {
         show();
     }
+    
+    activateWindow();
+    raise();
     
     m_translationWidget->translate(phrase);
 }
