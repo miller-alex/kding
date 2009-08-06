@@ -1,26 +1,19 @@
 This package was debianized by:
-
     Michael Rex <me@rexi.org> on Sat, 16 May 2009 15:04:03 +0200
 
 It was downloaded from:
+    http://kding.sourceforge.net/
 
-    <url://example.com>
-
-Upstream Author(s):
-
-    <put author's name and email here>
-    <likewise for another author>
+Upstream Author:
+    Michael Rex <me@rexi.org>
 
 Copyright:
-
-    <Copyright (C) YYYY Firtname Lastname>
-    <likewise for another author>
+    Copyright (C) 2005-2009 Michael Rex
 
 License:
-
-   This package is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License version 2 as
-   published by the Free Software Foundation.
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 2 as
+    published by the Free Software Foundation.
 
     This package is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,12 +25,10 @@ License:
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 On Debian systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL'.
+Public License can be found in `/usr/share/common-licenses/GPL-2'.
 
 The Debian packaging is:
-
-    Copyright (C) 2009, Michael Rex <me@rexi.org>
-
+    Copyright (C) 2009 Michael Rex <me@rexi.org>
 and is licensed under the GPL, see above.
 
 
