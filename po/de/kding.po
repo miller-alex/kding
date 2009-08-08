@@ -2,14 +2,15 @@
 # This file is distributed under the same license as the KDing package.
 #
 # Michael Rex <me@rexi.org>, 2009.
+# Michael Rex <michael@rexi.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: kding\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-14 15:12+0200\n"
-"PO-Revision-Date: 2009-07-17 11:55+0200\n"
-"Last-Translator: Michael Rex <me@rexi.org>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
+"POT-Creation-Date: 2009-08-08 16:05+0200\n"
+"PO-Revision-Date: 2009-08-08 17:11+0200\n"
+"Last-Translator: Michael Rex <michael@rexi.org>\n"
+"Language-Team: en_US <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,62 +19,199 @@ msgstr ""
 
 #. i18n: file: src/kding.kcfg:12
 #. i18n: ectx: label, entry (CenterWindow), group (General)
-#: build/src/settings.cpp:38 rc.cpp:6 rc.cpp:6
+#: build/src/settings.cpp:38 rc.cpp:36
 msgid "Center the application window on the desktop?"
 msgstr "Fenster auf dem Desktop zentrieren?"
 
-#. i18n: file: src/kding.kcfg:16
+#. i18n: file: src/kding.kcfg:14
+#. i18n: ectx: tooltip, entry (CenterWindow), group (General)
+#: build/src/settings.cpp:39 rc.cpp:39
+msgid "The window is always displayed in the center of the desktop"
+msgstr "Das Fenster wird immer in der Mitte des Desktops angezeigt"
+
+#. i18n: file: src/kding.kcfg:17
 #. i18n: ectx: label, entry (RememberPosition), group (General)
-#: build/src/settings.cpp:42 rc.cpp:9 rc.cpp:9
+#: build/src/settings.cpp:43 rc.cpp:42
 msgid "Remember position of the application window?"
 msgstr "Position des Fensters merken?"
 
+#. i18n: file: src/kding.kcfg:19
+#. i18n: ectx: tooltip, entry (RememberPosition), group (General)
+#: build/src/settings.cpp:44 rc.cpp:45
+msgid ""
+"The application stores its window position when exiting and reuses that on "
+"the next start"
+msgstr ""
+"Die Anwendung speichert beim Beenden die Position des Fensters und stellt "
+"sie beim nächsten Start wieder her"
+
 #. i18n: file: src/kding.kcfg:22
+#. i18n: ectx: label, entry (NoSpecialHandling), group (General)
+#: build/src/settings.cpp:48 rc.cpp:48
+msgid "Let KDE place the application window"
+msgstr "KDE die Position des Fensters bestimmen lassen"
+
+#. i18n: file: src/kding.kcfg:24
+#. i18n: ectx: tooltip, entry (NoSpecialHandling), group (General)
+#: build/src/settings.cpp:49 rc.cpp:51
+msgid "Nothing special is done, the window's position is decided by KDE"
+msgstr "Die Anwendung überlässt die Positionierung des Fensters KDE"
+
+#. i18n: file: src/kding.kcfg:27
 #. i18n: ectx: label, entry (Position), group (General)
-#: build/src/settings.cpp:46 rc.cpp:12 rc.cpp:12
+#: build/src/settings.cpp:53 rc.cpp:54
 msgid "Position of the application window"
 msgstr "Position des Fensters"
 
-#. i18n: file: src/kding.kcfg:28
+#. i18n: file: src/kding.kcfg:30
+#. i18n: ectx: label, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:57 rc.cpp:57
+msgid ""
+"Should a left click on the system tray icon translate the clipboard content?"
+msgstr ""
+"Soll ein Linksklick auf das Symbol im Systembereich den Inhalt der "
+"Zwischenablage übersetzen?"
+
+#. i18n: file: src/kding.kcfg:32
+#. i18n: ectx: tooltip, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:58 rc.cpp:60
+msgid ""
+"Decides whether to start the translation or to show the main window after a "
+"left click on the system tray icon."
+msgstr ""
+"Legt fest, ob bei einem Linksklick auf das Symbol im Systembereich der "
+"Kontrollleiste die Übersetzung angestoßen oder nur das Hauptfenster "
+"angezeigt werden soll."
+
+#. i18n: file: src/kding.kcfg:33
+#. i18n: ectx: whatsthis, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:59 rc.cpp:63
+msgid ""
+"If this is enabled, translation will start when the user clicks the system "
+"tray icon with the left mouse button, and the applications window will be "
+"shown when the icon is clicked with the middle mouse button. Otherwise, it's "
+"the other way round."
+msgstr ""
+"Wenn diese Option aktiviert ist, wird die Übersetzung angestoßen wenn der "
+"Benutzer mit der linken Maustaste auf das Symbol im Systembereich der "
+"Kontrollleiste klickt, und das Hauptfenster wird angezeigt, wenn mit der "
+"mittleren Maustaste auf das Symbol geklickt wird. Andernfalls sind die "
+"Reaktionen auf einen Klick auf das Symbol andersherum."
+
+#. i18n: file: src/kding.kcfg:39
 #. i18n: ectx: label, entry (Recent), group (History)
-#: build/src/settings.cpp:53 rc.cpp:15 rc.cpp:15
+#: build/src/settings.cpp:66 rc.cpp:66
 msgid "List of recently translated words"
 msgstr "Liste der zuletzt übersetzten Wörter"
 
+#. i18n: file: src/generalsettingsbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralSettingsBase)
+#: build/src/ui_generalsettingsbase.h:103 rc.cpp:6 src/mainwindow.cpp:178
+#, fuzzy
+msgid "General Settings"
+msgstr "&Einstellungen"
+
+#. i18n: file: src/generalsettingsbase.ui:20
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: build/src/ui_generalsettingsbase.h:104 rc.cpp:9
+msgid "Window Placement"
+msgstr "Fensterplatzierung"
+
+#. i18n: file: src/generalsettingsbase.ui:26
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_CenterWindow)
+#: build/src/ui_generalsettingsbase.h:105 rc.cpp:12
+msgid "Always center window"
+msgstr "Fenster immer zentrieren"
+
+#. i18n: file: src/generalsettingsbase.ui:36
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_RememberPosition)
+#: build/src/ui_generalsettingsbase.h:106 rc.cpp:18
+msgid "Remember window position"
+msgstr "Fensterposition merken"
+
+#. i18n: file: src/generalsettingsbase.ui:46
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_NoSpecialHandling)
+#: build/src/ui_generalsettingsbase.h:107 rc.cpp:24
+msgid "No special handling"
+msgstr "Keinen Einfluß auf Positionierung nehmen"
+
+#. i18n: file: src/generalsettingsbase.ui:59
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: build/src/ui_generalsettingsbase.h:108 rc.cpp:30
+msgid "System Tray Icon"
+msgstr "Symbol im Systembereich"
+
+#. i18n: file: src/generalsettingsbase.ui:65
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TranslateOnLeftClick)
+#: build/src/ui_generalsettingsbase.h:109 rc.cpp:33
+#, fuzzy
+msgid "Left click translates clipboard content"
+msgstr "Inhalt der Zwischenablage &übersetzen"
+
 #. i18n: file: src/translationwidgetbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
-#: build/src/ui_translationwidgetbase.h:111 rc.cpp:18 rc.cpp:18
+#: build/src/ui_translationwidgetbase.h:111 rc.cpp:69
 msgid "Form"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:47
 #. i18n: ectx: property (text), widget (QLabel, labelText)
-#: build/src/ui_translationwidgetbase.h:113 rc.cpp:21 rc.cpp:21
+#: build/src/ui_translationwidgetbase.h:113 rc.cpp:72
 msgid "Enter the word or phrase you want to translate"
-msgstr ""
-"Geben Sie das Wort oder den Ausdruck ein, den Sie übersetzen möchten"
+msgstr "Geben Sie das Wort oder den Ausdruck ein, den Sie übersetzen möchten"
 
 #. i18n: file: src/translationwidgetbase.ui:71
 #. i18n: ectx: property (text), widget (QLabel, labelSearch)
-#: build/src/ui_translationwidgetbase.h:114 rc.cpp:24 rc.cpp:24
+#: build/src/ui_translationwidgetbase.h:114 rc.cpp:75
 msgid "Se&arch word:"
 msgstr "&Suchbegriff"
 
 #. i18n: file: resources/kdingui.rc:11
 #. i18n: ectx: Menu (settings)
-#: rc.cpp:3 rc.cpp:3
+#: rc.cpp:3
 msgid "&Settings"
 msgstr "&Einstellungen"
 
+#. i18n: file: src/generalsettingsbase.ui:29
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_CenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:39
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_RememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:49
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_NoSpecialHandling)
+#. i18n: file: src/generalsettingsbase.ui:29
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_CenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:39
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_RememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:49
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_NoSpecialHandling)
+#: rc.cpp:15 rc.cpp:21 rc.cpp:27
+msgid "windowPlacementGroup"
+msgstr ""
+
+#: src/htmlgenerator.cpp:57
+msgid "Dictionary Lookup for KDE"
+msgstr "Wörterbuchsuche für KDE"
+
 #: src/htmlgenerator.cpp:59
-msgctxt "table caption"
+#, fuzzy
+msgid "Using dictionary version %1"
+msgstr "Wörterbuch-Version %1"
+
+#: src/htmlgenerator.cpp:107
+#, fuzzy
+msgctxt "result table caption"
 msgid "German"
 msgstr "Deutsch"
 
-#: src/htmlgenerator.cpp:61
-msgctxt "table caption"
+#: src/htmlgenerator.cpp:108
+#, fuzzy
+msgctxt "result table caption"
 msgid "English"
 msgstr "Englisch"
+
+#: src/htmlgenerator.cpp:126
+msgid "No matches found"
+msgstr "Keine passenden Einträge gefunden"
 
 #: src/main.cpp:27
 msgid "KDing"
@@ -114,54 +252,49 @@ msgstr "ursprüngliche Portierung auf KDE4"
 
 #: src/main.cpp:42
 msgid "Translate the given phrase"
-msgstr ""
+msgstr "Den angegebenen Ausdruck übersetzen"
 
-#: src/mainwindow.cpp:49
-msgid "Dictionary version %1"
-msgstr "Wörterbuch-Version %1"
-
-#: src/mainwindow.cpp:71
+#: src/mainwindow.cpp:69
 msgid "&Translate Clipboard Content"
 msgstr "Inhalt der Zwischenablage &übersetzen"
 
-#: src/mainwindow.cpp:73 src/mainwindow.cpp:74
+#: src/mainwindow.cpp:71 src/mainwindow.cpp:72
 msgid "Translates the current content of the clipboard."
 msgstr "Übersetzt den aktuellen Inhalt der Zwischenablage."
 
-#: src/mainwindow.cpp:81
+#: src/mainwindow.cpp:79
 msgid "Translate &Word..."
 msgstr "&Wort übersetzen..."
 
-#: src/mainwindow.cpp:83 src/mainwindow.cpp:84
+#: src/mainwindow.cpp:81 src/mainwindow.cpp:82
 msgid "Opens a dialog where you can enter the word to be translated."
 msgstr ""
 "Öffnet ein Fenster, in dem Sie das zu übersetzende Wort eingeben können."
 
-#: src/mainwindow.cpp:91
+#: src/mainwindow.cpp:89
 msgid "Configure &Global Shortcuts..."
 msgstr "&Globale Kurzbefehle einrichten..."
 
-#: src/searchengine.cpp:81
+#: src/searchengine.cpp:91
 msgid "Searching for '%1'..."
 msgstr "Suche nach '%1'..."
 
-#: src/searchengine.cpp:236
+#: src/searchengine.cpp:246
 msgctxt "dictionary version"
 msgid "unknown"
 msgstr "unbekannt"
 
-#: src/systemtrayicon.cpp:42
+#: src/systemtrayicon.cpp:43
 msgid "KDing - translation tool"
 msgstr "KDing - Übersetzungswerkzeug"
 
-#: src/translationwidget.cpp:103
+#: src/translationwidget.cpp:109
 msgid "Another search is currently running."
 msgstr "Eine andere Suche läuft bereits."
 
-#: src/translationwidget.cpp:125
+#: src/translationwidget.cpp:138
 msgid "Found 1 match for '%2'."
 msgid_plural "Found %1 matches for '%2'."
 msgstr[0] "Ein passender Eintrag gefunden für '%2'."
 msgstr[1] "%1 passende Einträge gefunden für '%2'."
-
 
