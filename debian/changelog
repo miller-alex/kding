@@ -1,3 +1,9 @@
+kding (0.5.1-1) jaunty; urgency=low
+
+  * new release
+
+ -- Michael Rex <me@rexi.org>  Sun, 09 Aug 2009 15:51:15 +0200
+
 kding (0.5-1) jaunty; urgency=low
 
   * ported to KDE4
