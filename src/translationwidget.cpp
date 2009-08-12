@@ -66,7 +66,10 @@ void TranslationWidget::initGui() {
     
     m_busyAnimation = new KAnimatedButton(this);
     m_busyAnimation->setIconSize(QSize(22, 22));
-    m_busyAnimation->setIcons("kding_search");
+    m_busyAnimation->setAutoRaise(true);
+    m_busyAnimation->setFocusPolicy(Qt::NoFocus);
+    m_busyAnimation->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    m_busyAnimation->setIcons("process-working");
     layoutInfo->addWidget(m_busyAnimation);
     
     buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
