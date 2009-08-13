@@ -51,6 +51,8 @@ private:
     
     int m_fontSize;
     QString m_fontFamily;
+    QString m_textColor;
+    QString m_alternateBackgroundColor;
 };
 
 #endif

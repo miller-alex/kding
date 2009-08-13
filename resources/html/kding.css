@@ -2,7 +2,6 @@
 
 body {
     margin: 0px;
-    /* background-color: #e8e8e8; */
 }
 
 h1 {
@@ -22,21 +21,14 @@ table {
 }
 
 th {
-    border-bottom: 1px solid black;
+    color: black;
     background-color: silver;
+    border-bottom: 1px dotted gray;
 }
 
 td {
     vertical-align: top;
     border-bottom: 1px dotted silver;
-}
-
-td.line0 {
-    
-}
-
-td.line1 {
-    background-color: #eef6ff;
 }
 
 td.title {

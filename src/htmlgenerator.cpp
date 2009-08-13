@@ -23,18 +23,30 @@
 #include <KComponentData>
 #include <KGlobal>
 #include <KGlobalSettings>
+#include <KColorScheme>
 #include <KDebug>
 #include <QFile>
 #include <QTextStream>
 #include <QApplication>
 #include <QFont>
+#include <QColor>
+#include <QPalette>
+#include <QBrush>
 
 const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    // capture left and right side in groups
 const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    // match opening brackets: { [
 const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    // match closing brackets: } ]
 
 HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "html/kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "html/welcome.html")), RESULT_FILE(KStandardDirs::locate("appdata", "html/result.html")), NO_MATCHES_FILE(KStandardDirs::locate("appdata", "html/nomatches.html")), m_fontSize(fontSize), m_fontFamily(KGlobalSettings::generalFont().family()) {
+    // set the foreground and alternate background colors for the result page
+    // to the one from KDE's current color scheme
+    KColorScheme colorScheme(QPalette::Normal);
     
+    QColor color = colorScheme.foreground().color();
+    m_textColor = QString("rgb(%1,%2,%3)").arg(color.red()).arg(color.green()).arg(color.blue());
+    
+    color = colorScheme.background(KColorScheme::AlternateBackground).color();
+    m_alternateBackgroundColor = QString("rgb(%1,%2,%3)").arg(color.red()).arg(color.green()).arg(color.blue());
 }
 
 HtmlGenerator::~HtmlGenerator() {
@@ -88,13 +100,11 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
             text.replace(OPEN_BRACKETS, "&nbsp;<i>\\1");
             text.replace(CLOSE_BRACKETS, "\\1</i>");
             if(SPLITTER.indexIn(text) != -1) {
+                QString cellClass = (bgClass % 2) == 0 ? "" : " class=\"alternate\"";
                 QString german = SPLITTER.cap(1).trimmed();
                 QString english = SPLITTER.cap(2).trimmed();
                 
-                table += "<tr><td class=\"line" + QString::number(bgClass % 2)
-                    + "\">" + german + "</td><td class=\"line"
-                    + QString::number(bgClass % 2)
-                    + "\">" + english + "</td></tr>";
+                table += QString("<tr><td%1>%2</td><td%1>%3</td></tr>").arg(cellClass).arg(german).arg(english);
                 
                 ++bgClass;
             } else {
@@ -104,10 +114,10 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
         
         // replace placeholders
         QString fontSize = QString::number(m_fontSize); // %3
-        QString captionGerman = i18nc("result table caption", "German"); // %4
-        QString captionEnglish = i18nc("result table caption", "English"); // %5
+        QString captionGerman = i18nc("result table caption", "German"); // %6
+        QString captionEnglish = i18nc("result table caption", "English"); // %7
         
-        html = html.arg(CSS_FILE).arg(m_fontFamily).arg(fontSize).arg(captionGerman).arg(captionEnglish).arg(table);
+        html = html.arg(CSS_FILE).arg(m_fontFamily).arg(fontSize).arg(m_textColor).arg(m_alternateBackgroundColor).arg(captionGerman).arg(captionEnglish).arg(table);
     }
     
     return html;
