@@ -24,7 +24,6 @@
 
 class SearchEngine;
 class HtmlGenerator;
-class KAnimatedButton;
 class KHTMLPart;
 class KActionCollection;
 
@@ -58,7 +57,6 @@ private:
     void displayHtml(QString html);
     
     KActionCollection* m_actionCollection;
-    KAnimatedButton* m_busyAnimation;
     KHTMLPart* m_htmlPart;
     SearchEngine* m_searchEngine;
     HtmlGenerator* m_htmlGenerator;

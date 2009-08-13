@@ -37,8 +37,8 @@ TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searc
     initGui();
     
     m_searchEngine = new SearchEngine(this);
-    connect(m_searchEngine, SIGNAL(searchStarted()), m_busyAnimation, SLOT(start()));
-    connect(m_searchEngine, SIGNAL(searchFinished()), m_busyAnimation, SLOT(stop()));
+    connect(m_searchEngine, SIGNAL(searchStarted()), busyAnimation, SLOT(start()));
+    connect(m_searchEngine, SIGNAL(searchFinished()), busyAnimation, SLOT(stop()));
     connect(m_searchEngine, SIGNAL(searchFinished()), this, SLOT(processSearchResults()));
     connect(m_searchEngine, SIGNAL(searchRunning()), this, SLOT(anotherSearchRunning()));
     connect(m_searchEngine, SIGNAL(statusMessage(QString)), this, SIGNAL(statusMessage(QString)));
@@ -64,13 +64,7 @@ void TranslationWidget::initGui() {
     
     labelIcon->setPixmap(KIcon("kding").pixmap(48,48));
     
-    m_busyAnimation = new KAnimatedButton(this);
-    m_busyAnimation->setIconSize(QSize(22, 22));
-    m_busyAnimation->setAutoRaise(true);
-    m_busyAnimation->setFocusPolicy(Qt::NoFocus);
-    m_busyAnimation->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    m_busyAnimation->setIcons("process-working");
-    layoutInfo->addWidget(m_busyAnimation);
+    busyAnimation->setIcons("process-working");
     
     buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));

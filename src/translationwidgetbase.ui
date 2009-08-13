@@ -61,6 +61,22 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="KAnimatedButton" name="busyAnimation">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -103,6 +119,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KAnimatedButton</class>
+   <extends>QToolButton</extends>
+   <header>kanimatedbutton.h</header>
+  </customwidget>
   <customwidget>
    <class>KHistoryComboBox</class>
    <extends>KComboBox</extends>
