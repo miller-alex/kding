@@ -48,11 +48,12 @@ signals:
     
 public slots:
     void search(QString phrase);
+    void cancelSearch();
     
 private slots:
     void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
-    void processFailed(QProcess::ProcessError error);
-    void monitorProcess(QProcess::ProcessState newState);
+    void processFailed(QProcess::ProcessError error) const;
+    void monitorProcess(QProcess::ProcessState newState) const;
     
 private:
     // this enum defines values that are added to the result's priority

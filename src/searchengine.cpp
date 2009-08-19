@@ -93,6 +93,27 @@ void SearchEngine::search(QString phrase) {
 }
 
 /**
+ * This method cancels a currently running search operation and resets the
+ * search engine.
+ */
+void SearchEngine::cancelSearch() {
+    if(m_process != 0) {
+        disconnect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(processFinished(int, QProcess::ExitStatus)));
+        m_process->close();
+        
+        delete m_process;
+        m_process = 0;
+    }
+    
+    if(m_resultList != 0) {
+        delete m_resultList;
+        m_resultList = 0;
+    }
+    
+    m_searchTerm = QString();
+}
+
+/**
  * This method reads the results from the KProcess and creates and sorts the
  * ResultList from these.  After that, the search is finished and the objects
  * interested in that are notified via the relevant signal.
@@ -186,7 +207,7 @@ ResultList& SearchEngine::results() const {
  * This debug method is used to keep track of the current state of the process.
  * It is connected to QProcess::stateChanged(QProcess::ProcessState).
  */
-void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
+void SearchEngine::monitorProcess(QProcess::ProcessState newState) const {
     switch(newState) {
         case QProcess::NotRunning:
             kDebug() << "Process is not running";
@@ -204,7 +225,7 @@ void SearchEngine::monitorProcess(QProcess::ProcessState newState) {
  * This debug method is used to give information on errors when running the
  * process. It is connected to QProcess::error(QProcess::ProcessError).
  */
-void SearchEngine::processFailed(QProcess::ProcessError error) {
+void SearchEngine::processFailed(QProcess::ProcessError error) const {
     switch(error) {
         case QProcess::FailedToStart:
             kDebug() << "Process failed to start";

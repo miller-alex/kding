@@ -85,6 +85,9 @@ void TranslationWidget::displayHtml(QString html) {
     //m_htmlPart->setUserStyleSheet(m_htmlGenerator->styleSheetUrl());
     m_htmlPart->write(html);
     m_htmlPart->end();
+    
+    // scroll to the top of the view
+    m_htmlPart->view()->ensureVisible(0, 0);
 }
 
 void TranslationWidget::startSearch() {
@@ -99,7 +102,17 @@ void TranslationWidget::startSearch() {
 }
 
 void TranslationWidget::stopSearch() {
-    kDebug() << "TODO: stopSearch()";
+    m_searchEngine->cancelSearch();
+    
+    disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
+    connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
+    buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    
+    busyAnimation->stop();
+    
+    focusInputWidget();
+    
+    emit statusMessage(i18n("Search cancelled."));
 }
 
 void TranslationWidget::anotherSearchRunning() {
@@ -113,13 +126,19 @@ void TranslationWidget::translate(QString phrase) {
         return;
     }
     
-    //KIcon("process-stop")
-    //buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
+    connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
+    buttonTranslate->setIcon(KIcon("process-stop"));
+    
     historyInput->setEditText(phrase);
     m_searchEngine->search(phrase);
 }
 
 void TranslationWidget::processSearchResults() {
+    disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
+    connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
+    buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    
     ResultList resultList = m_searchEngine->results();
     QString searchTerm = m_searchEngine->searchTerm();
     
