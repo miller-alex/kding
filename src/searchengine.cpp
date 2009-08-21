@@ -33,11 +33,11 @@ const QStringList SearchEngine::SEARCH_ARGS = QStringList() \
     << "-i"     /* case insensitive */ \
     << "-w";    /* match only whole words */
 
-const QRegExp SearchEngine::MULTI_LINE = QRegExp("\\|");
-const QRegExp SearchEngine::ABBREVIATION = QRegExp(" : ");
-const QRegExp SearchEngine::ROUND_BRACKETS = QRegExp(" \\([^.\\)]*\\)");
-const QRegExp SearchEngine::CURLY_BRACKETS = QRegExp(" \\{[^.\\}]*\\}");
-const QRegExp SearchEngine::SQUARE_BRACKETS = QRegExp(" \\[[^\\]]*\\]");
+const QRegExp SearchEngine::MULTI_LINE = QRegExp("\\|");    ///< RegExp to match line break markers
+const QRegExp SearchEngine::ABBREVIATION = QRegExp(" : ");  ///< RegExp to match abbreviation markers
+const QRegExp SearchEngine::ROUND_BRACKETS = QRegExp(" \\([^.\\)]*\\)");    ///< RegExp to match text in round brackets
+const QRegExp SearchEngine::CURLY_BRACKETS = QRegExp(" \\{[^.\\}]*\\}");    ///< RegExp to match text in curly brackets
+const QRegExp SearchEngine::SQUARE_BRACKETS = QRegExp(" \\[[^\\]]*\\]");    ///< RegExp to match text in square brackets
 
 SearchEngine::SearchEngine(QObject* parent) : QObject(parent), DEFAULT_DICTIONARY(KStandardDirs::locate("appdata", "de-en.txt")), DICTIONARY_VERSION(determineDictionaryVersion()), m_process(0), m_resultList(0) {
     
@@ -48,9 +48,14 @@ SearchEngine::~SearchEngine() {
 }
 
 /**
- * This is where the search is initiated. The KProcess is set up, its signals
- * are connected to the corresponding slots of this class, and finally the
- * process is started.
+ * This is where the search is initiated.
+ * The @c KProcess is set up, its signals are connected to the corresponding
+ * slots of this class, and finally the process is started.
+ *
+ * @param phrase the phrase to search for
+ *
+ * @see processFinished()
+ * @see cancelSearch()
  */
 void SearchEngine::search(QString phrase) {
     // if there is already another search process running emit a signal and
@@ -95,6 +100,9 @@ void SearchEngine::search(QString phrase) {
 /**
  * This method cancels a currently running search operation and resets the
  * search engine.
+ *
+ * @see search()
+ * @see processFinished()
  */
 void SearchEngine::cancelSearch() {
     if(m_process != 0) {
@@ -114,9 +122,16 @@ void SearchEngine::cancelSearch() {
 }
 
 /**
- * This method reads the results from the KProcess and creates and sorts the
- * ResultList from these.  After that, the search is finished and the objects
- * interested in that are notified via the relevant signal.
+ * This method reads the results from the @c KProcess and creates and sorts the
+ * ResultList from these.
+ * After that, the search is finished and the objects interested in that are
+ * notified via the relevant signal.
+ *
+ * @param exitCode exit code of the process
+ * @param exitStatus exit status of the process
+ *
+ * @see search()
+ * @see cancelSearch()
  */
 void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     kDebug() << "Exit code:" << exitCode;
@@ -139,8 +154,11 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
 }
 
 /**
- * Sorts the results by priority. The algorithm to determine the priority of an
- * item is taken from Ding.
+ * Sorts the results by priority.
+ * The algorithm to determine the priority of an item is taken from
+ * <a href="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>.
+ *
+ * @param resultList a pointer to the @c #ResultList to sort
  */
 void SearchEngine::sortResultsByPriority(ResultList* resultList) {
     // the result starts with the search term
@@ -205,7 +223,9 @@ ResultList& SearchEngine::results() const {
 
 /**
  * This debug method is used to keep track of the current state of the process.
- * It is connected to QProcess::stateChanged(QProcess::ProcessState).
+ * It is connected to @c QProcess::stateChanged(QProcess::ProcessState).
+ *
+ * @see processFailed()
  */
 void SearchEngine::monitorProcess(QProcess::ProcessState newState) const {
     switch(newState) {
@@ -223,7 +243,10 @@ void SearchEngine::monitorProcess(QProcess::ProcessState newState) const {
 
 /**
  * This debug method is used to give information on errors when running the
- * process. It is connected to QProcess::error(QProcess::ProcessError).
+ * process.
+ * It is connected to @c QProcess::error(QProcess::ProcessError).
+ *
+ * @see monitorProcess()
  */
 void SearchEngine::processFailed(QProcess::ProcessError error) const {
     switch(error) {

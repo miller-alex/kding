@@ -50,7 +50,7 @@ private:
 };
 
 /**
- * Define a @c ResultList as a @c QList of @c ResultItems.
+ * Define a @c #ResultList as a @c QList of @c ResultItem s.
  */
 typedef QList<ResultItem> ResultList;
 

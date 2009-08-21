@@ -60,6 +60,11 @@ void SystemTrayIcon::createMenu() {
     menu->addMenu(helpMenu->menu());
 }
 
+/**
+ * This method decides what to do when the user clicks on the system tray icon.
+ *
+ * @param reason the type of click the system tray icon received
+ */
 void SystemTrayIcon::handleClicks(QSystemTrayIcon::ActivationReason reason) {
     // Trigger and Context are handled by KSystemTrayIcon, so only MiddleClick
     // has to be handled here, unless TranslateOnLeftClick is enabled. In that

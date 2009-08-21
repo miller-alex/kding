@@ -25,6 +25,9 @@ class SystemTrayIcon;
 class TranslationWidget;
 class QKeyEvent;
 
+/**
+ * This class implements the main window of the application.
+ */
 class MainWindow : public KXmlGuiWindow {
     Q_OBJECT
 

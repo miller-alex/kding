@@ -28,6 +28,11 @@ Application::~Application() {
     delete m_mainWindow;
 }
 
+/**
+ * Creates a new instance of the application if required.
+ * If there are arguments given on the command line, they are passed to the
+ * application to be translated.
+ */
 int Application::newInstance() {
     KUniqueApplication::newInstance();
     

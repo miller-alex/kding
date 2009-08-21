@@ -55,7 +55,7 @@ MainWindow::~MainWindow() {
 }
 
 /**
- * Create all required actions.
+ * Create required actions.
  */
 void MainWindow::setupActions() {
     KStandardAction::close(this, SLOT(hide()), actionCollection());
@@ -93,7 +93,7 @@ void MainWindow::setupActions() {
 }
 
 /**
- * Create and set up all of the GUI widgets.
+ * Create and set up GUI widgets.
  */
 void MainWindow::initGui() {
     // create the statusbar
@@ -211,6 +211,13 @@ void MainWindow::saveSettings() {
     Settings::self()->writeConfig();
 }
 
+/**
+ * This method catches key press events to this window.
+ * If the @c Esc key is pressed, the window is hidden, otherwise no action is
+ * taken.
+ *
+ * @param event pointer to a @c QKeyEvent describing the event
+ */
 void MainWindow::keyPressEvent(QKeyEvent* event) {
     // allow the window to be hidden by pressing Escape
     if(event->key() == Qt::Key_Escape) {

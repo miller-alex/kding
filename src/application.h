@@ -22,6 +22,9 @@
 
 class MainWindow;
 
+/**
+ * This class implements handling the unique instance of the application.
+ */
 class Application : public KUniqueApplication {
     Q_OBJECT
 

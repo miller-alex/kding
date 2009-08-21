@@ -27,6 +27,13 @@ class HtmlGenerator;
 class KHTMLPart;
 class KActionCollection;
 
+/**
+ * This class implements the translation widget.
+ * The translation widget consists of an input field to enter the phrase to
+ * translate, and a HTML view to display the results. It manages the whole
+ * translation process by employing functionality provided by the
+ * @c SearchEngine and @c HtmlGenerator classes.
+ */
 class TranslationWidget : public QWidget, public Ui::TranslationWidgetBase {
     Q_OBJECT
 

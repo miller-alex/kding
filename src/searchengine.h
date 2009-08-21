@@ -28,6 +28,10 @@
 class MainWindow;
 class KProcess;
 
+/**
+ * This class implements the search engine that looks up phrases in the
+ * dictionary and provides a @c #ResultList of matching entries.
+ */
 class SearchEngine : public QObject {
     Q_OBJECT
 

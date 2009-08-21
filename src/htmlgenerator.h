@@ -24,6 +24,17 @@
 #include <QString>
 #include <QRegExp>
 
+/**
+ * This class implements the HTML Generator.
+ * The HTML Generator is responsible for creating the HTML code that is
+ * displayed in the @c TranslationWidget 's @c KHTMLPart. It uses different
+ * templates to generate the HTML code, depending on what to display.
+ *
+ * @see welcomePage()
+ * @see resultPage()
+ * @see noMatchesPage()
+ * @see emptyPage()
+ */
 class HtmlGenerator : public QObject {
     Q_OBJECT
 

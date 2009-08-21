@@ -22,6 +22,9 @@
 
 class MainWindow;
 
+/**
+ * This class implements the system tray icon.
+ */
 class SystemTrayIcon : public KSystemTrayIcon {
     Q_OBJECT
 

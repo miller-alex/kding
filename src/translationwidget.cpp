@@ -80,6 +80,13 @@ void TranslationWidget::initGui() {
     focusInputWidget();
 }
 
+/**
+ * Display the given HTML page in the @c KHTMLPart.
+ *
+ * @param html HTML code to display
+ *
+ * @see HtmlGenerator
+ */
 void TranslationWidget::displayHtml(QString html) {
     m_htmlPart->begin();
     //m_htmlPart->setUserStyleSheet(m_htmlGenerator->styleSheetUrl());
@@ -90,6 +97,9 @@ void TranslationWidget::displayHtml(QString html) {
     m_htmlPart->view()->ensureVisible(0, 0);
 }
 
+/**
+ * This method starts a search for the phrase entered in the input widget.
+ */
 void TranslationWidget::startSearch() {
     QString phrase(historyInput->currentText());
 
@@ -101,6 +111,10 @@ void TranslationWidget::startSearch() {
     }
 }
 
+/**
+ * This method cancels a currently running search and resets the
+ * @c TranslationWidget 's state.
+ */
 void TranslationWidget::stopSearch() {
     m_searchEngine->cancelSearch();
     
@@ -119,6 +133,11 @@ void TranslationWidget::anotherSearchRunning() {
     emit statusMessage(i18n("Another search is currently running."));
 }
 
+/**
+ * This method starts a search for the phrase passed in @p phrase.
+ *
+ * @param phrase the phrase to search for
+ */
 void TranslationWidget::translate(QString phrase) {
     phrase = phrase.trimmed();
     
@@ -134,6 +153,11 @@ void TranslationWidget::translate(QString phrase) {
     m_searchEngine->search(phrase);
 }
 
+/**
+ * This method fetches the @c #ResultList from the @c SearchEngine and employs
+ * the @c HtmlGenerator to create a HTML representation of it, suitable to be
+ * displayed in the @c KHTMLPart.
+ */
 void TranslationWidget::processSearchResults() {
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));

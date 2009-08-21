@@ -21,13 +21,16 @@
 #include "ui_generalsettingsbase.h"
 #include <QWidget>
 
+/**
+ * This class implements the "General Settings" section of the configuration
+ * dialog.
+ */
 class GeneralSettings : public QWidget, public Ui::GeneralSettingsBase {
     Q_OBJECT
 
 public:
     GeneralSettings(QWidget* parent = 0);
     ~GeneralSettings();
-    
 };
 
 #endif

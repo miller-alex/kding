@@ -33,10 +33,18 @@
 #include <QPalette>
 #include <QBrush>
 
-const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    // capture left and right side in groups
-const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    // match opening brackets: { [
-const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    // match closing brackets: } ]
+const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    ///< capture left and right side of a line (the German and the English part) in groups
+const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    ///< match opening brackets: { [
+const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    ///< match closing brackets: } ]
 
+/**
+ * This creates a new instance of @c HtmlGenerator.
+ * It takes the font size to be used in the HTML code and, optionally, a parent
+ * object for this object.
+ *
+ * @param fontSize font size in pixels
+ * @param parent parent object
+ */
 HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent) : QObject(parent), CSS_FILE(KStandardDirs::locate("appdata", "html/kding.css")), WELCOME_FILE(KStandardDirs::locate("appdata", "html/welcome.html")), RESULT_FILE(KStandardDirs::locate("appdata", "html/result.html")), NO_MATCHES_FILE(KStandardDirs::locate("appdata", "html/nomatches.html")), m_fontSize(fontSize), m_fontFamily(KGlobalSettings::generalFont().family()) {
     // set the foreground and alternate background colors for the result page
     // to the one from KDE's current color scheme
@@ -53,6 +61,12 @@ HtmlGenerator::~HtmlGenerator() {
     
 }
 
+/**
+ * This method generates the HTML code of the welcome page from the template
+ * and returns it.
+ *
+ * @return HTML code of the welcome page
+ */
 QString HtmlGenerator::welcomePage() const {
     QString html = loadFile(WELCOME_FILE);
     
@@ -77,10 +91,25 @@ QString HtmlGenerator::welcomePage() const {
     return html;
 }
 
+/**
+ * This method generates the HTML code of an empty page and returns it.
+ *
+ * @return HTML code of an empty page
+ */
 QString HtmlGenerator::emptyPage() const {
     return "<html><body></body></html>";
 }
 
+/**
+ * This method generates the HTML code of the result page from the template
+ * and returns it.
+ * It uses @p searchTerm to determine what phrase to highlight.
+ *
+ * @param searchTerm the phrase to highlight
+ * @param resultList @c #ResultList containing the matches found
+ *
+ * @return HTML code of the result page
+ */
 QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList resultList) const {
     QString html = loadFile(RESULT_FILE);
     
@@ -123,6 +152,12 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
     return html;
 }
 
+/**
+ * This method generates the HTML code of the failure page from the template
+ * and returns it.
+ *
+ * @return HTML code of the failure page
+ */
 QString HtmlGenerator::noMatchesPage() const {
     QString html = loadFile(NO_MATCHES_FILE);
     
@@ -145,6 +180,14 @@ KUrl HtmlGenerator::styleSheetUrl() const {
     return KUrl::fromPath(CSS_FILE);
 }
 
+/**
+ * This method reads in a file and returns its contents.
+ *
+ * @param filename the file to read
+ *
+ * @return content of the file to read, or an empty string in case an error
+ *         occurred while trying to read the file
+ */
 QString HtmlGenerator::loadFile(const QString filename) const {
     QString contents = "";
     QFile file(filename);
