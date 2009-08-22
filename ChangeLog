@@ -1,3 +1,10 @@
+2009-08-22  Michael Rex  <me@rexi.org>
+
+        * released v0.5.2
+        * the result page now uses the font and alternating background colors
+          from the current color scheme
+        * added ability to cancel a running search
+
 2009-08-09  Michael Rex  <me@rexi.org>
 
         * released v0.5.1
