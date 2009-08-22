@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-08 16:05+0200\n"
+"POT-Creation-Date: 2009-08-21 18:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,19 +137,19 @@ msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
-#: build/src/ui_translationwidgetbase.h:111 rc.cpp:69 rc.cpp:69
+#: build/src/ui_translationwidgetbase.h:121 rc.cpp:69 rc.cpp:69
 msgid "Form"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:47
 #. i18n: ectx: property (text), widget (QLabel, labelText)
-#: build/src/ui_translationwidgetbase.h:113 rc.cpp:72 rc.cpp:72
+#: build/src/ui_translationwidgetbase.h:123 rc.cpp:72 rc.cpp:72
 msgid "Enter the word or phrase you want to translate"
 msgstr ""
 
-#. i18n: file: src/translationwidgetbase.ui:71
+#. i18n: file: src/translationwidgetbase.ui:87
 #. i18n: ectx: property (text), widget (QLabel, labelSearch)
-#: build/src/ui_translationwidgetbase.h:114 rc.cpp:75 rc.cpp:75
+#: build/src/ui_translationwidgetbase.h:124 rc.cpp:75 rc.cpp:75
 msgid "Se&arch word:"
 msgstr ""
 
@@ -175,25 +175,25 @@ msgstr ""
 msgid "windowPlacementGroup"
 msgstr ""
 
-#: src/htmlgenerator.cpp:57
+#: src/htmlgenerator.cpp:83
 msgid "Dictionary Lookup for KDE"
 msgstr ""
 
-#: src/htmlgenerator.cpp:59
+#: src/htmlgenerator.cpp:85
 msgid "Using dictionary version %1"
 msgstr ""
 
-#: src/htmlgenerator.cpp:107
+#: src/htmlgenerator.cpp:146
 msgctxt "result table caption"
 msgid "German"
 msgstr ""
 
-#: src/htmlgenerator.cpp:108
+#: src/htmlgenerator.cpp:147
 msgctxt "result table caption"
 msgid "English"
 msgstr ""
 
-#: src/htmlgenerator.cpp:126
+#: src/htmlgenerator.cpp:171
 msgid "No matches found"
 msgstr ""
 
@@ -258,11 +258,11 @@ msgstr ""
 msgid "Configure &Global Shortcuts..."
 msgstr ""
 
-#: src/searchengine.cpp:91
+#: src/searchengine.cpp:96
 msgid "Searching for '%1'..."
 msgstr ""
 
-#: src/searchengine.cpp:246
+#: src/searchengine.cpp:290
 msgctxt "dictionary version"
 msgid "unknown"
 msgstr ""
@@ -271,11 +271,15 @@ msgstr ""
 msgid "KDing - translation tool"
 msgstr ""
 
-#: src/translationwidget.cpp:109
+#: src/translationwidget.cpp:129
+msgid "Search cancelled."
+msgstr ""
+
+#: src/translationwidget.cpp:133
 msgid "Another search is currently running."
 msgstr ""
 
-#: src/translationwidget.cpp:138
+#: src/translationwidget.cpp:178
 msgid "Found 1 match for '%2'."
 msgid_plural "Found %1 matches for '%2'."
 msgstr[0] ""
