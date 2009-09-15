@@ -34,6 +34,36 @@
         </entry>
     </group>
     
+    <group name="Backend">
+        <entry name="SelectedBackend" type="Enum">
+            <label>What backend to use for dictionary lookups?</label>
+            <default>egrep</default>
+            <tooltip>This selects the backend to use for dictionary lookups.</tooltip>
+            <whatsthis>This option determines the program that is used to search the dictionary. egrep is a standard tool that should be installed on every system and supports basic searching. agrep is an advanced tool which supports approximate matching and thus enables KDing to find a phrase even when it is misspelled. When using agrep, you can set the number of errors permitted in the "Advanced Options" section.</whatsthis>
+            <choices>
+                <choice name="egrep"/>
+                <choice name="agrep"/>
+            </choices>
+        </entry>
+        <entry name="CaseSensitive" type="Bool">
+            <label>Should the search be case-sensitive?</label>
+            <default>false</default>
+            <tooltip>Decides whether case will be considered when searching for a term.</tooltip>
+        </entry>
+        <entry name="WholeWords" type="Bool">
+            <label>Should the search match only whole words or also partial strings?</label>
+            <default>true</default>
+            <tooltip>Decides whether the search term must match a whole word or can be a part of a word.</tooltip>
+            <whatsthis>If this is enabled, the search term will match only whole words. If it is disabled, the search term can also be a part of a word.</whatsthis>
+        </entry>
+        <entry name="MaximumErrorNumber" type="Int">
+            <label>How many errors are permitted when doing an approximate search?</label>
+            <default>0</default>
+            <tooltip></tooltip>
+            <whatsthis></whatsthis>
+        </entry>
+    </group>
+    
     <group name="History">
         <entry name="Recent" type="StringList">
             <label>List of recently translated words</label>

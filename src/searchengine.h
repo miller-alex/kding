@@ -26,6 +26,7 @@
 #include <QRegExp>
 
 class MainWindow;
+class SearchBackendFactory;
 class KProcess;
 
 /**
@@ -42,7 +43,7 @@ public:
     QString searchTerm() const;
     ResultList& results() const;
     QString dictionaryVersion() const;
-    QString grepVersion() const;
+    QString backendVersion() const;
     
 signals:
     void searchStarted();
@@ -53,6 +54,7 @@ signals:
 public slots:
     void search(QString phrase);
     void cancelSearch();
+    void updateSearchBackend() const;
     
 private slots:
     void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
@@ -60,12 +62,9 @@ private slots:
     void monitorProcess(QProcess::ProcessState newState) const;
     
 private:
-    // this enum defines values that are added to the result's priority
-    // depending on the on the outcome of various regexp tests
+    /// This enum defines values that are added to the result's priority
+    /// depending on the outcome of various regexp tests
     enum SortPriority { STARTS_WITH = 100, CONTAINS = 80, IS_ABBREVIATION = 10 };
-    
-    static const QString SEARCH_CMD;
-    static const QStringList SEARCH_ARGS;
     
     // the following regular expressions are independent of the search term
     // and thus can be defined at class level
@@ -81,13 +80,14 @@ private:
     
     const QString DICTIONARY_VERSION;
     
-    void sortResultsByPriority(ResultList* resultList);
+    void sortResultsByPriority(ResultList* resultList) const;
     QString determineDictionaryVersion();
-    QString determineGrepVersion();
+    QString determineBackendVersion();
     
     KProcess* m_process;
     QString m_searchTerm;
     ResultList* m_resultList;
+    SearchBackendFactory* m_backendFactory;
 };
 
 #endif

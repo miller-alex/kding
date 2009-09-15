@@ -20,6 +20,7 @@
 #include "translationwidget.h"
 #include "settings.h"
 #include "generalsettings.h"
+#include "backendsettings.h"
 #include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>
@@ -176,8 +177,10 @@ void MainWindow::showPreferences() {
     // create an instance of the config dialog
     KConfigDialog* dialog = new KConfigDialog(this, "settings", Settings::self());
     dialog->addPage(new GeneralSettings(), i18n("General Settings"), "configure");
+    dialog->addPage(new BackendSettings(), i18n("Backend"), "system-run");
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(saveSettings()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), m_systemTrayIcon, SLOT(updateSettings()));
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), m_translationWidget, SLOT(updateSearchBackend()));
     
     dialog->show();
 }

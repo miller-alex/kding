@@ -58,6 +58,7 @@ private slots:
     void anotherSearchRunning();
     void processSearchResults();
     void saveSettings();
+    void updateSearchBackend();
     
 private:
     void initGui();

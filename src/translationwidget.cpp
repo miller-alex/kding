@@ -210,4 +210,8 @@ void TranslationWidget::saveSettings() {
     Settings::self()->writeConfig();
 }
 
+void TranslationWidget::updateSearchBackend() {
+    m_searchEngine->updateSearchBackend();
+}
+
 #include "translationwidget.moc"

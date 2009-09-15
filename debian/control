@@ -9,6 +9,7 @@ Homepage: http://kding.sourceforge.net/
 Package: kding
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: agrep
 Description: KDE port of Ding
  KDing is a KDE port of Ding, a dictionary lookup program. It sits in
  KDE's system tray and can translate the current clipboard content. Users can

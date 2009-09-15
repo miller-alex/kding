@@ -16,6 +16,7 @@
  */
 
 #include "searchengine.h"
+#include "searchbackendfactory.h"
 #include <KStandardDirs>
 #include <KLocale>
 #include <KGlobal>
@@ -28,19 +29,14 @@
 #include <QMutableListIterator>
 #include <QtAlgorithms>
 
-const QString SearchEngine::SEARCH_CMD = "egrep";
-const QStringList SearchEngine::SEARCH_ARGS = QStringList() \
-    << "-i"     /* case insensitive */ \
-    << "-w";    /* match only whole words */
-
 const QRegExp SearchEngine::MULTI_LINE = QRegExp("\\|");    ///< RegExp to match line break markers
 const QRegExp SearchEngine::ABBREVIATION = QRegExp(" : ");  ///< RegExp to match abbreviation markers
 const QRegExp SearchEngine::ROUND_BRACKETS = QRegExp(" \\([^.\\)]*\\)");    ///< RegExp to match text in round brackets
 const QRegExp SearchEngine::CURLY_BRACKETS = QRegExp(" \\{[^.\\}]*\\}");    ///< RegExp to match text in curly brackets
 const QRegExp SearchEngine::SQUARE_BRACKETS = QRegExp(" \\[[^\\]]*\\]");    ///< RegExp to match text in square brackets
 
-SearchEngine::SearchEngine(QObject* parent) : QObject(parent), DEFAULT_DICTIONARY(KStandardDirs::locate("appdata", "de-en.txt")), DICTIONARY_VERSION(determineDictionaryVersion()), m_process(0), m_resultList(0) {
-    
+SearchEngine::SearchEngine(QObject* parent) : QObject(parent), DEFAULT_DICTIONARY(KStandardDirs::locate("appdata", "de-en.txt")), DICTIONARY_VERSION(determineDictionaryVersion()), m_process(0), m_resultList(0), m_backendFactory(0) {
+    m_backendFactory = new SearchBackendFactory(this);
 }
 
 SearchEngine::~SearchEngine() {
@@ -90,7 +86,8 @@ void SearchEngine::search(QString phrase) {
     }
     
     // set up the command to run
-    (*m_process) << SEARCH_CMD << SEARCH_ARGS << phrase << DEFAULT_DICTIONARY;
+    kDebug() << m_backendFactory->executable() << m_backendFactory->argumentList();
+    (*m_process) << m_backendFactory->executable() << m_backendFactory->argumentList() << phrase << DEFAULT_DICTIONARY;
     
     // finally start searching
     emit statusMessage(i18n("Searching for '%1'...", phrase));
@@ -160,7 +157,7 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
  *
  * @param resultList a pointer to the @c #ResultList to sort
  */
-void SearchEngine::sortResultsByPriority(ResultList* resultList) {
+void SearchEngine::sortResultsByPriority(ResultList* resultList) const {
     // the result starts with the search term
     QRegExp startsWith_DE("^" + m_searchTerm + "(;| ::)", Qt::CaseInsensitive);
     QRegExp startsWith_EN(":: (to )?" + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
@@ -275,7 +272,7 @@ QString SearchEngine::dictionaryVersion() const {
     return DICTIONARY_VERSION;
 }
 
-QString SearchEngine::grepVersion() const {
+QString SearchEngine::backendVersion() const {
     return "";
 }
 
@@ -310,8 +307,12 @@ QString SearchEngine::determineDictionaryVersion() {
     return version;
 }
 
-QString SearchEngine::determineGrepVersion() {
+QString SearchEngine::determineBackendVersion() {
     return "";
+}
+
+void SearchEngine::updateSearchBackend() const {
+    m_backendFactory->generate();
 }
 
 #include "searchengine.moc"
