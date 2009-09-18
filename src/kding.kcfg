@@ -8,20 +8,14 @@
 <!--    <kcfgfile name="kdingrc"/> -->
     
     <group name="General">
-        <entry name="CenterWindow" type="Bool">
-            <label>Center the application window on the desktop?</label>
-            <default>true</default>
-            <tooltip>The window is always displayed in the center of the desktop</tooltip>
-        </entry>
-        <entry name="RememberPosition" type="Bool">
-            <label>Remember position of the application window?</label>
-            <default>false</default>
-            <tooltip>The application stores its window position when exiting and reuses that on the next start</tooltip>
-        </entry>
-        <entry name="NoSpecialHandling" type="Bool">
-            <label>Let KDE place the application window</label>
-            <default>false</default>
-            <tooltip>Nothing special is done, the window's position is decided by KDE</tooltip>
+        <entry name="WindowPlacement" type="Enum">
+            <label>How the window should be placed on the desktop</label>
+            <default>CenterWindow</default>
+            <choices>
+                <choice name="CenterWindow"/>
+                <choice name="RememberPosition"/>
+                <choice name="NoSpecialHandling"/>
+            </choices>
         </entry>
         <entry name="Position" type="Point">
             <label>Position of the application window</label>

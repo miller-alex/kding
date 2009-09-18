@@ -111,12 +111,13 @@ void MainWindow::initGui() {
     m_systemTrayIcon->show();
     
     // restore settings
-    if(Settings::self()->centerWindow()) {
-        centerWindow();
-    }
-    
-    if(Settings::self()->rememberPosition()) {
-        move(Settings::self()->position());
+    switch(Settings::self()->windowPlacement()) {
+        case Settings::EnumWindowPlacement::CenterWindow:
+            centerWindow();
+            break;
+        case Settings::EnumWindowPlacement::RememberPosition:
+            move(Settings::self()->position());
+            break;
     }
 }
 

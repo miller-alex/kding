@@ -13,15 +13,18 @@
   <property name="windowTitle">
    <string>General Settings</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="KButtonGroup" name="kcfg_WindowPlacement">
      <property name="title">
       <string>Window Placement</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QRadioButton" name="kcfg_CenterWindow">
+       <widget class="QRadioButton" name="radioCenterWindow">
+        <property name="toolTip">
+         <string>The window is always displayed in the center of the desktop</string>
+        </property>
         <property name="text">
          <string>Always center window</string>
         </property>
@@ -31,7 +34,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="kcfg_RememberPosition">
+       <widget class="QRadioButton" name="radioRememberPosition">
+        <property name="toolTip">
+         <string>The application stores its window position when exiting and reuses that on the next start</string>
+        </property>
         <property name="text">
          <string>Remember window position</string>
         </property>
@@ -41,7 +47,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="kcfg_NoSpecialHandling">
+       <widget class="QRadioButton" name="radioNoSpecialHandling">
+        <property name="toolTip">
+         <string>Nothing special is done, the window's position is decided by KDE</string>
+        </property>
         <property name="text">
          <string>No special handling</string>
         </property>
@@ -84,6 +93,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KButtonGroup</class>
+   <extends>QGroupBox</extends>
+   <header>kbuttongroup.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
