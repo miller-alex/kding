@@ -16,7 +16,7 @@
  */
 
 #include "backendsettings.h"
-#include "settings.h"
+#include "searchbackendfactory.h"
 #include <KDebug>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -24,6 +24,7 @@
 BackendSettings::BackendSettings(QWidget* parent) : QWidget(parent) {
     setupUi(this);
     
+    radioAgrep->setEnabled(SearchBackendFactory::hasAgrep());
     connect(radioAgrep, SIGNAL(toggled(bool)), advancedOptionsBox, SLOT(setEnabled(bool)));
 }
 

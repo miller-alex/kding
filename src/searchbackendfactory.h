@@ -23,7 +23,8 @@
 #include <QStringList>
 
 /**
- *
+ * This class generates the command line to use the backend and options
+ * selected by the user.
  */
 class SearchBackendFactory : public QObject {
     Q_OBJECT
@@ -34,6 +35,8 @@ public:
     
     QString executable() const;
     QStringList argumentList() const;
+    
+    static bool hasAgrep();
     
 public slots:
     void generate();
