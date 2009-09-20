@@ -24,7 +24,7 @@
 
 int main(int argc, char* argv[]) {
     // add About dialog data
-    KAboutData* about = new KAboutData("kding", 0, ki18n("KDing"), "0.6");
+    KAboutData* about = new KAboutData("kding", 0, ki18n("KDing"), "0.6.1dev");
     about->setShortDescription(ki18n("KDE port of Ding, the DIctionary Nice Grep"));
     about->setLicense(KAboutData::License_GPL_V2);
     about->setCopyrightStatement(ki18n("(c) 2005-2009, Michael Rex"));
