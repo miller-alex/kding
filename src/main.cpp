@@ -24,7 +24,7 @@
 
 int main(int argc, char* argv[]) {
     // add About dialog data
-    KAboutData* about = new KAboutData("kding", 0, ki18n("KDing"), "0.6dev");
+    KAboutData* about = new KAboutData("kding", 0, ki18n("KDing"), "0.6");
     about->setShortDescription(ki18n("KDE port of Ding, the DIctionary Nice Grep"));
     about->setLicense(KAboutData::License_GPL_V2);
     about->setCopyrightStatement(ki18n("(c) 2005-2009, Michael Rex"));
@@ -53,11 +53,14 @@ int main(int argc, char* argv[]) {
  *
  * @section desc Description
  *
- * KDing is a KDE port of Ding, a dictionary lookup program. It sits in
- * KDE's system tray and can translate the current clipboard content. Users can
- * also enter single words or phrases for translation. It is intended to be used
- * for translating between German and English, but can be used with every
- * language for which a word list is available for Ding.
+ * KDing is a KDE port of
+ * <a href="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>, a dictionary
+ * lookup program. It sits in KDE's system tray and can translate the current
+ * clipboard content. Users can also enter single words or phrases for
+ * translation. It is intended to be used for translating between German and
+ * English, but can be used with every language for which a word list is
+ * available for
+ * <a href="http://www-user.tu-chemnitz.de/~fri/ding/#other">Ding</a>.
  *
  * @section license License
  *

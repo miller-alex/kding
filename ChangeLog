@@ -1,3 +1,11 @@
+2009-09-20  Michael Rex  <me@rexi.org>
+
+        * released v0.6
+        * case-insensitive search and matching whole words only is now
+          configurable
+        * in addition to egrep, KDing now supports agrep for searching
+        * approximate matching is supported when using agrep
+
 2009-08-22  Michael Rex  <me@rexi.org>
 
         * released v0.5.2
