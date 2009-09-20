@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-21 18:14+0200\n"
+"POT-Creation-Date: 2009-09-20 13:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,67 +18,35 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #. i18n: file: src/kding.kcfg:12
-#. i18n: ectx: label, entry (CenterWindow), group (General)
-#: build/src/settings.cpp:38 rc.cpp:36 rc.cpp:36
-msgid "Center the application window on the desktop?"
+#. i18n: ectx: label, entry (WindowPlacement), group (General)
+#: build/src/settings.cpp:54 rc.cpp:78 rc.cpp:78
+msgid "How the window should be placed on the desktop"
 msgstr ""
 
-#. i18n: file: src/kding.kcfg:14
-#. i18n: ectx: tooltip, entry (CenterWindow), group (General)
-#: build/src/settings.cpp:39 rc.cpp:39 rc.cpp:39
-msgid "The window is always displayed in the center of the desktop"
-msgstr ""
-
-#. i18n: file: src/kding.kcfg:17
-#. i18n: ectx: label, entry (RememberPosition), group (General)
-#: build/src/settings.cpp:43 rc.cpp:42 rc.cpp:42
-msgid "Remember position of the application window?"
-msgstr ""
-
-#. i18n: file: src/kding.kcfg:19
-#. i18n: ectx: tooltip, entry (RememberPosition), group (General)
-#: build/src/settings.cpp:44 rc.cpp:45 rc.cpp:45
-msgid ""
-"The application stores its window position when exiting and reuses that on "
-"the next start"
-msgstr ""
-
-#. i18n: file: src/kding.kcfg:22
-#. i18n: ectx: label, entry (NoSpecialHandling), group (General)
-#: build/src/settings.cpp:48 rc.cpp:48 rc.cpp:48
-msgid "Let KDE place the application window"
-msgstr ""
-
-#. i18n: file: src/kding.kcfg:24
-#. i18n: ectx: tooltip, entry (NoSpecialHandling), group (General)
-#: build/src/settings.cpp:49 rc.cpp:51 rc.cpp:51
-msgid "Nothing special is done, the window's position is decided by KDE"
-msgstr ""
-
-#. i18n: file: src/kding.kcfg:27
+#. i18n: file: src/kding.kcfg:21
 #. i18n: ectx: label, entry (Position), group (General)
-#: build/src/settings.cpp:53 rc.cpp:54 rc.cpp:54
+#: build/src/settings.cpp:58 rc.cpp:81 rc.cpp:81
 msgid "Position of the application window"
 msgstr ""
 
-#. i18n: file: src/kding.kcfg:30
+#. i18n: file: src/kding.kcfg:24
 #. i18n: ectx: label, entry (TranslateOnLeftClick), group (General)
-#: build/src/settings.cpp:57 rc.cpp:57 rc.cpp:57
+#: build/src/settings.cpp:62 rc.cpp:84 rc.cpp:84
 msgid ""
 "Should a left click on the system tray icon translate the clipboard content?"
 msgstr ""
 
-#. i18n: file: src/kding.kcfg:32
+#. i18n: file: src/kding.kcfg:26
 #. i18n: ectx: tooltip, entry (TranslateOnLeftClick), group (General)
-#: build/src/settings.cpp:58 rc.cpp:60 rc.cpp:60
+#: build/src/settings.cpp:63 rc.cpp:87 rc.cpp:87
 msgid ""
 "Decides whether to start the translation or to show the main window after a "
 "left click on the system tray icon."
 msgstr ""
 
-#. i18n: file: src/kding.kcfg:33
+#. i18n: file: src/kding.kcfg:27
 #. i18n: ectx: whatsthis, entry (TranslateOnLeftClick), group (General)
-#: build/src/settings.cpp:59 rc.cpp:63 rc.cpp:63
+#: build/src/settings.cpp:64 rc.cpp:90 rc.cpp:90
 msgid ""
 "If this is enabled, translation will start when the user clicks the system "
 "tray icon with the left mouse button, and the applications window will be "
@@ -86,70 +54,209 @@ msgid ""
 "the other way round."
 msgstr ""
 
-#. i18n: file: src/kding.kcfg:39
+#. i18n: file: src/kding.kcfg:33
+#. i18n: ectx: label, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:82 rc.cpp:93 rc.cpp:93
+msgid "What backend to use for dictionary lookups?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:35
+#. i18n: ectx: tooltip, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:83 rc.cpp:96 rc.cpp:96
+msgid "This selects the backend to use for dictionary lookups."
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:36
+#. i18n: ectx: whatsthis, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:84 rc.cpp:99 rc.cpp:99
+msgid ""
+"This option determines the program that is used to search the dictionary. "
+"egrep is a standard tool that should be installed on every system and "
+"supports basic searching. agrep is an advanced tool which supports "
+"approximate matching and thus enables KDing to find a phrase even when it is "
+"misspelled. When using agrep, you can set the number of errors permitted in "
+"the \"Advanced Options\" section."
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:43
+#. i18n: ectx: label, entry (CaseSensitive), group (Backend)
+#: build/src/settings.cpp:88 rc.cpp:102 rc.cpp:102
+msgid "Should the search be case-sensitive?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:45
+#. i18n: ectx: tooltip, entry (CaseSensitive), group (Backend)
+#: build/src/settings.cpp:89 rc.cpp:105 rc.cpp:105
+msgid "Decides whether case will be considered when searching for a term."
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:48
+#. i18n: ectx: label, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:93 rc.cpp:108 rc.cpp:108
+msgid "Should the search match only whole words or also partial strings?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:50
+#. i18n: ectx: tooltip, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:94 rc.cpp:111 rc.cpp:111
+msgid ""
+"Decides whether the search term must match a whole word or can be a part of "
+"a word."
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:51
+#. i18n: ectx: whatsthis, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:95 rc.cpp:114 rc.cpp:114
+msgid ""
+"If this is enabled, the search term will match only whole words. If it is "
+"disabled, the search term can also be a part of a word."
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:54
+#. i18n: ectx: label, entry (MaximumErrorNumber), group (Backend)
+#: build/src/settings.cpp:99 rc.cpp:117 rc.cpp:117
+msgid "How many errors are permitted when doing an approximate search?"
+msgstr ""
+
+#. i18n: file: src/kding.kcfg:63
 #. i18n: ectx: label, entry (Recent), group (History)
-#: build/src/settings.cpp:66 rc.cpp:66 rc.cpp:66
+#: build/src/settings.cpp:106 rc.cpp:122 rc.cpp:122
 msgid "List of recently translated words"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, BackendSettingsBase)
+#: build/src/ui_backendsettingsbase.h:139 rc.cpp:6 src/mainwindow.cpp:181
+#: rc.cpp:6
+msgid "Backend"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:20
+#. i18n: ectx: property (title), widget (KButtonGroup, kcfg_SelectedBackend)
+#: build/src/ui_backendsettingsbase.h:140 rc.cpp:9 rc.cpp:9
+msgid "Search Command"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:32
+#. i18n: ectx: property (text), widget (QRadioButton, radioEgrep)
+#: build/src/ui_backendsettingsbase.h:141 rc.cpp:12 rc.cpp:12
+msgid "Basic search (egrep)"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:48
+#. i18n: ectx: property (text), widget (QRadioButton, radioAgrep)
+#: build/src/ui_backendsettingsbase.h:142 rc.cpp:18 rc.cpp:18
+msgid "Advanced search (agrep)"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:61
+#. i18n: ectx: property (title), widget (QGroupBox, basicOptionsBox)
+#: build/src/ui_backendsettingsbase.h:143 rc.cpp:24 rc.cpp:24
+msgid "Basic Options"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:67
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_WholeWords)
+#: build/src/ui_backendsettingsbase.h:144 rc.cpp:27 rc.cpp:27
+msgid "Match whole words only"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:74
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_CaseSensitive)
+#: build/src/ui_backendsettingsbase.h:145 rc.cpp:30 rc.cpp:30
+msgid "Case sensitive search"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:87
+#. i18n: ectx: property (title), widget (QGroupBox, advancedOptionsBox)
+#: build/src/ui_backendsettingsbase.h:146 rc.cpp:33 rc.cpp:33
+msgid "Advanced Options"
+msgstr ""
+
+#. i18n: file: src/backendsettingsbase.ui:93
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: build/src/ui_backendsettingsbase.h:147 rc.cpp:36 rc.cpp:36
+msgid "Number of errors allowed:"
 msgstr ""
 
 #. i18n: file: src/generalsettingsbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralSettingsBase)
-#: build/src/ui_generalsettingsbase.h:103 rc.cpp:6 src/mainwindow.cpp:178
-#: rc.cpp:6
+#: build/src/ui_generalsettingsbase.h:104 rc.cpp:39 src/mainwindow.cpp:180
+#: rc.cpp:39
 msgid "General Settings"
 msgstr ""
 
 #. i18n: file: src/generalsettingsbase.ui:20
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: build/src/ui_generalsettingsbase.h:104 rc.cpp:9 rc.cpp:9
+#. i18n: ectx: property (title), widget (KButtonGroup, kcfg_WindowPlacement)
+#: build/src/ui_generalsettingsbase.h:105 rc.cpp:42 rc.cpp:42
 msgid "Window Placement"
 msgstr ""
 
 #. i18n: file: src/generalsettingsbase.ui:26
-#. i18n: ectx: property (text), widget (QRadioButton, kcfg_CenterWindow)
-#: build/src/ui_generalsettingsbase.h:105 rc.cpp:12 rc.cpp:12
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioCenterWindow)
+#: build/src/ui_generalsettingsbase.h:107 rc.cpp:45 rc.cpp:45
+msgid "The window is always displayed in the center of the desktop"
+msgstr ""
+
+#. i18n: file: src/generalsettingsbase.ui:29
+#. i18n: ectx: property (text), widget (QRadioButton, radioCenterWindow)
+#: build/src/ui_generalsettingsbase.h:109 rc.cpp:48 rc.cpp:48
 msgid "Always center window"
 msgstr ""
 
-#. i18n: file: src/generalsettingsbase.ui:36
-#. i18n: ectx: property (text), widget (QRadioButton, kcfg_RememberPosition)
-#: build/src/ui_generalsettingsbase.h:106 rc.cpp:18 rc.cpp:18
+#. i18n: file: src/generalsettingsbase.ui:39
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioRememberPosition)
+#: build/src/ui_generalsettingsbase.h:111 rc.cpp:54 rc.cpp:54
+msgid ""
+"The application stores its window position when exiting and reuses that on "
+"the next start"
+msgstr ""
+
+#. i18n: file: src/generalsettingsbase.ui:42
+#. i18n: ectx: property (text), widget (QRadioButton, radioRememberPosition)
+#: build/src/ui_generalsettingsbase.h:113 rc.cpp:57 rc.cpp:57
 msgid "Remember window position"
 msgstr ""
 
-#. i18n: file: src/generalsettingsbase.ui:46
-#. i18n: ectx: property (text), widget (QRadioButton, kcfg_NoSpecialHandling)
-#: build/src/ui_generalsettingsbase.h:107 rc.cpp:24 rc.cpp:24
+#. i18n: file: src/generalsettingsbase.ui:52
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioNoSpecialHandling)
+#: build/src/ui_generalsettingsbase.h:115 rc.cpp:63 rc.cpp:63
+msgid "Nothing special is done, the window's position is decided by KDE"
+msgstr ""
+
+#. i18n: file: src/generalsettingsbase.ui:55
+#. i18n: ectx: property (text), widget (QRadioButton, radioNoSpecialHandling)
+#: build/src/ui_generalsettingsbase.h:117 rc.cpp:66 rc.cpp:66
 msgid "No special handling"
 msgstr ""
 
-#. i18n: file: src/generalsettingsbase.ui:59
+#. i18n: file: src/generalsettingsbase.ui:68
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: build/src/ui_generalsettingsbase.h:108 rc.cpp:30 rc.cpp:30
+#: build/src/ui_generalsettingsbase.h:118 rc.cpp:72 rc.cpp:72
 msgid "System Tray Icon"
 msgstr ""
 
-#. i18n: file: src/generalsettingsbase.ui:65
+#. i18n: file: src/generalsettingsbase.ui:74
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TranslateOnLeftClick)
-#: build/src/ui_generalsettingsbase.h:109 rc.cpp:33 rc.cpp:33
+#: build/src/ui_generalsettingsbase.h:119 rc.cpp:75 rc.cpp:75
 msgid "Left click translates clipboard content"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
-#: build/src/ui_translationwidgetbase.h:121 rc.cpp:69 rc.cpp:69
+#: build/src/ui_translationwidgetbase.h:121 rc.cpp:125 rc.cpp:125
 msgid "Form"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:47
 #. i18n: ectx: property (text), widget (QLabel, labelText)
-#: build/src/ui_translationwidgetbase.h:123 rc.cpp:72 rc.cpp:72
+#: build/src/ui_translationwidgetbase.h:123 rc.cpp:128 rc.cpp:128
 msgid "Enter the word or phrase you want to translate"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:87
 #. i18n: ectx: property (text), widget (QLabel, labelSearch)
-#: build/src/ui_translationwidgetbase.h:124 rc.cpp:75 rc.cpp:75
+#: build/src/ui_translationwidgetbase.h:124 rc.cpp:131 rc.cpp:131
 msgid "Se&arch word:"
 msgstr ""
 
@@ -159,19 +266,31 @@ msgstr ""
 msgid "&Settings"
 msgstr ""
 
-#. i18n: file: src/generalsettingsbase.ui:29
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_CenterWindow)
-#. i18n: file: src/generalsettingsbase.ui:39
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_RememberPosition)
-#. i18n: file: src/generalsettingsbase.ui:49
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_NoSpecialHandling)
-#. i18n: file: src/generalsettingsbase.ui:29
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_CenterWindow)
-#. i18n: file: src/generalsettingsbase.ui:39
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_RememberPosition)
-#. i18n: file: src/generalsettingsbase.ui:49
-#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, kcfg_NoSpecialHandling)
-#: rc.cpp:15 rc.cpp:21 rc.cpp:27 rc.cpp:15 rc.cpp:21 rc.cpp:27
+#. i18n: file: src/backendsettingsbase.ui:35
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioEgrep)
+#. i18n: file: src/backendsettingsbase.ui:51
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioAgrep)
+#. i18n: file: src/backendsettingsbase.ui:35
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioEgrep)
+#. i18n: file: src/backendsettingsbase.ui:51
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioAgrep)
+#: rc.cpp:15 rc.cpp:21 rc.cpp:15 rc.cpp:21
+msgid "searchCommandGroup"
+msgstr ""
+
+#. i18n: file: src/generalsettingsbase.ui:32
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioCenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:45
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioRememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:58
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioNoSpecialHandling)
+#. i18n: file: src/generalsettingsbase.ui:32
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioCenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:45
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioRememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:58
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioNoSpecialHandling)
+#: rc.cpp:51 rc.cpp:60 rc.cpp:69 rc.cpp:51 rc.cpp:60 rc.cpp:69
 msgid "windowPlacementGroup"
 msgstr ""
 
@@ -238,37 +357,37 @@ msgstr ""
 msgid "Translate the given phrase"
 msgstr ""
 
-#: src/mainwindow.cpp:69
+#: src/mainwindow.cpp:70
 msgid "&Translate Clipboard Content"
 msgstr ""
 
-#: src/mainwindow.cpp:71 src/mainwindow.cpp:72
+#: src/mainwindow.cpp:72 src/mainwindow.cpp:73
 msgid "Translates the current content of the clipboard."
 msgstr ""
 
-#: src/mainwindow.cpp:79
+#: src/mainwindow.cpp:80
 msgid "Translate &Word..."
 msgstr ""
 
-#: src/mainwindow.cpp:81 src/mainwindow.cpp:82
+#: src/mainwindow.cpp:82 src/mainwindow.cpp:83
 msgid "Opens a dialog where you can enter the word to be translated."
 msgstr ""
 
-#: src/mainwindow.cpp:89
+#: src/mainwindow.cpp:90
 msgid "Configure &Global Shortcuts..."
 msgstr ""
 
-#: src/searchengine.cpp:96
+#: src/searchengine.cpp:93
 msgid "Searching for '%1'..."
 msgstr ""
 
-#: src/searchengine.cpp:290
+#: src/searchengine.cpp:287
 msgctxt "dictionary version"
 msgid "unknown"
 msgstr ""
 
 #: src/systemtrayicon.cpp:43
-msgid "KDing - translation tool"
+msgid "KDing - Translation tool"
 msgstr ""
 
 #: src/translationwidget.cpp:129

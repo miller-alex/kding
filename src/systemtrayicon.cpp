@@ -40,7 +40,7 @@ SystemTrayIcon::~SystemTrayIcon() {
 }
 
 void SystemTrayIcon::initGui() {
-    setToolTip(i18n("KDing - translation tool"));
+    setToolTip(i18n("KDing - Translation tool"));
     
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(handleClicks(QSystemTrayIcon::ActivationReason)));
 }
