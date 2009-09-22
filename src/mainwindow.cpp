@@ -127,6 +127,9 @@ void MainWindow::translateClipboard() {
     m_translationWidget->clearDisplay();
     
     if(!isVisible()) {
+        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
+            centerWindow();
+        }
         show();
     }
     
@@ -138,6 +141,9 @@ void MainWindow::translateClipboard() {
 
 void MainWindow::translateWord() {
     if(!isVisible()) {
+        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
+            centerWindow();
+        }
         show();
     }
     
@@ -151,6 +157,9 @@ void MainWindow::translate(QString phrase) {
     m_translationWidget->clearDisplay();
     
     if(!isVisible()) {
+        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
+            centerWindow();
+        }
         show();
     }
     
