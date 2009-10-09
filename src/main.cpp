@@ -35,6 +35,8 @@ int main(int argc, char* argv[]) {
     about->addCredit(ki18n("Frank Richter"), ki18n("original author of Ding, for the inspiration for KDing and the dictionary"), 0, "http://www-user.tu-chemnitz.de/~fri/ding/");
     about->addCredit(ki18n("Alexander Stein"), ki18n("initial port to KDE4"), "alexander.stein@informatik.tu-chemnitz.de");
     
+    about->setTranslator(ki18nc("NAME OF TRANSLATORS", "Your names"), ki18nc("EMAIL OF TRANSLATORS", "Your emails"));
+    
     KCmdLineArgs::init(argc, argv, about);
     
     // add command line options

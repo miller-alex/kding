@@ -1,0 +1,440 @@
+# Copyright (C) 2009
+# This file is distributed under the same license as the KDing package.
+#
+# Michael Rex <me@rexi.org>, 2009.
+# Michael Rex <michael@rexi.org>, 2009.
+# Pavel Fric <pavelfric@seznam.cz>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kding\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-09 15:24+0200\n"
+"PO-Revision-Date: 2009-09-30 22:42+0200\n"
+"Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.0\n"
+
+#. i18n: file: src/kding.kcfg:12
+#. i18n: ectx: label, entry (WindowPlacement), group (General)
+#: build/src/settings.cpp:54 rc.cpp:78
+msgid "How the window should be placed on the desktop"
+msgstr "Jakým způsobem má být okno umístěno na ploše"
+
+#. i18n: file: src/kding.kcfg:21
+#. i18n: ectx: label, entry (Position), group (General)
+#: build/src/settings.cpp:58 rc.cpp:81
+msgid "Position of the application window"
+msgstr "Poloha okna s programem"
+
+#. i18n: file: src/kding.kcfg:24
+#. i18n: ectx: label, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:62 rc.cpp:84
+msgid ""
+"Should a left click on the system tray icon translate the clipboard content?"
+msgstr ""
+"Má klepnutí na symbol ikony v systémové oblasti panelu stisknutím levého "
+"tlačítka myši přeložit obsah schránky?"
+
+#. i18n: file: src/kding.kcfg:26
+#. i18n: ectx: tooltip, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:63 rc.cpp:87
+msgid ""
+"Decides whether to start the translation or to show the main window after a "
+"left click on the system tray icon."
+msgstr ""
+"Určuje, zda se po klepnutí na symbol ikony v systémové oblasti panelu "
+"stisknutím levého tlačítka myši přeloží obsah schránky, nebo se ukáže pouze "
+"hlavní okno"
+
+#. i18n: file: src/kding.kcfg:27
+#. i18n: ectx: whatsthis, entry (TranslateOnLeftClick), group (General)
+#: build/src/settings.cpp:64 rc.cpp:90
+msgid ""
+"If this is enabled, translation will start when the user clicks the system "
+"tray icon with the left mouse button, and the applications window will be "
+"shown when the icon is clicked with the middle mouse button. Otherwise, it's "
+"the other way round."
+msgstr ""
+"Jestliže je povolena tato volba, překlad začne, když uživatel klepne za "
+"stisknutí levého tlačítka myši na symbol ikony v systémové oblasti panelu, a "
+"hlavní okno se ukáže, když bude na ikonu poklepáno prostředním tlačítkem "
+"myši. V opačném případě jsou reakce na klepnutí na symbol obráceně."
+
+#. i18n: file: src/kding.kcfg:33
+#. i18n: ectx: label, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:82 rc.cpp:93
+msgid "What backend to use for dictionary lookups?"
+msgstr "Který program se má používat pro hledání ve slovníku?"
+
+#. i18n: file: src/kding.kcfg:35
+#. i18n: ectx: tooltip, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:83 rc.cpp:96
+msgid "This selects the backend to use for dictionary lookups."
+msgstr "Tímto se vybere program, který se použije pro hledání ve slovníku"
+
+#. i18n: file: src/kding.kcfg:36
+#. i18n: ectx: whatsthis, entry (SelectedBackend), group (Backend)
+#: build/src/settings.cpp:84 rc.cpp:99
+msgid ""
+"This option determines the program that is used to search the dictionary. "
+"egrep is a standard tool that should be installed on every system and "
+"supports basic searching. agrep is an advanced tool which supports "
+"approximate matching and thus enables KDing to find a phrase even when it is "
+"misspelled. When using agrep, you can set the number of errors permitted in "
+"the \"Advanced Options\" section."
+msgstr ""
+"Touto volbou se určí program, se kterým se bude slovník prohledávat. Egrep "
+"je obvyklým nástrojem, který by měl být instalován na každém systémua nabízí "
+"základní vyhledávací funkce. Agrep je pokročilým nástrojem, který umožňuje "
+"vyhledávání podobných slov. Tímto je pro KDing možné najít výraz i tehdy, "
+"když obsahuje chybu pravopisnou chybu. Používate-liagrep můžete stanovit "
+"počet dovolených chyb v oddíle\"Rozšířené volby\"."
+
+#. i18n: file: src/kding.kcfg:43
+#. i18n: ectx: label, entry (CaseSensitive), group (Backend)
+#: build/src/settings.cpp:88 rc.cpp:102
+msgid "Should the search be case-sensitive?"
+msgstr "Má se při hledání brát zřetel na psaní velkých a malých písmen?"
+
+#. i18n: file: src/kding.kcfg:45
+#. i18n: ectx: tooltip, entry (CaseSensitive), group (Backend)
+#: build/src/settings.cpp:89 rc.cpp:105
+msgid "Decides whether case will be considered when searching for a term."
+msgstr ""
+"Určuje, zda se při hledání pojmu bude brát zřetel na psaní velkých a malých "
+"písmen."
+
+#. i18n: file: src/kding.kcfg:48
+#. i18n: ectx: label, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:93 rc.cpp:108
+msgid "Should the search match only whole words or also partial strings?"
+msgstr ""
+"Mají se nacházet pouze celá slova, nebo i taková, u kterých je hledaný pojem "
+"částí slova?"
+
+#. i18n: file: src/kding.kcfg:50
+#. i18n: ectx: tooltip, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:94 rc.cpp:111
+msgid ""
+"Decides whether the search term must match a whole word or can be a part of "
+"a word."
+msgstr ""
+"Určuje, zda se nacházejí pouze taková slova, která přesně odpovídají "
+"hledanému pojmu, nebo zda hledaný pojem může být částí slova."
+
+#. i18n: file: src/kding.kcfg:51
+#. i18n: ectx: whatsthis, entry (WholeWords), group (Backend)
+#: build/src/settings.cpp:95 rc.cpp:114
+msgid ""
+"If this is enabled, the search term will match only whole words. If it is "
+"disabled, the search term can also be a part of a word."
+msgstr ""
+"Když je povolena tato volba, budou se nacházet pouze záznamy, u kterých "
+"slovo odpovídá přesně hledanému pojmu. Když není povolena, budou se nacházet "
+"i záznamy, u kterých je hledaný pojem jen částí slova."
+
+#. i18n: file: src/kding.kcfg:54
+#. i18n: ectx: label, entry (MaximumErrorNumber), group (Backend)
+#: build/src/settings.cpp:99 rc.cpp:117
+msgid "How many errors are permitted when doing an approximate search?"
+msgstr "Kolik chyb je dovoleno, když se provádí přibližné vyhledávání?"
+
+#. i18n: file: src/kding.kcfg:63
+#. i18n: ectx: label, entry (Recent), group (History)
+#: build/src/settings.cpp:106 rc.cpp:122
+msgid "List of recently translated words"
+msgstr "Seznam v poslední době přeložených slov"
+
+#. i18n: file: src/backendsettingsbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, BackendSettingsBase)
+#: build/src/ui_backendsettingsbase.h:139 rc.cpp:6 src/mainwindow.cpp:190
+msgid "Backend"
+msgstr "Program"
+
+#. i18n: file: src/backendsettingsbase.ui:20
+#. i18n: ectx: property (title), widget (KButtonGroup, kcfg_SelectedBackend)
+#: build/src/ui_backendsettingsbase.h:140 rc.cpp:9
+msgid "Search Command"
+msgstr "Příkaz pro hledání"
+
+#. i18n: file: src/backendsettingsbase.ui:32
+#. i18n: ectx: property (text), widget (QRadioButton, radioEgrep)
+#: build/src/ui_backendsettingsbase.h:141 rc.cpp:12
+msgid "Basic search (egrep)"
+msgstr "Jednoduché hledání (egrep)"
+
+#. i18n: file: src/backendsettingsbase.ui:48
+#. i18n: ectx: property (text), widget (QRadioButton, radioAgrep)
+#: build/src/ui_backendsettingsbase.h:142 rc.cpp:18
+msgid "Advanced search (agrep)"
+msgstr "Rozšířené hledání (agrep)"
+
+#. i18n: file: src/backendsettingsbase.ui:61
+#. i18n: ectx: property (title), widget (QGroupBox, basicOptionsBox)
+#: build/src/ui_backendsettingsbase.h:143 rc.cpp:24
+msgid "Basic Options"
+msgstr "Jednoduché volby"
+
+#. i18n: file: src/backendsettingsbase.ui:67
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_WholeWords)
+#: build/src/ui_backendsettingsbase.h:144 rc.cpp:27
+msgid "Match whole words only"
+msgstr "Najít pouze celá slova"
+
+#. i18n: file: src/backendsettingsbase.ui:74
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_CaseSensitive)
+#: build/src/ui_backendsettingsbase.h:145 rc.cpp:30
+msgid "Case sensitive search"
+msgstr "Dbát na psaní velkých a malých písmen"
+
+#. i18n: file: src/backendsettingsbase.ui:87
+#. i18n: ectx: property (title), widget (QGroupBox, advancedOptionsBox)
+#: build/src/ui_backendsettingsbase.h:146 rc.cpp:33
+msgid "Advanced Options"
+msgstr "Rozšířené volby"
+
+#. i18n: file: src/backendsettingsbase.ui:93
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: build/src/ui_backendsettingsbase.h:147 rc.cpp:36
+msgid "Number of errors allowed:"
+msgstr "Počet povolených chyb:"
+
+#. i18n: file: src/generalsettingsbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralSettingsBase)
+#: build/src/ui_generalsettingsbase.h:104 rc.cpp:39 src/mainwindow.cpp:189
+msgid "General Settings"
+msgstr "Obecná nastavení"
+
+#. i18n: file: src/generalsettingsbase.ui:20
+#. i18n: ectx: property (title), widget (KButtonGroup, kcfg_WindowPlacement)
+#: build/src/ui_generalsettingsbase.h:105 rc.cpp:42
+msgid "Window Placement"
+msgstr "Umístění okna"
+
+#. i18n: file: src/generalsettingsbase.ui:26
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioCenterWindow)
+#: build/src/ui_generalsettingsbase.h:107 rc.cpp:45
+msgid "The window is always displayed in the center of the desktop"
+msgstr "Okno se vždy zobrazuje uprostřed plochy"
+
+#. i18n: file: src/generalsettingsbase.ui:29
+#. i18n: ectx: property (text), widget (QRadioButton, radioCenterWindow)
+#: build/src/ui_generalsettingsbase.h:109 rc.cpp:48
+msgid "Always center window"
+msgstr "Okno vždy na střed"
+
+#. i18n: file: src/generalsettingsbase.ui:39
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioRememberPosition)
+#: build/src/ui_generalsettingsbase.h:111 rc.cpp:54
+msgid ""
+"The application stores its window position when exiting and reuses that on "
+"the next start"
+msgstr ""
+"Aplikace při ukončení ukládá polohu okna a opět ji použije při svém příštím "
+"spuštění"
+
+#. i18n: file: src/generalsettingsbase.ui:42
+#. i18n: ectx: property (text), widget (QRadioButton, radioRememberPosition)
+#: build/src/ui_generalsettingsbase.h:113 rc.cpp:57
+msgid "Remember window position"
+msgstr "Zapamatovat si polohu okna"
+
+#. i18n: file: src/generalsettingsbase.ui:52
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioNoSpecialHandling)
+#: build/src/ui_generalsettingsbase.h:115 rc.cpp:63
+msgid "Nothing special is done, the window's position is decided by KDE"
+msgstr "Aplikace přenechá umístění okna prostředí KDE"
+
+#. i18n: file: src/generalsettingsbase.ui:55
+#. i18n: ectx: property (text), widget (QRadioButton, radioNoSpecialHandling)
+#: build/src/ui_generalsettingsbase.h:117 rc.cpp:66
+msgid "No special handling"
+msgstr "Nemít žádný vliv na umístění"
+
+#. i18n: file: src/generalsettingsbase.ui:68
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: build/src/ui_generalsettingsbase.h:118 rc.cpp:72
+msgid "System Tray Icon"
+msgstr "Symbol v systémové oblasti panelu"
+
+#. i18n: file: src/generalsettingsbase.ui:74
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TranslateOnLeftClick)
+#: build/src/ui_generalsettingsbase.h:119 rc.cpp:75
+msgid "Left click translates clipboard content"
+msgstr "Levé klepnutí přeloží obsah schránky"
+
+#. i18n: file: src/translationwidgetbase.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
+#: build/src/ui_translationwidgetbase.h:121 rc.cpp:125
+msgid "Form"
+msgstr "Formulář"
+
+#. i18n: file: src/translationwidgetbase.ui:47
+#. i18n: ectx: property (text), widget (QLabel, labelText)
+#: build/src/ui_translationwidgetbase.h:123 rc.cpp:128
+msgid "Enter the word or phrase you want to translate"
+msgstr "Zadejte slovo nebo výraz, který chcete přeložit"
+
+#. i18n: file: src/translationwidgetbase.ui:87
+#. i18n: ectx: property (text), widget (QLabel, labelSearch)
+#: build/src/ui_translationwidgetbase.h:124 rc.cpp:131
+msgid "Se&arch word:"
+msgstr "&Hledané slovo:"
+
+#. i18n: file: resources/kdingui.rc:11
+#. i18n: ectx: Menu (settings)
+#: rc.cpp:3
+msgid "&Settings"
+msgstr "&Nastavení"
+
+#. i18n: file: src/backendsettingsbase.ui:35
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioEgrep)
+#. i18n: file: src/backendsettingsbase.ui:51
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioAgrep)
+#. i18n: file: src/backendsettingsbase.ui:35
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioEgrep)
+#. i18n: file: src/backendsettingsbase.ui:51
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioAgrep)
+#: rc.cpp:15 rc.cpp:21
+msgid "searchCommandGroup"
+msgstr "Skupina příkazů pro prohledání"
+
+#. i18n: file: src/generalsettingsbase.ui:32
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioCenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:45
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioRememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:58
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioNoSpecialHandling)
+#. i18n: file: src/generalsettingsbase.ui:32
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioCenterWindow)
+#. i18n: file: src/generalsettingsbase.ui:45
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioRememberPosition)
+#. i18n: file: src/generalsettingsbase.ui:58
+#. i18n: ectx: attribute (buttonGroup), widget (QRadioButton, radioNoSpecialHandling)
+#: rc.cpp:51 rc.cpp:60 rc.cpp:69
+msgid "windowPlacementGroup"
+msgstr "Skupina umístění okna"
+
+#: src/htmlgenerator.cpp:83
+msgid "Dictionary Lookup for KDE"
+msgstr "Hledání ve slovníku pro KDE"
+
+#: src/htmlgenerator.cpp:85
+msgid "Using dictionary version %1"
+msgstr "Používá se verze slovníku %1"
+
+#: src/htmlgenerator.cpp:146
+msgctxt "result table caption"
+msgid "German"
+msgstr "Německý"
+
+#: src/htmlgenerator.cpp:147
+msgctxt "result table caption"
+msgid "English"
+msgstr "Anglický"
+
+#: src/htmlgenerator.cpp:171
+msgid "No matches found"
+msgstr "Nenalezeny žádné hodící se záznamy"
+
+#: src/main.cpp:27
+msgid "KDing"
+msgstr "KDing"
+
+#: src/main.cpp:28
+msgid "KDE port of Ding, the DIctionary Nice Grep"
+msgstr "Přenos Dingu do prostředí KDE, DIctionary Nice Grepu"
+
+#: src/main.cpp:30
+msgid "(c) 2005-2009, Michael Rex"
+msgstr "(c) 2005-2009, Michael Rex"
+
+#: src/main.cpp:34
+msgid "Michael Rex"
+msgstr "Michael Rex"
+
+#: src/main.cpp:34
+msgid "Maintainer"
+msgstr "Správce"
+
+#: src/main.cpp:35
+msgid "Frank Richter"
+msgstr "Frank Richter"
+
+#: src/main.cpp:35
+msgid ""
+"original author of Ding, for the inspiration for KDing and the dictionary"
+msgstr "Původní autor programu Ding, pro inspiraci pro KDing a slovník"
+
+#: src/main.cpp:36
+msgid "Alexander Stein"
+msgstr "Alexander Stein"
+
+#: src/main.cpp:36
+msgid "initial port to KDE4"
+msgstr "počáteční přenos do prostředí KDE4"
+
+#: src/main.cpp:38
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Pavel Fric"
+
+#: src/main.cpp:38
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "pavelfric@seznam.cz"
+
+#: src/main.cpp:44
+msgid "Translate the given phrase"
+msgstr "Přeložit zadaný výraz"
+
+#: src/mainwindow.cpp:70
+msgid "&Translate Clipboard Content"
+msgstr "&Přeložit obsah schránky"
+
+#: src/mainwindow.cpp:72 src/mainwindow.cpp:73
+msgid "Translates the current content of the clipboard."
+msgstr "Přeloží nynější obsah schránky."
+
+#: src/mainwindow.cpp:80
+msgid "Translate &Word..."
+msgstr "&Přeložit slovo..."
+
+#: src/mainwindow.cpp:82 src/mainwindow.cpp:83
+msgid "Opens a dialog where you can enter the word to be translated."
+msgstr "Otevře okno, ve kterém můžete zadat slovo, které se má přeložit."
+
+#: src/mainwindow.cpp:90
+msgid "Configure &Global Shortcuts..."
+msgstr "&Nastavit všeobecné zkratky..."
+
+#: src/searchengine.cpp:93
+msgid "Searching for '%1'..."
+msgstr "Hledání '%1'..."
+
+#: src/searchengine.cpp:287
+msgctxt "dictionary version"
+msgid "unknown"
+msgstr "neznámý"
+
+#: src/systemtrayicon.cpp:43
+msgid "KDing - Translation tool"
+msgstr "KDing - Nástroj pro překládání"
+
+#: src/translationwidget.cpp:129
+msgid "Search cancelled."
+msgstr "Hledání bylo zrušeno."
+
+#: src/translationwidget.cpp:133
+msgid "Another search is currently running."
+msgstr "Již běží další hledání."
+
+#: src/translationwidget.cpp:178
+msgid "Found 1 match for '%2'."
+msgid_plural "Found %1 matches for '%2'."
+msgstr[0] "Nalezen jeden hodící se výraz pro '%2'."
+msgstr[1] "Nalezeny %1 hodící se výrazy pro '%2'."

@@ -9,3 +9,4 @@ if (NOT GETTEXT_MSGFMT_EXECUTABLE)
 endif (NOT GETTEXT_MSGFMT_EXECUTABLE)
 
 add_subdirectory( de )
+add_subdirectory( cs )
