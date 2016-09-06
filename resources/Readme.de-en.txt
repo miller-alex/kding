@@ -1,6 +1,6 @@
 de-en.txt is a file with German - English translations.
 
- Copyright (c) Frank Richter <frank.richter@hrz.tu-chemnitz.de> 1995-2009
+ Copyright (c) Frank Richter <frank.richter@hrz.tu-chemnitz.de> 1995-2016
  GNU public license, see COPYING for details
  It comes with ABSOLUTELY NO WARRANTY.
 
@@ -10,7 +10,7 @@ de-en.txt is used by
   * Some other programs ...
 
 The German-English dictionary file "de-en.txt" has been maintained 
-over the last fourteen years. All your comments are welcome. In fact, your
+over the last twenty years. All your comments are welcome. In fact, your
 questions, comments, corrections, and new words are the source where
 this dictionary evolves from. Keep them going...
 
