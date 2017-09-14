@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kding\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-09 15:24+0200\n"
-"PO-Revision-Date: 2009-09-30 22:42+0200\n"
+"POT-Creation-Date: 2017-09-14 02:46+0200\n"
+"PO-Revision-Date: 2017-09-14 03:37+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -349,46 +350,57 @@ msgstr "KDing"
 msgid "KDE port of Ding, the DIctionary Nice Grep"
 msgstr "Přenos Dingu do prostředí KDE, DIctionary Nice Grepu"
 
-#: src/main.cpp:30
-msgid "(c) 2005-2009, Michael Rex"
-msgstr "(c) 2005-2009, Michael Rex"
+#: src/main.cpp:31
+msgid ""
+"(c) 2005-2009, Michael Rex\n"
+"Dictionary (c) 1995-2016, Frank Richter"
+msgstr ""
+"(c) 2005-2009, Michael Rex\n"
+"Slovník (c) 1995-2016, Frank Richter"
 
-#: src/main.cpp:34
-msgid "Michael Rex"
-msgstr "Michael Rex"
+#: src/main.cpp:37
+msgid "Alexander Miller"
+msgstr "Alexander Miller"
 
-#: src/main.cpp:34
+#: src/main.cpp:37
 msgid "Maintainer"
 msgstr "Správce"
 
-#: src/main.cpp:35
+#: src/main.cpp:38
+msgid "Michael Rex"
+msgstr "Michael Rex"
+
+#: src/main.cpp:38
+msgid "Original author"
+msgstr "Původní autor"
+
+#: src/main.cpp:39
 msgid "Frank Richter"
 msgstr "Frank Richter"
 
-#: src/main.cpp:35
-msgid ""
-"original author of Ding, for the inspiration for KDing and the dictionary"
+#: src/main.cpp:39
+msgid "Author of Ding, for the inspiration for KDing and the dictionary"
 msgstr "Původní autor programu Ding, pro inspiraci pro KDing a slovník"
 
-#: src/main.cpp:36
+#: src/main.cpp:40
 msgid "Alexander Stein"
 msgstr "Alexander Stein"
 
-#: src/main.cpp:36
-msgid "initial port to KDE4"
-msgstr "počáteční přenos do prostředí KDE4"
+#: src/main.cpp:40
+msgid "Initial port to KDE4"
+msgstr "Počáteční přenos do prostředí KDE4"
 
-#: src/main.cpp:38
+#: src/main.cpp:42
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Pavel Fric"
 
-#: src/main.cpp:38
+#: src/main.cpp:42
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "pavelfric@seznam.cz"
 
-#: src/main.cpp:44
+#: src/main.cpp:48
 msgid "Translate the given phrase"
 msgstr "Přeložit zadaný výraz"
 
