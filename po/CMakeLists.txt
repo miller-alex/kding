@@ -5,8 +5,8 @@ if (NOT GETTEXT_MSGMERGE_EXECUTABLE)
 endif (NOT GETTEXT_MSGMERGE_EXECUTABLE)
 
 if (NOT GETTEXT_MSGFMT_EXECUTABLE)
-    MESSAGE(FATAL_ERROR "Please install msgmerge binary")
+    MESSAGE(FATAL_ERROR "Please install msgfmt binary")
 endif (NOT GETTEXT_MSGFMT_EXECUTABLE)
 
-add_subdirectory( de )
-add_subdirectory( cs )
+add_subdirectory(de)
+add_subdirectory(cs)

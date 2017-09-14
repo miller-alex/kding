@@ -12,17 +12,25 @@ set(kding_SRCS
     backendsettings.cpp
 )
 
-kde4_add_ui_files( kding_SRCS
+ki18n_wrap_ui(kding_SRCS
     translationwidgetbase.ui
     generalsettingsbase.ui
     backendsettingsbase.ui
 )
 
-kde4_add_kcfg_files( kding_SRCS settings.kcfgc )
+kconfig_add_kcfg_files(kding_SRCS settings.kcfgc)
 
-kde4_add_executable( kding ${kding_SRCS} )
+add_executable(kding ${kding_SRCS})
 
-target_link_libraries( kding ${KDE4_KDEUI_LIBS} ${KDE4_KHTML_LIBS} )
+target_link_libraries(kding
+    KF5::ConfigWidgets
+    KF5::CoreAddons
+    KF5::IconThemes
+    KF5::KHtml
+    KF5::WidgetsAddons
+    KF5::XmlGui
+    KF5::KDELibs4Support
+)
 
-install( FILES kding.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
-install( TARGETS kding ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(FILES kding.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(TARGETS kding ${INSTALL_TARGETS_DEFAULT_ARGS})

@@ -1,1 +1,3 @@
-kde4_install_icons( ${ICON_INSTALL_DIR} )
+include(ECMInstallIcons)
+file(GLOB _icons *.png)
+ecm_install_icons(ICONS ${_icons} DESTINATION ${ICON_INSTALL_DIR})

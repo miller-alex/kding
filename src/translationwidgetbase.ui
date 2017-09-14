@@ -34,7 +34,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../icons/hi48-app-kding.png</pixmap>
+        <pixmap>../icons/48-apps-kding.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>

@@ -1,1 +1,1 @@
-kde4_create_handbook( index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/de SUBDIR kding )
+kdoctools_create_handbook(index.docbook INSTALL_DESTINATION ${KDE_INSTALL_DOCBUNDLEDIR}/de SUBDIR kding)

@@ -21,6 +21,7 @@
 #include "settings.h"
 #include <KAnimatedButton>
 #include <KIcon>
+#include <KIconLoader>
 #include <KHTMLPart>
 #include <KHTMLView>
 #include <KAction>
@@ -64,7 +65,8 @@ void TranslationWidget::initGui() {
     
     labelIcon->setPixmap(KIcon("kding").pixmap(48,48));
     
-    busyAnimation->setIcons("process-working");
+    const int baIconSize = qMin(busyAnimation->iconSize().width(), busyAnimation->iconSize().height());
+    busyAnimation->setAnimationPath(KIconLoader::global()->iconPath("process-working", -baIconSize));
     
     buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));

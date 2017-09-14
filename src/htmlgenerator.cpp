@@ -19,7 +19,7 @@
 #include "searchengine.h"
 #include <KStandardDirs>
 #include <KLocale>
-#include <KAboutData>
+#include <K4AboutData>
 #include <KComponentData>
 #include <KGlobal>
 #include <KGlobalSettings>
@@ -76,15 +76,15 @@ QString HtmlGenerator::welcomePage() const {
         SearchEngine searchEngine;
         
         // replace placeholders
-        QString infocss = KStandardDirs::locate("data", "kdeui/about/kde_infopage.css"); // %1
-        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(KStandardDirs::locate("data", "kdeui/about/kde_infopage_rtl.css")) : ""; // %2
+        QString infocss = QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage.css")).toString(); // %1
+        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage_rtl.css")).toString()) : ""; // %2
         QString fontSize = QString::number(m_fontSize); // %3
         QString appTitle = KGlobal::mainComponent().aboutData()->programName(); // %4
         QString catchPhrase = i18n("Dictionary Lookup for KDE"); // %5
         QString shortDescription = KGlobal::mainComponent().aboutData()->shortDescription(); // %6
         QString description = i18n("Using dictionary version %1", searchEngine.dictionaryVersion()); // %7
-        QString welcomeCss = KStandardDirs::locate("appdata", "html/welcome.css"); // %8
-        
+        QString welcomeCss = QUrl::fromLocalFile(KStandardDirs::locate("appdata", "html/welcome.css")).toString(); // %8
+
         html = html.arg(infocss).arg(rtlcss).arg(fontSize).arg(appTitle).arg(catchPhrase).arg(shortDescription).arg(description).arg(welcomeCss);
     }
     
@@ -149,8 +149,9 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
         QString fontSize = QString::number(m_fontSize); // %3
         QString captionGerman = i18nc("result table caption", "German"); // %6
         QString captionEnglish = i18nc("result table caption", "English"); // %7
-        
-        html = html.arg(CSS_FILE).arg(m_fontFamily).arg(fontSize).arg(m_textColor).arg(m_alternateBackgroundColor).arg(captionGerman).arg(captionEnglish).arg(table);
+        QString css = QUrl::fromLocalFile(CSS_FILE).toString();
+
+        html = html.arg(css).arg(m_fontFamily).arg(fontSize).arg(m_textColor).arg(m_alternateBackgroundColor).arg(captionGerman).arg(captionEnglish).arg(table);
     }
     
     return html;
@@ -169,8 +170,8 @@ QString HtmlGenerator::noMatchesPage() const {
         html = emptyPage();
     } else {
         // replace placeholders
-        QString infocss = KStandardDirs::locate("data", "kdeui/about/kde_infopage.css"); // %1
-        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(KStandardDirs::locate("data", "kdeui/about/kde_infopage_rtl.css")) : ""; // %2
+        QString infocss = QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage.css")).toString(); // %1
+        QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage_rtl.css")).toString()) : ""; // %2
         QString fontSize = QString::number(m_fontSize); // %3
         QString message = i18n("No matches found"); // %74
         

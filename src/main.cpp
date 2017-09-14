@@ -17,16 +17,16 @@
 
 #include "mainwindow.h"
 #include "application.h"
-#include <KAboutData>
+#include <K4AboutData>
 #include <KUniqueApplication>
 #include <KCmdLineArgs>
 #include <KLocale>
 
 int main(int argc, char* argv[]) {
     // add About dialog data
-    KAboutData* about = new KAboutData("kding", 0, ki18n("KDing"), "0.7-dev");
+    K4AboutData* about = new K4AboutData("kding", 0, ki18n("KDing"), "0.7-dev");
     about->setShortDescription(ki18n("KDE port of Ding, the DIctionary Nice Grep"));
-    about->setLicense(KAboutData::License_GPL_V2);
+    about->setLicense(K4AboutData::License_GPL_V2);
     about->setCopyrightStatement(ki18n(
         "(c) 2005-2009, Michael Rex\n"
         "Dictionary (c) 1995-2016, Frank Richter"));

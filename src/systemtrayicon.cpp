@@ -18,7 +18,6 @@
 #include "systemtrayicon.h"
 #include "mainwindow.h"
 #include "settings.h"
-#include <KAboutData>
 #include <KAction>
 #include <KComponentData>
 #include <KGlobal>
@@ -56,7 +55,7 @@ void SystemTrayIcon::createMenu() {
     menu->addAction(actionCollection->action("options_configure"));
     menu->addSeparator();
     
-    KHelpMenu* helpMenu = new KHelpMenu(parentWidget(), KGlobal::mainComponent().aboutData(), false);
+    KHelpMenu* helpMenu = new KHelpMenu(parentWidget(), KGlobal::mainComponent(), false);
     menu->addMenu(helpMenu->menu());
 }
 

@@ -4,3 +4,4 @@ ClassName=Settings
 Singleton=true
 Mutators=true
 SetUserTexts=true
+TranslationSystem=kde

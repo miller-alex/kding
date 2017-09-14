@@ -29,6 +29,7 @@
 #include <KMenuBar>
 #include <KStandardAction>
 #include <KStatusBar>
+#include <KShortcut>
 #include <KShortcutsDialog>
 #include <KIcon>
 #include <KDebug>

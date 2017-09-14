@@ -1,12 +1,29 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 project(kding)
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} )
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-add_subdirectory( src )
-add_subdirectory( resources )
-add_subdirectory( doc )
-add_subdirectory( po )
+#find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Gui Widgets)
+find_package(KF5 REQUIRED COMPONENTS
+    ConfigWidgets
+    CoreAddons
+    IconThemes
+    KHtml
+    WidgetsAddons
+    XmlGui
+    KDELibs4Support
+)
+
+include(KDEInstallDirs)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDECMakeSettings)
+include(FeatureSummary)
+
+add_subdirectory(src)
+add_subdirectory(resources)
+add_subdirectory(doc)
+add_subdirectory(po)
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
