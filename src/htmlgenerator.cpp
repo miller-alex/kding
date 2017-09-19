@@ -33,8 +33,8 @@
 #include <QPalette>
 #include <QBrush>
 
-const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    ///< capture left and right side of a line (the German and the English part) in groups
-const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp(" ([[{])");    ///< match opening brackets: { [
+const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) ::(?: |&nbsp;)(.*)");    ///< capture left and right side of a line (the German and the English part) in groups
+const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp("([[{])");    ///< match opening brackets: { [
 const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    ///< match closing brackets: } ]
 
 /**
@@ -118,15 +118,19 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
     } else {
         // create the table
         QRegExp term("(" + searchTerm + ")", Qt::CaseInsensitive);  // match the search term
+        QRegExp space_itag(" +(<i>)");
         int bgClass = 0;    // counter used for alternating background colors
         QString table = "";
         
         foreach(ResultItem item, resultList) {
             QString text = item.text();
-            
-            text.replace(term, "<span class=\"keyword\">\\1</span>");
+            // mark search term before escaping, replace with tags afterwards;
+            // use newline as special marker since text is a single line
+            text = text.replace(term, "\n[\\1\n]").toHtmlEscaped();
+            text.replace("\n[", "<span class=\"keyword\">").replace("\n]", "</span>");
+
             text.replace("|", "<br>&nbsp;&nbsp;");
-            text.replace(OPEN_BRACKETS, "&nbsp;<i>\\1");
+            text.replace(OPEN_BRACKETS, "<i>\\1").replace(space_itag, "&nbsp;\\1");
             text.replace(CLOSE_BRACKETS, "\\1</i>");
             if(SPLITTER.indexIn(text) != -1) {
                 QString cellClass = (bgClass % 2) == 0 ? "" : " class=\"alternate\"";
