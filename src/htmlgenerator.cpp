@@ -181,8 +181,8 @@ QString HtmlGenerator::noMatchesPage() const {
     return html;
 }
 
-KUrl HtmlGenerator::styleSheetUrl() const {
-    return KUrl::fromPath(CSS_FILE);
+QUrl HtmlGenerator::styleSheetUrl() const {
+    return QUrl::fromLocalFile(CSS_FILE);
 }
 
 /**

@@ -19,7 +19,7 @@
 #define HTMLGENERATOR_H
 
 #include "resultlist.h"
-#include <KUrl>
+#include <QUrl>
 #include <QObject>
 #include <QString>
 #include <QRegExp>
@@ -46,7 +46,7 @@ public:
     QString emptyPage() const;
     QString resultPage(const QString searchTerm, const ResultList resultList) const;
     QString noMatchesPage() const;
-    KUrl styleSheetUrl() const;
+    QUrl styleSheetUrl() const;
     
 private:
     static const QRegExp SPLITTER;
