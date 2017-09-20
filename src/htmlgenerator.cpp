@@ -19,9 +19,7 @@
 #include "searchengine.h"
 #include <KStandardDirs>
 #include <KLocale>
-#include <K4AboutData>
-#include <KComponentData>
-#include <KGlobal>
+#include <KAboutData>
 #include <KGlobalSettings>
 #include <KColorScheme>
 #include <KDebug>
@@ -79,9 +77,9 @@ QString HtmlGenerator::welcomePage() const {
         QString infocss = QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage.css")).toString(); // %1
         QString rtlcss = QApplication::isRightToLeft() ? QString("@import \"%1\"").arg(QUrl::fromLocalFile(KStandardDirs::locate("data", "kf5/infopage/kde_infopage_rtl.css")).toString()) : ""; // %2
         QString fontSize = QString::number(m_fontSize); // %3
-        QString appTitle = KGlobal::mainComponent().aboutData()->programName(); // %4
+        QString appTitle = KAboutData::applicationData().displayName(); // %4
         QString catchPhrase = i18n("Dictionary Lookup for KDE"); // %5
-        QString shortDescription = KGlobal::mainComponent().aboutData()->shortDescription(); // %6
+        QString shortDescription = KAboutData::applicationData().shortDescription(); // %6
         QString description = i18n("Using dictionary version %1", searchEngine.dictionaryVersion()); // %7
         QString welcomeCss = QUrl::fromLocalFile(KStandardDirs::locate("appdata", "html/welcome.css")).toString(); // %8
 

@@ -19,7 +19,6 @@
 #include "searchbackendfactory.h"
 #include <KStandardDirs>
 #include <KLocale>
-#include <KGlobal>
 #include <KDebug>
 #include <KProcess>
 #include <QFile>
@@ -81,7 +80,7 @@ void SearchEngine::search(QString phrase) {
     
     // this check is needed to pass a correctly encoded search term to the
     // grep command
-    if(QString("UTF-8") != KGlobal::locale()->encoding()) {
+    if(QString("UTF-8") != KLocale::global()->encoding()) {
         phrase = phrase.toUtf8();
     }
     
