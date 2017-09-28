@@ -143,7 +143,13 @@
         </para>
         
         <para>
-            Program copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+            Program copyright:
+            <simplelist>
+                <member><trademark class="copyright" />
+                    2005-2009 Michael Rex <email>me@rexi.org</email></member>
+                <member><trademark class="copyright" />
+                    2017 Alexander Miller <email>alex.miller@gmx.de</email></member>
+            </simplelist>
         </para>
         
 <!--
@@ -157,7 +163,8 @@
 -->
 
         <para>
-            Documentation copyright 2005-2009 Michael Rex <email>me@rexi.org</email>
+            <trademark class="copyright">Documentation copyright</trademark>
+            2005-2009 Michael Rex <email>me@rexi.org</email>
         </para>
 
         &underFDL;               <!-- FDL: do not remove -->
