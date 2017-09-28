@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -17,39 +18,51 @@
 
 #include "mainwindow.h"
 #include "application.h"
-#include <K4AboutData>
-#include <KUniqueApplication>
-#include <KCmdLineArgs>
-#include <KLocale>
+#include <KAboutData>
+#include <KLocalizedString>
+#include <QCommandLineParser>
+#include <QIcon>
 
 int main(int argc, char* argv[]) {
+    Application app(argc, argv);
+    KLocalizedString::setApplicationDomain("kding");
+
     // add About dialog data
-    K4AboutData* about = new K4AboutData("kding", 0, ki18n("KDing"), "0.7-dev");
-    about->setShortDescription(ki18n("KDE port of Ding, the DIctionary Nice Grep"));
-    about->setLicense(K4AboutData::License_GPL_V2);
-    about->setCopyrightStatement(ki18n(
+    KAboutData about("kding", i18n("KDing"), "0.7-dev");
+    about.setShortDescription(i18n("KDE port of Ding, "
+                                   "the DIctionary Nice Grep"));
+    about.setLicense(KAboutLicense::GPL_V2);
+    about.setCopyrightStatement(i18n(
         "(c) 2005-2009, Michael Rex\n"
         "Dictionary (c) 1995-2016, Frank Richter"));
-    about->setHomepage("https://github.com/miller-alex/kding");
-    about->setBugAddress("alex.miller@gmx.de");
-    
-    about->addAuthor(ki18n("Alexander Miller"), ki18n("Maintainer"), "alex.miller@gmx.de");
-    about->addAuthor(ki18n("Michael Rex"), ki18n("Original author"), "me@rexi.org");
-    about->addCredit(ki18n("Frank Richter"), ki18n("Author of Ding, for the inspiration for KDing and the dictionary"), 0, "http://www-user.tu-chemnitz.de/~fri/ding/");
-    about->addCredit(ki18n("Alexander Stein"), ki18n("Initial port to KDE4"), "alexander.stein@informatik.tu-chemnitz.de");
-    
-    about->setTranslator(ki18nc("NAME OF TRANSLATORS", "Your names"), ki18nc("EMAIL OF TRANSLATORS", "Your emails"));
-    
-    KCmdLineArgs::init(argc, argv, about);
-    
-    // add command line options
-    KCmdLineOptions options;
-    options.add("+[phrase]", ki18n("Translate the given phrase"));
-    KCmdLineArgs::addCmdLineOptions(options);
-    KUniqueApplication::addCmdLineOptions();
-    
-    Application app;
-    
+    about.setHomepage("https://github.com/miller-alex/kding");
+    about.setBugAddress("alex.miller@gmx.de");
+
+    about.addAuthor(i18n("Alexander Miller"), i18n("Maintainer"),
+                    "alex.miller@gmx.de");
+    about.addAuthor(i18n("Michael Rex"), i18n("Original author"),
+                    "me@rexi.org");
+    about.addCredit(i18n("Frank Richter"),
+                    i18n("Author of Ding, for the inspiration for KDing "
+                         "and the dictionary"),
+                    0, "http://www-user.tu-chemnitz.de/~fri/ding/");
+    about.addCredit(i18n("Alexander Stein"), i18n("Initial port to KDE4"),
+                    "alexander.stein@informatik.tu-chemnitz.de");
+
+    about.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"),
+                        i18nc("EMAIL OF TRANSLATORS", "Your emails"));
+
+    KAboutData::setApplicationData(about);
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kding")));
+
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument(i18nc("command line arg name", "phrase"),
+				 i18n("Translate the given phrase"),
+				 i18nc("command line arg syntax", "[phrase]"));
+    parser.process(app);
+
     return app.exec();
 }
 

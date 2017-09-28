@@ -25,6 +25,8 @@ add_executable(kding ${kding_SRCS})
 target_link_libraries(kding
     KF5::ConfigWidgets
     KF5::CoreAddons
+    KF5::DBusAddons
+    KF5::I18n
     KF5::IconThemes
     KF5::KHtml
     KF5::WidgetsAddons

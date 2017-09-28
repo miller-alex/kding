@@ -9,6 +9,8 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 find_package(KF5 REQUIRED COMPONENTS
     ConfigWidgets
     CoreAddons
+    DBusAddons
+    I18n
     IconThemes
     KHtml
     WidgetsAddons

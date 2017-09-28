@@ -18,7 +18,7 @@
 #include "htmlgenerator.h"
 #include "searchengine.h"
 #include <KStandardDirs>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KAboutData>
 #include <KGlobalSettings>
 #include <KColorScheme>

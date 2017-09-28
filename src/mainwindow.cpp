@@ -24,8 +24,7 @@
 #include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>
-#include <KApplication>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMenuBar>
 #include <KStandardAction>
 #include <KStatusBar>
@@ -61,8 +60,7 @@ MainWindow::~MainWindow() {
  */
 void MainWindow::setupActions() {
     KStandardAction::close(this, SLOT(hide()), actionCollection());
-    //KStandardAction::quit(kapp, SLOT(closeAllWindows()), actionCollection());
-    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
     
     KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), actionCollection());
     KStandardAction::preferences(this, SLOT(showPreferences()), actionCollection());
@@ -123,7 +121,7 @@ void MainWindow::initGui() {
 }
 
 void MainWindow::translateClipboard() {
-    QClipboard* clipboard = KApplication::clipboard();
+    QClipboard* clipboard = QApplication::clipboard();
     
     m_translationWidget->clearDisplay();
     

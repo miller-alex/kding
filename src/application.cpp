@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -17,15 +18,26 @@
 
 #include "application.h"
 #include "mainwindow.h"
-#include <KCmdLineArgs>
-#include <KDebug>
+#include <KDBusService>
 
-Application::Application() : m_mainWindow(0) {
-    
-}
+MainWindow *Application::m_mainWindow = 0;
 
 Application::~Application() {
     delete m_mainWindow;
+    m_mainWindow = 0;
+}
+
+int Application::exec() {
+    KDBusService dbusService(KDBusService::Unique
+			     | KDBusService::NoExitOnFailure);
+
+    // only the first instance reaches this point
+    connect(&dbusService,
+	    SIGNAL(activateRequested(const QStringList&, const QString&)),
+	    instance(), SLOT(newInstance(const QStringList &)));
+    newInstance(arguments(), true);
+
+    return QApplication::exec();
 }
 
 /**
@@ -33,24 +45,18 @@ Application::~Application() {
  * If there are arguments given on the command line, they are passed to the
  * application to be translated.
  */
-int Application::newInstance() {
-    KUniqueApplication::newInstance();
-    
-    if(m_mainWindow == 0) {
+void Application::newInstance(const QStringList &arguments, bool first) {
+    if (!m_mainWindow) {
         m_mainWindow = new MainWindow();
     }
-    
-    // handle command line arguments
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    
-    if(args->count() > 0) {
-        m_mainWindow->translate(args->arg(0));
+
+    // no need for a command line parser here
+    // all arguments (except at(0)) form a phrase
+    if (arguments.count() > 1) {
+        m_mainWindow->translate(arguments.mid(1).join(' '));
+    } else if (!first) {
+        m_mainWindow->translateWord();
     }
-    
-    args->clear();
-    
-    // exit value for the calling process
-    return 0;
 }
 
 #include "application.moc"

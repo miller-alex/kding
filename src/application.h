@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -18,24 +19,27 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <KUniqueApplication>
+#include <QApplication>
 
 class MainWindow;
 
 /**
  * This class implements handling the unique instance of the application.
  */
-class Application : public KUniqueApplication {
+class Application : public QApplication {
     Q_OBJECT
 
 public:
-    Application();
+    Application(int &argc, char **argv) : QApplication(argc, argv) {};
     ~Application();
-    
-    int newInstance();
+
+    static int exec();
+
+public slots:
+    static void newInstance(const QStringList &arguments, bool first = false);
     
 private:
-    MainWindow* m_mainWindow;
+    static MainWindow *m_mainWindow;
 };
 
 #endif
