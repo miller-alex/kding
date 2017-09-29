@@ -107,8 +107,9 @@ void MainWindow::initGui() {
     
     // create system tray icon
     m_systemTrayIcon = new SystemTrayIcon(this);
-    m_systemTrayIcon->show();
-    
+    connect(m_systemTrayIcon, SIGNAL(translateClipboardRequested()),
+	    this, SLOT(translateClipboard()));
+
     // restore settings
     switch(Settings::self()->windowPlacement()) {
         case Settings::EnumWindowPlacement::CenterWindow:

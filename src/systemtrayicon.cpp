@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -28,65 +29,57 @@
 #include <KDebug>
 #include <QMenu>
 
-SystemTrayIcon::SystemTrayIcon(MainWindow* parent) : KSystemTrayIcon("kding", parent) {
+SystemTrayIcon::SystemTrayIcon(MainWindow* parent)
+  : KStatusNotifierItem(parent), m_helpMenu(0)
+{
     initGui();
-    createMenu();
+    createMenu(parent);
     updateSettings();
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
-    
+    delete m_helpMenu;
 }
 
 void SystemTrayIcon::initGui() {
-    setToolTip(i18n("KDing - Translation tool"));
-    
-    connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(handleClicks(QSystemTrayIcon::ActivationReason)));
+    setIconByName("kding");
+    setStatus(KStatusNotifierItem::Active);
+    setToolTipTitle(i18n("KDing - Translation tool"));
+
+    // our base class already calls activate(), so we only have to
+    // connect to secondaryActivateRequest()
+    connect(this, SIGNAL(secondaryActivateRequested(const QPoint&)),
+	    this, SLOT(activateSecondary(const QPoint&)));
 }
 
-void SystemTrayIcon::createMenu() {
-    KActionCollection* actionCollection = static_cast<MainWindow*>(parentWidget())->actionCollection();
+void SystemTrayIcon::createMenu(MainWindow* parent) {
+    KActionCollection* actionCollection = parent->actionCollection();
     QMenu* menu = contextMenu();
-    
+
     menu->addAction(actionCollection->action("kding_translate_clipboard"));
     menu->addAction(actionCollection->action("kding_translate_word"));
     menu->addSeparator();
     menu->addAction(actionCollection->action("configure_global_shortcuts"));
     menu->addAction(actionCollection->action("options_configure"));
     menu->addSeparator();
-    
-    KHelpMenu* helpMenu = new KHelpMenu(parentWidget(), KAboutData::applicationData(), false);
-    menu->addMenu(helpMenu->menu());
+
+    m_helpMenu = new KHelpMenu(parent, KAboutData::applicationData(), false);
+    menu->addMenu(m_helpMenu->menu());
 }
 
-/**
- * This method decides what to do when the user clicks on the system tray icon.
- *
- * @param reason the type of click the system tray icon received
- */
-void SystemTrayIcon::handleClicks(QSystemTrayIcon::ActivationReason reason) {
-    // Trigger and Context are handled by KSystemTrayIcon, so only MiddleClick
-    // has to be handled here, unless TranslateOnLeftClick is enabled. In that
-    // case, we need to handle Trigger ourself, too
-    switch(reason) {
-        case QSystemTrayIcon::MiddleClick:
-            if(m_translateOnLeftClick) {
-                toggleActive();
-            } else {
-                static_cast<MainWindow*>(parentWidget())->translateClipboard();
-            }
-            break;
-        case QSystemTrayIcon::Unknown:
-        case QSystemTrayIcon::Context:
-        case QSystemTrayIcon::DoubleClick:
-            // fallthrough intended to suppress compiler warnings
-            // because of unhandled enumeration values
-            break;
-        case QSystemTrayIcon::Trigger:
-            if(m_translateOnLeftClick) {
-                static_cast<MainWindow*>(parentWidget())->translateClipboard();
-            }
-            break;
+void SystemTrayIcon::activate(const QPoint &pos) {
+    if (m_translateOnLeftClick) {
+        emit translateClipboardRequested();
+    } else {
+        KStatusNotifierItem::activate(pos);
+    }
+}
+
+void SystemTrayIcon::activateSecondary(const QPoint &pos) {
+    if (m_translateOnLeftClick) {
+        KStatusNotifierItem::activate(pos);
+    } else {
+        emit translateClipboardRequested();
     }
 }
 

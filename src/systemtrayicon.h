@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -18,29 +19,35 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <KSystemTrayIcon>
+#include <KStatusNotifierItem>
 
 class MainWindow;
+class KHelpMenu;
 
 /**
  * This class implements the system tray icon.
  */
-class SystemTrayIcon : public KSystemTrayIcon {
+class SystemTrayIcon : public KStatusNotifierItem {
     Q_OBJECT
 
 public:
     SystemTrayIcon(MainWindow* parent);
     ~SystemTrayIcon();
 
+signals:
+    void translateClipboardRequested();
+
 private slots:
-    void handleClicks(QSystemTrayIcon::ActivationReason reason);
+    void activate(const QPoint &pos);
+    void activateSecondary(const QPoint &pos);
     void updateSettings();
     
 private:
     void initGui();
-    void createMenu();
+    void createMenu(MainWindow* parent);
     
     bool m_translateOnLeftClick;
+    KHelpMenu* m_helpMenu;
 };
 
 #endif
