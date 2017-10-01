@@ -20,7 +20,6 @@
 #include "htmlgenerator.h"
 #include "settings.h"
 #include <KAnimatedButton>
-#include <KIcon>
 #include <KIconLoader>
 #include <KHTMLPart>
 #include <KHTMLView>
@@ -28,6 +27,7 @@
 #include <KActionCollection>
 #include <KGlobalSettings>
 #include <KDebug>
+#include <QIcon>
 #include <QSize>
 #include <QString>
 #include <QLineEdit>
@@ -63,12 +63,12 @@ void TranslationWidget::initGui() {
     connect(historyInput, SIGNAL(cleared()), this, SLOT(saveSettings()));
     connect(historyInput, SIGNAL(returnPressed()), this, SLOT(startSearch()));
     
-    labelIcon->setPixmap(KIcon("kding").pixmap(48,48));
+    labelIcon->setPixmap(QIcon::fromTheme("kding").pixmap(48,48));
     
     const int baIconSize = qMin(busyAnimation->iconSize().width(), busyAnimation->iconSize().height());
     busyAnimation->setAnimationPath(KIconLoader::global()->iconPath("process-working", -baIconSize));
     
-    buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
     
     // set up the HTML view
@@ -122,7 +122,7 @@ void TranslationWidget::stopSearch() {
     
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
-    buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
     
     busyAnimation->stop();
     
@@ -149,7 +149,7 @@ void TranslationWidget::translate(QString phrase) {
     
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
-    buttonTranslate->setIcon(KIcon("process-stop"));
+    buttonTranslate->setIcon(QIcon::fromTheme("process-stop"));
     
     historyInput->setEditText(phrase);
     m_searchEngine->search(phrase);
@@ -163,7 +163,7 @@ void TranslationWidget::translate(QString phrase) {
 void TranslationWidget::processSearchResults() {
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
-    buttonTranslate->setIcon(KIcon("go-jump-locationbar"));
+    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
     
     ResultList resultList = m_searchEngine->results();
     QString searchTerm = m_searchEngine->searchTerm();

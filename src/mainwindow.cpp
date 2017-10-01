@@ -30,13 +30,13 @@
 #include <KStatusBar>
 #include <KShortcut>
 #include <KShortcutsDialog>
-#include <KIcon>
 #include <KDebug>
 #include <KConfigDialog>
 #include <QClipboard>
 #include <QRect>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QIcon>
 #include <QKeyEvent>
 
 MainWindow::MainWindow() : KXmlGuiWindow(), m_systemTrayIcon(0), m_translationWidget(0) {
@@ -67,7 +67,7 @@ void MainWindow::setupActions() {
     
     KAction* translateClipboardAction = new KAction(this);
     translateClipboardAction->setText(i18n("&Translate Clipboard Content"));
-    translateClipboardAction->setIcon(KIcon("kding_babelfish"));
+    translateClipboardAction->setIcon(QIcon::fromTheme("kding_babelfish"));
     translateClipboardAction->setToolTip(i18n("Translates the current content of the clipboard."));
     translateClipboardAction->setStatusTip(i18n("Translates the current content of the clipboard."));
     translateClipboardAction->setObjectName("kding_translate_clipboard");
@@ -77,7 +77,7 @@ void MainWindow::setupActions() {
     
     KAction* translateWordAction = new KAction(this);
     translateWordAction->setText(i18n("Translate &Word..."));
-    translateWordAction->setIcon(KIcon("kding_babelfish"));
+    translateWordAction->setIcon(QIcon::fromTheme("kding_babelfish"));
     translateWordAction->setToolTip(i18n("Opens a dialog where you can enter the word to be translated."));
     translateWordAction->setStatusTip(i18n("Opens a dialog where you can enter the word to be translated."));
     translateWordAction->setObjectName("kding_translate_word");
@@ -87,7 +87,7 @@ void MainWindow::setupActions() {
     
     KAction* configureGlobalShortcutsAction = new KAction(this);
     configureGlobalShortcutsAction->setText(i18n("Configure &Global Shortcuts..."));
-    configureGlobalShortcutsAction->setIcon(KIcon("configure-shortcuts"));
+    configureGlobalShortcutsAction->setIcon(QIcon::fromTheme("configure-shortcuts"));
     actionCollection()->addAction("configure_global_shortcuts", configureGlobalShortcutsAction);
     connect(configureGlobalShortcutsAction, SIGNAL(triggered(bool)), this, SLOT(showShortcuts()));
 }

@@ -22,7 +22,6 @@
 #include <KAboutData>
 #include <KAction>
 #include <KHelpMenu>
-#include <KIcon>
 #include <KLocalizedString>
 #include <KMenu>
 #include <KActionCollection>
