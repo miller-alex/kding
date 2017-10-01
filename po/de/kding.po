@@ -21,9 +21,8 @@ msgstr ""
 #. i18n: file: src/kding.kcfg:12
 #. i18n: ectx: label, entry (WindowPlacement), group (General)
 #: build/src/settings.cpp:54 rc.cpp:78
-#, fuzzy
 msgid "How the window should be placed on the desktop"
-msgstr "Das Fenster wird immer in der Mitte des Desktops angezeigt"
+msgstr "Wie das Fenster auf dem Desktop platziert werden soll"
 
 #. i18n: file: src/kding.kcfg:21
 #. i18n: ectx: label, entry (Position), group (General)
@@ -77,7 +76,8 @@ msgstr "Welches Programm soll zur Wörterbuchsuche verwendet werden?"
 #: build/src/settings.cpp:83 rc.cpp:96
 msgid "This selects the backend to use for dictionary lookups."
 msgstr ""
-"Hiermit wird das Programm ausgewählt, das zur Wörterbuchsuche verwendet wird."
+"Hiermit wird das Programm ausgewählt, das zur Wörterbuchsuche verwendet "
+"wird."
 
 #. i18n: file: src/kding.kcfg:36
 #. i18n: ectx: whatsthis, entry (SelectedBackend), group (Backend)
@@ -96,7 +96,7 @@ msgstr ""
 "das die Suche nach ähnlichen Wörtern ermöglicht. Damit ist es KDing möglich "
 "einen Ausdruck auch dann zu finden, wenn er Schreibfehler enthält. Wenn Sie "
 "agrep benutzen, können sie die Anzahl der erlaubten Fehler im Abschnitt "
-"\"Erweiterte Optionen\" festlegen."
+"„Erweiterte Optionen“ festlegen."
 
 #. i18n: file: src/kding.kcfg:43
 #. i18n: ectx: label, entry (CaseSensitive), group (Backend)
@@ -146,7 +146,7 @@ msgstr ""
 #: build/src/settings.cpp:99 rc.cpp:117
 msgid "How many errors are permitted when doing an approximate search?"
 msgstr ""
-"Wie viele Fehler sind erlaubt, wenn eine annäherungsweise Suche durchgeführt "
+"Wie viele Fehler sind erlaubt, wenn eine näherungsweise Suche durchgeführt "
 "wird?"
 
 #. i18n: file: src/kding.kcfg:63
@@ -155,48 +155,48 @@ msgstr ""
 msgid "List of recently translated words"
 msgstr "Liste der zuletzt übersetzten Wörter"
 
+#  FIXME: find a better word
 #. i18n: file: src/backendsettingsbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, BackendSettingsBase)
 #: build/src/ui_backendsettingsbase.h:139 rc.cpp:6 src/mainwindow.cpp:181
 msgid "Backend"
-msgstr ""
+msgstr "Suchmaschine"
 
 #. i18n: file: src/backendsettingsbase.ui:20
 #. i18n: ectx: property (title), widget (KButtonGroup, kcfg_SelectedBackend)
 #: build/src/ui_backendsettingsbase.h:140 rc.cpp:9
-#, fuzzy
 msgid "Search Command"
-msgstr "&Suchbegriff"
+msgstr "Suchmethode"
 
 #. i18n: file: src/backendsettingsbase.ui:32
 #. i18n: ectx: property (text), widget (QRadioButton, radioEgrep)
 #: build/src/ui_backendsettingsbase.h:141 rc.cpp:12
 msgid "Basic search (egrep)"
-msgstr "Einfache Suche (egrep)"
+msgstr "Einfache Suche (&egrep)"
 
 #. i18n: file: src/backendsettingsbase.ui:48
 #. i18n: ectx: property (text), widget (QRadioButton, radioAgrep)
 #: build/src/ui_backendsettingsbase.h:142 rc.cpp:18
 msgid "Advanced search (agrep)"
-msgstr "Erweiterte Suche (agrep)"
+msgstr "Erweiterte Suche (&agrep)"
 
 #. i18n: file: src/backendsettingsbase.ui:61
 #. i18n: ectx: property (title), widget (QGroupBox, basicOptionsBox)
 #: build/src/ui_backendsettingsbase.h:143 rc.cpp:24
 msgid "Basic Options"
-msgstr "Allgemeine Optionen"
+msgstr "Einfache Optionen"
 
 #. i18n: file: src/backendsettingsbase.ui:67
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WholeWords)
 #: build/src/ui_backendsettingsbase.h:144 rc.cpp:27
 msgid "Match whole words only"
-msgstr "Nur ganze Wörter finden"
+msgstr "Nur ganze &Wörter finden"
 
 #. i18n: file: src/backendsettingsbase.ui:74
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CaseSensitive)
 #: build/src/ui_backendsettingsbase.h:145 rc.cpp:30
 msgid "Case sensitive search"
-msgstr "Groß-/Kleinschreibung beachten"
+msgstr "Groß-/&Kleinschreibung beachten"
 
 #. i18n: file: src/backendsettingsbase.ui:87
 #. i18n: ectx: property (title), widget (QGroupBox, advancedOptionsBox)
@@ -208,14 +208,13 @@ msgstr "Erweiterte Optionen"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: build/src/ui_backendsettingsbase.h:147 rc.cpp:36
 msgid "Number of errors allowed:"
-msgstr "Anzahl der erlaubten Fehler:"
+msgstr "Anzahl der erlaubten &Fehler:"
 
 #. i18n: file: src/generalsettingsbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralSettingsBase)
 #: build/src/ui_generalsettingsbase.h:104 rc.cpp:39 src/mainwindow.cpp:180
-#, fuzzy
 msgid "General Settings"
-msgstr "&Einstellungen"
+msgstr "Allgemeine Einstellungen"
 
 #. i18n: file: src/generalsettingsbase.ui:20
 #. i18n: ectx: property (title), widget (KButtonGroup, kcfg_WindowPlacement)
@@ -233,7 +232,7 @@ msgstr "Das Fenster wird immer in der Mitte des Desktops angezeigt"
 #. i18n: ectx: property (text), widget (QRadioButton, radioCenterWindow)
 #: build/src/ui_generalsettingsbase.h:109 rc.cpp:48
 msgid "Always center window"
-msgstr "Fenster immer zentrieren"
+msgstr "Fenster immer &zentrieren"
 
 #. i18n: file: src/generalsettingsbase.ui:39
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioRememberPosition)
@@ -249,7 +248,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, radioRememberPosition)
 #: build/src/ui_generalsettingsbase.h:113 rc.cpp:57
 msgid "Remember window position"
-msgstr "Fensterposition merken"
+msgstr "Fensterposition &merken"
 
 #. i18n: file: src/generalsettingsbase.ui:52
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioNoSpecialHandling)
@@ -261,7 +260,7 @@ msgstr "Die Anwendung überlässt die Positionierung des Fensters KDE"
 #. i18n: ectx: property (text), widget (QRadioButton, radioNoSpecialHandling)
 #: build/src/ui_generalsettingsbase.h:117 rc.cpp:66
 msgid "No special handling"
-msgstr "Keinen Einfluß auf Positionierung nehmen"
+msgstr "&Keinen Einfluß auf Positionierung nehmen"
 
 #. i18n: file: src/generalsettingsbase.ui:68
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -272,9 +271,8 @@ msgstr "Symbol im Systembereich"
 #. i18n: file: src/generalsettingsbase.ui:74
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TranslateOnLeftClick)
 #: build/src/ui_generalsettingsbase.h:119 rc.cpp:75
-#, fuzzy
 msgid "Left click translates clipboard content"
-msgstr "Inhalt der Zwischenablage &übersetzen"
+msgstr "&Linksklick übersetzt Zwischenablage"
 
 #. i18n: file: src/translationwidgetbase.ui:14
 #. i18n: ectx: property (windowTitle), widget (QWidget, TranslationWidgetBase)
@@ -333,18 +331,15 @@ msgid "Dictionary Lookup for KDE"
 msgstr "Wörterbuchsuche für KDE"
 
 #: src/htmlgenerator.cpp:85
-#, fuzzy
 msgid "Using dictionary version %1"
 msgstr "Wörterbuch-Version %1"
 
 #: src/htmlgenerator.cpp:146
-#, fuzzy
 msgctxt "result table caption"
 msgid "German"
 msgstr "Deutsch"
 
 #: src/htmlgenerator.cpp:147
-#, fuzzy
 msgctxt "result table caption"
 msgid "English"
 msgstr "Englisch"
@@ -399,7 +394,7 @@ msgstr ""
 
 #: src/main.cpp:40
 msgid "Initial port to KDE4"
-msgstr "Ursprüngliche Portierung auf KDE4"
+msgstr "Vorläufige Portierung auf KDE4"
 
 #: src/main.cpp:42
 msgctxt "NAME OF TRANSLATORS"
@@ -425,7 +420,7 @@ msgstr "Übersetzt den aktuellen Inhalt der Zwischenablage."
 
 #: src/mainwindow.cpp:80
 msgid "Translate &Word..."
-msgstr "&Wort übersetzen..."
+msgstr "&Wort übersetzen …"
 
 #: src/mainwindow.cpp:82 src/mainwindow.cpp:83
 msgid "Opens a dialog where you can enter the word to be translated."
@@ -434,11 +429,11 @@ msgstr ""
 
 #: src/mainwindow.cpp:90
 msgid "Configure &Global Shortcuts..."
-msgstr "&Globale Kurzbefehle einrichten..."
+msgstr "&Globale Kurzbefehle einrichten …"
 
 #: src/searchengine.cpp:93
 msgid "Searching for '%1'..."
-msgstr "Suche nach '%1'..."
+msgstr "Suche nach „%1“ …"
 
 #: src/searchengine.cpp:287
 msgctxt "dictionary version"
@@ -446,9 +441,8 @@ msgid "unknown"
 msgstr "unbekannt"
 
 #: src/systemtrayicon.cpp:43
-#, fuzzy
 msgid "KDing - Translation tool"
-msgstr "KDing - Übersetzungswerkzeug"
+msgstr "KDing – Übersetzungswerkzeug"
 
 #: src/translationwidget.cpp:129
 msgid "Search cancelled."
@@ -461,5 +455,5 @@ msgstr "Eine andere Suche läuft bereits."
 #: src/translationwidget.cpp:178
 msgid "Found 1 match for '%2'."
 msgid_plural "Found %1 matches for '%2'."
-msgstr[0] "Ein passender Eintrag gefunden für '%2'."
-msgstr[1] "%1 passende Einträge gefunden für '%2'."
+msgstr[0] "Ein passender Eintrag gefunden für „%2“."
+msgstr[1] "%1 passende Einträge gefunden für „%2“."
