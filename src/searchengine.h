@@ -75,7 +75,7 @@ private:
     static const QRegExp SQUARE_BRACKETS;
     
     // cannot make this a static member because an application instance
-    // is needed to use KStandardDirs
+    // is needed to use QStandardPaths
     const QString DEFAULT_DICTIONARY;
     
     const QString DICTIONARY_VERSION;

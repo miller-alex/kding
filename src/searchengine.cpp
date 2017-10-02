@@ -17,7 +17,6 @@
 
 #include "searchengine.h"
 #include "searchbackendfactory.h"
-#include <KStandardDirs>
 #include <KLocale>
 #include <KProcess>
 #include <QDebug>
@@ -25,6 +24,7 @@
 #include <QTextStream>
 #include <QByteArray>
 #include <QRegExp>
+#include <QStandardPaths>
 #include <QMutableListIterator>
 #include <QtAlgorithms>
 
@@ -34,7 +34,14 @@ const QRegExp SearchEngine::ROUND_BRACKETS = QRegExp(" \\([^.\\)]*\\)");    ///<
 const QRegExp SearchEngine::CURLY_BRACKETS = QRegExp(" \\{[^.\\}]*\\}");    ///< RegExp to match text in curly brackets
 const QRegExp SearchEngine::SQUARE_BRACKETS = QRegExp(" \\[[^\\]]*\\]");    ///< RegExp to match text in square brackets
 
-SearchEngine::SearchEngine(QObject* parent) : QObject(parent), DEFAULT_DICTIONARY(KStandardDirs::locate("appdata", "de-en.txt")), DICTIONARY_VERSION(determineDictionaryVersion()), m_process(0), m_resultList(0), m_backendFactory(0) {
+SearchEngine::SearchEngine(QObject* parent)
+  : QObject(parent),
+    DEFAULT_DICTIONARY(QStandardPaths::locate(QStandardPaths::AppDataLocation,
+                                              "de-en.txt")),
+    DICTIONARY_VERSION(determineDictionaryVersion()),
+    m_process(0),
+    m_resultList(0)
+{
     m_backendFactory = new SearchBackendFactory(this);
 }
 

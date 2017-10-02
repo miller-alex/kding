@@ -53,7 +53,7 @@ private:
     static const QRegExp OPEN_BRACKETS;
     static const QRegExp CLOSE_BRACKETS;
     
-    const QString CSS_FILE;
+    const QString CSS_FILE_URL;
     const QString WELCOME_FILE;
     const QString RESULT_FILE;
     const QString NO_MATCHES_FILE;
