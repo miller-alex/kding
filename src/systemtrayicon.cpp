@@ -20,12 +20,12 @@
 #include "mainwindow.h"
 #include "settings.h"
 #include <KAboutData>
-#include <KAction>
 #include <KHelpMenu>
 #include <KLocalizedString>
 #include <KMenu>
 #include <KActionCollection>
 #include <KDebug>
+#include <QAction>
 #include <QMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow* parent)

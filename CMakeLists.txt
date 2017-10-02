@@ -10,6 +10,7 @@ find_package(KF5 REQUIRED COMPONENTS
     ConfigWidgets
     CoreAddons
     DBusAddons
+    GlobalAccel
     I18n
     IconThemes
     KHtml

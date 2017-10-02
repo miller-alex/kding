@@ -21,17 +21,17 @@
 #include "settings.h"
 #include "generalsettings.h"
 #include "backendsettings.h"
-#include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>
+#include <KGlobalAccel>
 #include <KLocalizedString>
 #include <KMenuBar>
 #include <KStandardAction>
 #include <KStatusBar>
-#include <KShortcut>
 #include <KShortcutsDialog>
 #include <KDebug>
 #include <KConfigDialog>
+#include <QAction>
 #include <QClipboard>
 #include <QRect>
 #include <QApplication>
@@ -65,27 +65,27 @@ void MainWindow::setupActions() {
     KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), actionCollection());
     KStandardAction::preferences(this, SLOT(showPreferences()), actionCollection());
     
-    KAction* translateClipboardAction = new KAction(this);
+    QAction* translateClipboardAction = new QAction(this);
     translateClipboardAction->setText(i18n("&Translate Clipboard Content"));
     translateClipboardAction->setIcon(QIcon::fromTheme("kding_babelfish"));
     translateClipboardAction->setToolTip(i18n("Translates the current content of the clipboard."));
     translateClipboardAction->setStatusTip(i18n("Translates the current content of the clipboard."));
-    translateClipboardAction->setObjectName("kding_translate_clipboard");
-    translateClipboardAction->setGlobalShortcut(KShortcut(Qt::SHIFT + Qt::META + Qt::Key_T));
     actionCollection()->addAction("kding_translate_clipboard", translateClipboardAction);
+    KGlobalAccel::setGlobalShortcut(translateClipboardAction,
+            QKeySequence(Qt::SHIFT + Qt::META + Qt::Key_T));
     connect(translateClipboardAction, SIGNAL(triggered(bool)), this, SLOT(translateClipboard()));
     
-    KAction* translateWordAction = new KAction(this);
+    QAction* translateWordAction = new QAction(this);
     translateWordAction->setText(i18n("Translate &Word..."));
     translateWordAction->setIcon(QIcon::fromTheme("kding_babelfish"));
     translateWordAction->setToolTip(i18n("Opens a dialog where you can enter the word to be translated."));
     translateWordAction->setStatusTip(i18n("Opens a dialog where you can enter the word to be translated."));
-    translateWordAction->setObjectName("kding_translate_word");
-    translateWordAction->setGlobalShortcut(KShortcut(Qt::SHIFT + Qt::META + Qt::Key_W));
     actionCollection()->addAction("kding_translate_word", translateWordAction);
+    KGlobalAccel::setGlobalShortcut(translateWordAction,
+            QKeySequence(Qt::SHIFT + Qt::META + Qt::Key_W));
     connect(translateWordAction, SIGNAL(triggered(bool)), this, SLOT(translateWord()));
     
-    KAction* configureGlobalShortcutsAction = new KAction(this);
+    QAction* configureGlobalShortcutsAction = new QAction(this);
     configureGlobalShortcutsAction->setText(i18n("Configure &Global Shortcuts..."));
     configureGlobalShortcutsAction->setIcon(QIcon::fromTheme("configure-shortcuts"));
     actionCollection()->addAction("configure_global_shortcuts", configureGlobalShortcutsAction);

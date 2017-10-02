@@ -26,6 +26,7 @@ target_link_libraries(kding
     KF5::ConfigWidgets
     KF5::CoreAddons
     KF5::DBusAddons
+    KF5::GlobalAccel
     KF5::I18n
     KF5::IconThemes
     KF5::KHtml

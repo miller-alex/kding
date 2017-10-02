@@ -23,8 +23,6 @@
 #include <KIconLoader>
 #include <KHTMLPart>
 #include <KHTMLView>
-#include <KAction>
-#include <KActionCollection>
 #include <KGlobalSettings>
 #include <KDebug>
 #include <QIcon>

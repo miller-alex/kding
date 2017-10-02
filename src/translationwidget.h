@@ -25,7 +25,6 @@
 class SearchEngine;
 class HtmlGenerator;
 class KHTMLPart;
-class KActionCollection;
 
 /**
  * This class implements the translation widget.
@@ -64,7 +63,6 @@ private:
     void initGui();
     void displayHtml(QString html);
     
-    KActionCollection* m_actionCollection;
     KHTMLPart* m_htmlPart;
     SearchEngine* m_searchEngine;
     HtmlGenerator* m_htmlGenerator;
