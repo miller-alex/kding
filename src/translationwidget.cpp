@@ -24,7 +24,6 @@
 #include <KHTMLPart>
 #include <KHTMLView>
 #include <KGlobalSettings>
-#include <KDebug>
 #include <QIcon>
 #include <QSize>
 #include <QString>

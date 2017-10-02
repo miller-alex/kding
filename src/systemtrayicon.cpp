@@ -23,7 +23,6 @@
 #include <KHelpMenu>
 #include <KLocalizedString>
 #include <KActionCollection>
-#include <KDebug>
 #include <QAction>
 #include <QMenu>
 

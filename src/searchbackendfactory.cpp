@@ -18,7 +18,7 @@
 #include "searchbackendfactory.h"
 #include "settings.h"
 #include <KProcess>
-#include <KDebug>
+#include <QDebug>
 
 const QString SearchBackendFactory::EGREP_CMD = "egrep";
 const QStringList SearchBackendFactory::EGREP_DEFAULT_ARGS = QStringList() \
@@ -54,7 +54,7 @@ void SearchBackendFactory::generate() {
             generateAgrepCmdLine();
             break;
         default:
-            kError() << "Invalid value when specifying backend";
+            qCritical() << "Invalid value when specifying backend";
     }
 }
 

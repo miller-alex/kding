@@ -22,7 +22,7 @@
 #include <KAboutData>
 #include <KGlobalSettings>
 #include <KColorScheme>
-#include <KDebug>
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
 #include <QApplication>
@@ -139,7 +139,7 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
                 
                 ++bgClass;
             } else {
-                kError() << "Bad line: splitter not found in" << text;
+                qCritical() << "Bad line: splitter not found in" << text;
             }
         }
         
@@ -200,7 +200,7 @@ QString HtmlGenerator::loadFile(const QString filename) const {
         contents = stream.readAll();
         file.close();
     } else {
-        kError() << "Failed to open" << filename;
+        qCritical() << "Failed to open" << filename;
     }
     
     return contents;

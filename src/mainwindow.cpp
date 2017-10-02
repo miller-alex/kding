@@ -27,7 +27,6 @@
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KShortcutsDialog>
-#include <KDebug>
 #include <KConfigDialog>
 #include <QAction>
 #include <QClipboard>

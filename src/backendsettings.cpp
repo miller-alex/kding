@@ -17,7 +17,6 @@
 
 #include "backendsettings.h"
 #include "searchbackendfactory.h"
-#include <KDebug>
 #include <QRadioButton>
 #include <QGroupBox>
 

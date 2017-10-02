@@ -19,8 +19,8 @@
 #include "searchbackendfactory.h"
 #include <KStandardDirs>
 #include <KLocale>
-#include <KDebug>
 #include <KProcess>
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
 #include <QByteArray>
@@ -85,7 +85,7 @@ void SearchEngine::search(QString phrase) {
     }
     
     // set up the command to run
-    kDebug() << m_backendFactory->executable() << m_backendFactory->argumentList();
+    qDebug() << m_backendFactory->executable() << m_backendFactory->argumentList();
     (*m_process) << m_backendFactory->executable() << m_backendFactory->argumentList() << phrase << DEFAULT_DICTIONARY;
     
     // finally start searching
@@ -130,9 +130,11 @@ void SearchEngine::cancelSearch() {
  * @see cancelSearch()
  */
 void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus) {
-    kDebug() << "Exit code:" << exitCode;
-    kDebug() << "Exit status:" << (exitStatus == QProcess::NormalExit ? "normal" : (exitStatus == QProcess::CrashExit ? "crashed" : "unknown"));
-    
+    qDebug() << "Exit code:" << exitCode;
+    qDebug() << "Exit status:"
+             << (exitStatus == QProcess::NormalExit ? "normal" :
+                 (exitStatus == QProcess::CrashExit ? "crashed" : "unknown"));
+
     m_resultList = new ResultList();
     while(m_process->canReadLine()) {
         ResultItem item;
@@ -226,13 +228,13 @@ ResultList& SearchEngine::results() const {
 void SearchEngine::monitorProcess(QProcess::ProcessState newState) const {
     switch(newState) {
         case QProcess::NotRunning:
-            kDebug() << "Process is not running";
+            qDebug() << "Process is not running";
             break;
         case QProcess::Starting:
-            kDebug() << "Process is starting";
+            qDebug() << "Process is starting";
             break;
         case QProcess::Running:
-            kDebug() << "Process is running";
+            qDebug() << "Process is running";
             break;
     }
 }
@@ -247,22 +249,22 @@ void SearchEngine::monitorProcess(QProcess::ProcessState newState) const {
 void SearchEngine::processFailed(QProcess::ProcessError error) const {
     switch(error) {
         case QProcess::FailedToStart:
-            kDebug() << "Process failed to start";
+            qDebug() << "Process failed to start";
             break;
         case QProcess::Crashed:
-            kDebug() << "Process crashed";
+            qDebug() << "Process crashed";
             break;
         case QProcess::Timedout:
-            kDebug() << "Process timed out";
+            qDebug() << "Process timed out";
             break;
         case QProcess::WriteError:
-            kDebug() << "Process could not be written to";
+            qDebug() << "Process could not be written to";
             break;
         case QProcess::ReadError:
-            kDebug() << "Process could not be read from";
+            qDebug() << "Process could not be read from";
             break;
         case QProcess::UnknownError:
-            kDebug() << "Process encountered an unknown error";
+            qDebug() << "Process encountered an unknown error";
             break;
     }
 }
@@ -300,7 +302,7 @@ QString SearchEngine::determineDictionaryVersion() {
         
         dictFile.close();
     } else {
-        kError() << "Failed to open dictionary" << dictFile.fileName();
+        qCritical() << "Failed to open dictionary" << dictFile.fileName();
     }
     
     return version;
