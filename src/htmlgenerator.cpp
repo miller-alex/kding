@@ -19,14 +19,13 @@
 #include "searchengine.h"
 #include <KLocalizedString>
 #include <KAboutData>
-#include <KGlobalSettings>
 #include <KColorScheme>
 #include <QDebug>
 #include <QFile>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QApplication>
-#include <QFont>
+#include <QFontDatabase>
 #include <QColor>
 #include <QPalette>
 #include <QBrush>
@@ -71,7 +70,7 @@ HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent)
     RESULT_FILE(locateAppData("html/result.html")),
     NO_MATCHES_FILE(locateAppData("html/nomatches.html")),
     m_fontSize(fontSize),
-    m_fontFamily(KGlobalSettings::generalFont().family())
+    m_fontFamily(QFontDatabase::systemFont(QFontDatabase::GeneralFont).family())
 {
     // set the foreground and alternate background colors for the result page
     // to the one from KDE's current color scheme

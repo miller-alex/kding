@@ -23,12 +23,11 @@
 #include <KIconLoader>
 #include <KHTMLPart>
 #include <KHTMLView>
-#include <KGlobalSettings>
+#include <QFontDatabase>
 #include <QIcon>
 #include <QSize>
 #include <QString>
 #include <QLineEdit>
-#include <QFont>
 
 TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searchEngine(0), m_htmlGenerator(0) {
     setupUi(this);
@@ -42,7 +41,7 @@ TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searc
     connect(m_searchEngine, SIGNAL(statusMessage(QString)), this, SIGNAL(statusMessage(QString)));
     
     // calculate pixel size from point size
-    int pointSize = KGlobalSettings::generalFont().pointSize();
+    int pointSize = QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
     int pixelSize = (pointSize * m_htmlPart->view()->logicalDpiY() + 36) / 72;
     m_htmlGenerator = new HtmlGenerator(pixelSize, this);
     
