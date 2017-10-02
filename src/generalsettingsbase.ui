@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="KButtonGroup" name="kcfg_WindowPlacement">
+    <widget class="QGroupBox" name="kcfg_WindowPlacement">
      <property name="title">
       <string>Window Placement</string>
      </property>
@@ -93,14 +93,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KButtonGroup</class>
-   <extends>QGroupBox</extends>
-   <header>kbuttongroup.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>

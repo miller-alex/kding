@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="KButtonGroup" name="kcfg_SelectedBackend">
+    <widget class="QGroupBox" name="kcfg_SelectedBackend">
      <property name="title">
       <string>Search Command</string>
      </property>
@@ -122,14 +122,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KButtonGroup</class>
-   <extends>QGroupBox</extends>
-   <header>kbuttongroup.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
