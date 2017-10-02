@@ -25,9 +25,7 @@
 #include <KActionCollection>
 #include <KGlobalAccel>
 #include <KLocalizedString>
-#include <KMenuBar>
 #include <KStandardAction>
-#include <KStatusBar>
 #include <KShortcutsDialog>
 #include <KDebug>
 #include <KConfigDialog>
@@ -38,6 +36,8 @@
 #include <QDesktopWidget>
 #include <QIcon>
 #include <QKeyEvent>
+#include <QMenuBar>
+#include <QStatusBar>
 
 MainWindow::MainWindow() : KXmlGuiWindow(), m_systemTrayIcon(0), m_translationWidget(0) {
     // we do not want the application to exit when the window is closed
