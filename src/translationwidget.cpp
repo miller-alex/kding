@@ -207,7 +207,7 @@ void TranslationWidget::saveSettings() {
     QStringList list = historyInput->historyItems();
     Settings::self()->setRecent(list);
     
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 }
 
 void TranslationWidget::updateSearchBackend() {

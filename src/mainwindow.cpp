@@ -221,7 +221,7 @@ void MainWindow::toggleMenuBar() {
 void MainWindow::saveSettings() {
     Settings::self()->setPosition(pos());
     
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 }
 
 /**
