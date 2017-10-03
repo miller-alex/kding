@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -17,10 +18,11 @@
 
 #include "searchengine.h"
 #include "searchbackendfactory.h"
-#include <KLocale>
-#include <KProcess>
+#include <KLocalizedString>
+#include <QProcess>
 #include <QDebug>
 #include <QFile>
+#include <QTextCodec>
 #include <QTextStream>
 #include <QByteArray>
 #include <QRegExp>
@@ -51,7 +53,7 @@ SearchEngine::~SearchEngine() {
 
 /**
  * This is where the search is initiated.
- * The @c KProcess is set up, its signals are connected to the corresponding
+ * The @c QProcess is set up, its signals are connected to the corresponding
  * slots of this class, and finally the process is started.
  *
  * @param phrase the phrase to search for
@@ -75,29 +77,59 @@ void SearchEngine::search(QString phrase) {
     // this search returns
     delete m_resultList;
     m_resultList = 0;
-    
-    // now construct the KProcess object and set up all necessary connections
-    m_process = new KProcess();
-    m_process->setOutputChannelMode(KProcess::OnlyStdoutChannel);
-    
+
+    // now construct the QProcess object and set up all necessary connections
+    m_process = new QProcess();
+    m_process->setProcessChannelMode(QProcess::ForwardedErrorChannel);
+
     connect(m_process, SIGNAL(started()), this, SIGNAL(searchStarted()));
     connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(processFinished(int, QProcess::ExitStatus)));
     connect(m_process, SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(monitorProcess(QProcess::ProcessState)));
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(processFailed(QProcess::ProcessError)));
-    
-    // this check is needed to pass a correctly encoded search term to the
-    // grep command
-    if(QString("UTF-8") != KLocale::global()->encoding()) {
-        phrase = phrase.toUtf8();
+
+    QTextCodec *localeCodec = QTextCodec::codecForLocale();
+    if (localeCodec->name() == "UTF-8") {
+        localeCodec = 0;
+    } else {
+        // the search term must always be utf-8 encoded (like the dictionary)
+        // for the *grep command's args
+
+        // Re-encoding the phrase would work for 8-bit encodings but may
+        // lead to invalid code sequences on multibyte encodings:
+        //phrase = QString::fromLocal8Bit(phrase.toUtf8());
+        // rather temporarily change the locale encoding
+        QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+
+        // also the LC_CTYPE category must be set to a utf-8 locale for
+        // correct interpretation of the search term
+        QProcessEnvironment env(QProcessEnvironment::systemEnvironment());
+        if (env.contains(QStringLiteral("LC_ALL"))) {
+            // LC_ALL must be removed because it overrides LC_CTYPE
+            // but we preserve its value for LC_MESSAGES
+            env.insert(QStringLiteral("LC_MESSAGES"),
+                       env.value(QStringLiteral("LC_ALL")));
+            env.remove(QStringLiteral("LC_ALL"));
+        }
+        env.insert(QStringLiteral("LC_CTYPE"), QStringLiteral("en_US.UTF-8"));
+        m_process->setProcessEnvironment(env);
     }
-    
+
     // set up the command to run
-    qDebug() << m_backendFactory->executable() << m_backendFactory->argumentList();
-    (*m_process) << m_backendFactory->executable() << m_backendFactory->argumentList() << phrase << DEFAULT_DICTIONARY;
-    
+    qDebug() << m_backendFactory->executable()
+             << m_backendFactory->argumentList()
+             << phrase;
+    m_process->setProgram(m_backendFactory->executable());
+    m_process->setArguments(m_backendFactory->argumentList() << phrase);
+
+    // pass the dictionary to stdin
+    m_process->setStandardInputFile(DEFAULT_DICTIONARY);
+
     // finally start searching
-    emit statusMessage(i18n("Searching for '%1'...", phrase));
+    emit statusMessage(i18n("Searching for '%1'...", m_searchTerm));
     m_process->start();
+
+    // reset CodecForLocale
+    if (localeCodec) QTextCodec::setCodecForLocale(localeCodec);
 }
 
 /**
@@ -125,7 +157,7 @@ void SearchEngine::cancelSearch() {
 }
 
 /**
- * This method reads the results from the @c KProcess and creates and sorts the
+ * This method reads the results from the @c QProcess and creates and sorts the
  * ResultList from these.
  * After that, the search is finished and the objects interested in that are
  * notified via the relevant signal.

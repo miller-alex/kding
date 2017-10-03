@@ -27,7 +27,6 @@
 
 class MainWindow;
 class SearchBackendFactory;
-class KProcess;
 
 /**
  * This class implements the search engine that looks up phrases in the
@@ -84,7 +83,7 @@ private:
     QString determineDictionaryVersion();
     QString determineBackendVersion();
     
-    KProcess* m_process;
+    QProcess* m_process;
     QString m_searchTerm;
     ResultList* m_resultList;
     SearchBackendFactory* m_backendFactory;

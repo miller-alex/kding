@@ -17,7 +17,7 @@
 
 #include "searchbackendfactory.h"
 #include "settings.h"
-#include <KProcess>
+#include <QProcess>
 #include <QDebug>
 
 const QString SearchBackendFactory::EGREP_CMD = "egrep";
@@ -112,10 +112,10 @@ void SearchBackendFactory::addAdvancedOptions() {
  *
  * @return @c true if @c agrep was found, @c false otherwise
  *
- * @see KProcess::execute()
+ * @see QProcess::execute()
  */
 bool SearchBackendFactory::hasAgrep() {
-    if(KProcess::execute(AGREP_CMD) != -2) {
+    if(QProcess::execute(AGREP_CMD, QStringList()) != -2) {
         return true;
     } else {
         return false;
