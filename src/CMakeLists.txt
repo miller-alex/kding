@@ -23,6 +23,11 @@ kconfig_add_kcfg_files(kding_SRCS settings.kcfgc)
 add_executable(kding ${kding_SRCS})
 
 target_link_libraries(kding
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+    KF5::ConfigCore
+    KF5::ConfigGui
     KF5::ConfigWidgets
     KF5::CoreAddons
     KF5::DBusAddons
@@ -33,7 +38,6 @@ target_link_libraries(kding
     KF5::Notifications
     KF5::WidgetsAddons
     KF5::XmlGui
-    KF5::KDELibs4Support
 )
 
 install(FILES kding.kcfg DESTINATION ${KCFG_INSTALL_DIR})

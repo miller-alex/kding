@@ -5,8 +5,13 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-#find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Gui Widgets)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS
+    Core
+    Gui
+    Widgets
+)
 find_package(KF5 REQUIRED COMPONENTS
+    Config
     ConfigWidgets
     CoreAddons
     DBusAddons
@@ -17,7 +22,6 @@ find_package(KF5 REQUIRED COMPONENTS
     Notifications
     WidgetsAddons
     XmlGui
-    KDELibs4Support
 )
 
 include(KDEInstallDirs)
