@@ -34,11 +34,25 @@
 #include "mainwindow.h"
 #include "application.h"
 #include <KAboutData>
+#include <Kdelibs4ConfigMigrator>
 #include <KLocalizedString>
 #include <QCommandLineParser>
 #include <QIcon>
 
+void migrateConfig() {
+    Kdelibs4ConfigMigrator migrator(QStringLiteral("kding"));
+
+    // list of all config files
+    migrator.setConfigFiles(QStringList() << QStringLiteral("kdingrc"));
+    // list of KXMLGUI files
+    migrator.setUiFiles(QStringList() << QStringLiteral("kdingui.rc"));
+
+    migrator.migrate();
+}
+
 int main(int argc, char* argv[]) {
+    migrateConfig();
+
     Application app(argc, argv);
     KLocalizedString::setApplicationDomain("kding");
 
