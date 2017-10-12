@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -39,23 +40,25 @@ public slots:
     void translateClipboard();
     void translateWord();
     void translate(QString phrase);
-    void showStatusMessage(QString message);
-    void clearStatusMessage();
-    
+    //void showStatusMessage(QString message);
+    //void clearStatusMessage();
+
 protected:
     void keyPressEvent(QKeyEvent* event);
-    
+
 private slots:
     void showPreferences();
     void showShortcuts();
     void toggleMenuBar();
     void saveSettings();
-    
+    void iconActivated(bool active);
+
 private:
     void initGui();
     void setupActions();
-    void centerWindow();
-    
+    void showRaised();
+    void updatePosition(bool initial = false);
+
     SystemTrayIcon* m_systemTrayIcon;
     TranslationWidget* m_translationWidget;
 };

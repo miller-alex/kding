@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -28,6 +29,7 @@
 #include <KStandardAction>
 #include <KShortcutsDialog>
 #include <KConfigDialog>
+#include <KWindowSystem>
 #include <QAction>
 #include <QClipboard>
 #include <QRect>
@@ -38,16 +40,20 @@
 #include <QMenuBar>
 #include <QStatusBar>
 
-MainWindow::MainWindow() : KXmlGuiWindow(), m_systemTrayIcon(0), m_translationWidget(0) {
+MainWindow::MainWindow()
+  : KXmlGuiWindow(),
+    m_systemTrayIcon(0),
+    m_translationWidget(0)
+{
     // we do not want the application to exit when the window is closed
     setAttribute(Qt::WA_DeleteOnClose, false);
-    
-    // the order is important here, do not change it!
+
     setupActions();
-    setupGUI();
     initGui();
-    
-    //showStatusMessage(i18n("Dictionary version %1", m_translationWidget->dictionaryVersion()));
+    setupGUI(); // call this after creating gui elements and actions
+
+    //showStatusMessage(i18n("Dictionary version %1",
+    //                  m_translationWidget->dictionaryVersion()));
 }
 
 MainWindow::~MainWindow() {
@@ -95,79 +101,111 @@ void MainWindow::setupActions() {
  * Create and set up GUI widgets.
  */
 void MainWindow::initGui() {
-    // create the statusbar
-    statusBar();
-    
     // create the main view
     m_translationWidget = new TranslationWidget(this);
     setCentralWidget(m_translationWidget);
     m_translationWidget->show();
-    connect(m_translationWidget, SIGNAL(statusMessage(QString)), this, SLOT(showStatusMessage(QString)));
-    
+
+    // create the statusbar and connect it to the main view
+    connect(m_translationWidget, SIGNAL(statusMessage(QString)),
+            statusBar(), SLOT(showMessage(QString)));
+
     // create system tray icon
     m_systemTrayIcon = new SystemTrayIcon(this);
     connect(m_systemTrayIcon, SIGNAL(translateClipboardRequested()),
 	    this, SLOT(translateClipboard()));
+    // use a QueuedConnection because KStatusNotifierItem moves the window, too
+    connect(m_systemTrayIcon, SIGNAL(activateRequested(bool, const QPoint&)),
+            this, SLOT(iconActivated(bool)), Qt::QueuedConnection);
 
-    // restore settings
-    switch(Settings::self()->windowPlacement()) {
-        case Settings::EnumWindowPlacement::CenterWindow:
-            centerWindow();
-            break;
-        case Settings::EnumWindowPlacement::RememberPosition:
-            move(Settings::self()->position());
-            break;
+    if (Settings::self()->windowPlacement() !=
+        Settings::EnumWindowPlacement::NoSpecialHandling) {
+        // set initial window position if desired
+        updatePosition(true);
+
+        // work around KStatusNotifierItem forcing newly mapped windows
+        // to QPoint(-1, -1): make it record current position
+        emit KWindowSystem::self()->windowRemoved(winId());
     }
+    // note that for NoSpecialHandling, KStatusNotifierItem will still
+    // override the WM's placement, but it's not our business to fix that
+}
+
+void MainWindow::updatePosition(bool initial) {
+    int placement = Settings::self()->windowPlacement();
+
+    switch (placement) {
+    case Settings::EnumWindowPlacement::NoSpecialHandling:
+        return;
+    case Settings::EnumWindowPlacement::RememberPosition:
+        if (!initial) return;
+    }
+
+    QRect desktop(QApplication::desktop()->availableGeometry(this));
+    QSize frame(frameSize());
+    QRect area(desktop.topLeft(), desktop.size() - frame);
+    QPoint pos;
+
+    switch (placement) {
+    case Settings::EnumWindowPlacement::CenterWindow:
+        pos = area.center();
+        break;
+
+    case Settings::EnumWindowPlacement::RememberPosition:
+        pos = Settings::self()->position();
+
+        // ensure the window is not completely outside the visible area
+        const int min_visible = 5;
+        if (pos.x() >= desktop.right() - min_visible)
+            pos.setX(area.right());
+        if (pos.x() + frame.width() <= desktop.left() + min_visible)
+            pos.setX(area.left());
+        if (pos.y() >= desktop.bottom() - min_visible)
+            pos.setY(area.bottom());
+        if (pos.y() + frame.height() <= desktop.top() + min_visible)
+            pos.setY(area.bottom());
+        break;
+    }
+
+    move(pos);
+}
+
+void MainWindow::showRaised() {
+    if (!isVisible()) {
+        show();
+        updatePosition();
+    }
+    if (windowState() & Qt::WindowMinimized) {
+        setWindowState(windowState() & ~Qt::WindowMinimized);
+    }
+    raise();
 }
 
 void MainWindow::translateClipboard() {
-    QClipboard* clipboard = QApplication::clipboard();
-    
-    m_translationWidget->clearDisplay();
-    
-    if(!isVisible()) {
-        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
-            centerWindow();
-        }
-        show();
-    }
-    
-    activateWindow();
-    raise();
-    
-    m_translationWidget->translate(clipboard->text(QClipboard::Selection));
+    QClipboard::Mode mode = QApplication::clipboard()->supportsSelection() ?
+        QClipboard::Selection : QClipboard::Clipboard;
+    QString phrase = QApplication::clipboard()->text(mode);
+
+    translate(phrase);
 }
 
 void MainWindow::translateWord() {
-    if(!isVisible()) {
-        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
-            centerWindow();
-        }
-        show();
-    }
-    
+    showRaised();
     activateWindow();
-    raise();
-    
     m_translationWidget->focusInputWidget();
 }
 
 void MainWindow::translate(QString phrase) {
     m_translationWidget->clearDisplay();
-    
-    if(!isVisible()) {
-        if(Settings::self()->windowPlacement() == Settings::EnumWindowPlacement::CenterWindow) {
-            centerWindow();
-        }
-        show();
-    }
-    
-    activateWindow();
-    raise();
-    
+    showRaised();
     m_translationWidget->translate(phrase);
 }
 
+void MainWindow::iconActivated(bool active) {
+    if (active) updatePosition();
+}
+
+/*
 void MainWindow::showStatusMessage(QString message) {
     statusBar()->showMessage(message);
 }
@@ -175,6 +213,7 @@ void MainWindow::showStatusMessage(QString message) {
 void MainWindow::clearStatusMessage() {
     statusBar()->clearMessage();
 }
+*/
 
 void MainWindow::showPreferences() {
     // an instance of the config dialog could already be created and cached,
@@ -203,23 +242,12 @@ void MainWindow::showShortcuts() {
     KShortcutsDialog::configure(&globalActions);
 }
 
-void MainWindow::centerWindow() {
-    QRect desktop = QApplication::desktop()->availableGeometry(this);
-    
-    move(desktop.width() / 2 - width() / 2, desktop.height() / 2 - height() / 2);
-}
-
 void MainWindow::toggleMenuBar() {
-    if(menuBar()->isVisible()) {
-        menuBar()->hide();
-    } else {
-        menuBar()->show();
-    }
+    menuBar()->setHidden(menuBar()->isVisible());
 }
 
 void MainWindow::saveSettings() {
     Settings::self()->setPosition(pos());
-    
     Settings::self()->save();
 }
 

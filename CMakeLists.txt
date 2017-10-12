@@ -21,6 +21,7 @@ find_package(KF5 REQUIRED COMPONENTS
     KHtml
     Notifications
     WidgetsAddons
+    WindowSystem
     XmlGui
 )
 
