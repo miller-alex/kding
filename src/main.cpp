@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
     KLocalizedString::setApplicationDomain("kding");
 
     // add About dialog data
-    KAboutData about("kding", i18n("KDing"), "0.7");
+    KAboutData about("kding", i18n("KDing"), "0.7.1-dev");
     about.setShortDescription(i18n("KDE port of Ding, "
                                    "the DIctionary Nice Grep"));
     about.setLicense(KAboutLicense::GPL_V2);
