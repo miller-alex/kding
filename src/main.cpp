@@ -36,6 +36,7 @@
 #include <KAboutData>
 #include <Kdelibs4ConfigMigrator>
 #include <KLocalizedString>
+#include <KStartupInfo>
 #include <QCommandLineParser>
 #include <QIcon>
 
@@ -52,6 +53,9 @@ void migrateConfig() {
 
 int main(int argc, char* argv[]) {
     migrateConfig();
+
+    // catch startupId before it's unset by QApplication constructor
+    (void) KStartupInfo::startupId();
 
     Application app(argc, argv);
     KLocalizedString::setApplicationDomain("kding");

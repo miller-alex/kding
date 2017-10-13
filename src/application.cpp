@@ -19,6 +19,7 @@
 #include "application.h"
 #include "mainwindow.h"
 #include <KDBusService>
+#include <KStartupInfo>
 
 MainWindow *Application::m_mainWindow = 0;
 
@@ -35,6 +36,7 @@ int Application::exec() {
     connect(&dbusService,
 	    SIGNAL(activateRequested(const QStringList&, const QString&)),
 	    instance(), SLOT(newInstance(const QStringList &)));
+
     newInstance(arguments(), true);
 
     return QApplication::exec();
@@ -48,6 +50,12 @@ int Application::exec() {
 void Application::newInstance(const QStringList &arguments, bool first) {
     if (!m_mainWindow) {
         m_mainWindow = new MainWindow();
+    }
+
+    if (first) {
+        KStartupInfo::appStarted();
+    } else {
+        KStartupInfo::setNewStartupId(m_mainWindow, KStartupInfo::startupId());
     }
 
     // no need for a command line parser here
