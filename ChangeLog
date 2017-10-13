@@ -1,3 +1,10 @@
+2017-10-13  Alexander Miller  <alex.miller@gmx.de>
+
+        * release v0.7
+        * port to KDE Frameworks 5
+        * properly handle searches with non-ASCII characters when not
+          using a utf-8 locale
+
 2017-09-13  Alexander Miller  <alex.miller@gmx.de>
 
         * release v0.6.1
