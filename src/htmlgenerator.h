@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -52,7 +53,9 @@ private:
     static const QRegExp SPLITTER;
     static const QRegExp OPEN_BRACKETS;
     static const QRegExp CLOSE_BRACKETS;
-    
+
+    static void formatFragments(QStringList &list, const QRegExp &SearchTerm);
+
     const QString CSS_FILE_URL;
     const QString WELCOME_FILE;
     const QString RESULT_FILE;

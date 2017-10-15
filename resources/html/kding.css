@@ -18,6 +18,8 @@ table {
     width: 100%;
     height: 100%;
     border-spacing: 0px;
+    border-collapse: collapse;
+    margin-bottom: 1px; /* or else the border may not show */
 }
 
 th {
@@ -26,13 +28,18 @@ th {
     border-bottom: 1px dotted gray;
 }
 
-td {
+tbody {
     vertical-align: top;
     border-bottom: 1px dotted silver;
 }
 
+tr.continued > td, div.continued {
+    padding-left: 1em;
+}
+
+/*
 td.title {
     vertical-align: middle;
     border: 0px;
 }
-
+*/

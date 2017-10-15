@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -30,7 +31,7 @@
 #include <QPalette>
 #include <QBrush>
 
-const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) ::(?: |&nbsp;)(.*)");    ///< capture left and right side of a line (the German and the English part) in groups
+const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    ///< capture left and right side of a line (the German and the English part) in groups
 const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp("([[{])");    ///< match opening brackets: { [
 const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    ///< match closing brackets: } ]
 
@@ -147,33 +148,41 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
     if(html.isEmpty()) {
         html = emptyPage();
     } else {
-        // create the table
-        QRegExp term("(" + searchTerm + ")", Qt::CaseInsensitive);  // match the search term
-        QRegExp space_itag(" +(<i>)");
-        int bgClass = 0;    // counter used for alternating background colors
-        QString table = "";
-        
-        foreach(ResultItem item, resultList) {
-            QString text = item.text();
-            // mark search term before escaping, replace with tags afterwards;
-            // use newline as special marker since text is a single line
-            text = text.replace(term, "\n[\\1\n]").toHtmlEscaped();
-            text.replace("\n[", "<span class=\"keyword\">").replace("\n]", "</span>");
+        bool alt_bg = false; // for alternating background colors
+        QString table;
+        // matches & captures the search term:
+        QRegExp term("(" + searchTerm + ")", Qt::CaseInsensitive);
 
-            text.replace("|", "<br>&nbsp;&nbsp;");
-            text.replace(OPEN_BRACKETS, "<i>\\1").replace(space_itag, "&nbsp;\\1");
-            text.replace(CLOSE_BRACKETS, "\\1</i>");
-            if(SPLITTER.indexIn(text) != -1) {
-                QString cellClass = (bgClass % 2) == 0 ? "" : " class=\"alternate\"";
-                QString german = SPLITTER.cap(1).trimmed();
-                QString english = SPLITTER.cap(2).trimmed();
-                
-                table += QString("<tr><td%1>%2</td><td%1>%3</td></tr>").arg(cellClass).arg(german).arg(english);
-                
-                ++bgClass;
-            } else {
-                qCritical() << "Bad line: splitter not found in" << text;
+        // create the table
+        foreach(ResultItem item, resultList) {
+            if (SPLITTER.indexIn(item.text().simplified()) < 0) {
+                qCritical() << "Bad line: splitter not found in" << item.text();
+                continue;
             }
+            QStringList left = SPLITTER.cap(1).split(" | ");
+            QStringList right = SPLITTER.cap(2).split(" | ");
+
+            formatFragments(left, term);
+            formatFragments(right, term);
+
+            if (left.length() != right.length()) {
+                // lines don't match up so collapse entry to a single table row
+                left = QStringList("<div>" + left.join(QLatin1String(
+                          "</div><div class=\"continued\">")) + "</div>");
+                right = QStringList("<div>" + right.join(QLatin1String(
+                          "</div><div class=\"continued\">")) + "</div>");
+            }
+
+            table.append(alt_bg ? QLatin1String("<tbody class=\"alternate\">")
+                                : QLatin1String("<tbody>"));
+            for (int i = 0; i < left.length(); ++i) {
+                table.append(QStringLiteral("<tr%1><td>%2</td><td>%3</td></tr>")
+                             .arg(i > 0 ? QStringLiteral(" class=\"continued\"")
+                                  : QString(), left.at(i), right.at(i)));
+            }
+            table.append(QLatin1String("</tbody>\n"));
+
+            alt_bg = !alt_bg;
         }
         
         // replace placeholders
@@ -217,6 +226,29 @@ QString HtmlGenerator::noMatchesPage() const {
 
 QUrl HtmlGenerator::styleSheetUrl() const {
     return QUrl(CSS_FILE_URL);
+}
+
+/**
+ * Convert all strings in @p list to HTML and mark all occurrences of
+ * @p searchTerm and phrases in brackets with appropriate tags.
+ */
+void HtmlGenerator::formatFragments(QStringList &list,
+                                    const QRegExp &searchTerm)
+{
+    // mark search term before escaping, replace with tags afterwards;
+    // use newline as special marker since text is a single line
+    list.replaceInStrings(searchTerm, QStringLiteral("\n[\\1\n]"));
+
+    for (QString &s : list) s = s.toHtmlEscaped();
+
+    list.replaceInStrings(QStringLiteral("\n["),
+                          QStringLiteral("<span class=\"keyword\">"))
+        .replaceInStrings(QStringLiteral("\n]"),
+                          QStringLiteral("</span>"))
+        // FIXME: ensure open/close tags match and are properly nested
+        .replaceInStrings(OPEN_BRACKETS, QStringLiteral("<i>\\1"))
+        .replaceInStrings(QStringLiteral(" <i>"), QStringLiteral("&nbsp;<i>"))
+        .replaceInStrings(CLOSE_BRACKETS, QStringLiteral("\\1</i>"));
 }
 
 /**
