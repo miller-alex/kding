@@ -35,7 +35,7 @@ public:
     ~SystemTrayIcon();
 
 signals:
-    void translateClipboardRequested();
+    void translateClipboardRequested(bool &flag);
 
 private slots:
     void activate(const QPoint &pos);

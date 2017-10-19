@@ -66,17 +66,21 @@ void SystemTrayIcon::createMenu(MainWindow* parent) {
 
 void SystemTrayIcon::activate(const QPoint &pos) {
     if (m_translateOnLeftClick) {
-        emit translateClipboardRequested();
-    } else {
-        KStatusNotifierItem::activate(pos);
+        bool flag = false;
+        emit translateClipboardRequested(flag);
+        if (flag) {
+            return;
+        }
     }
+    KStatusNotifierItem::activate(pos);
 }
 
 void SystemTrayIcon::activateSecondary(const QPoint &pos) {
     if (m_translateOnLeftClick) {
         KStatusNotifierItem::activate(pos);
     } else {
-        emit translateClipboardRequested();
+        bool always = true;
+        emit translateClipboardRequested(always);
     }
 }
 

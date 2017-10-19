@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -132,6 +133,19 @@ void TranslationWidget::anotherSearchRunning() {
 }
 
 /**
+ * Checks whether @p phrase is a valid search term and its results
+ * aren't already displayed.
+ */
+bool TranslationWidget::checkSearchTerm(QString phrase) const {
+    phrase = phrase.trimmed();
+
+    if (phrase.isEmpty() || (m_searchEngine->searchTerm() == phrase)) {
+        return false;
+    }
+    return true;
+}
+
+/**
  * This method starts a search for the phrase passed in @p phrase.
  *
  * @param phrase the phrase to search for
@@ -139,7 +153,7 @@ void TranslationWidget::anotherSearchRunning() {
 void TranslationWidget::translate(QString phrase) {
     phrase = phrase.trimmed();
     
-    if(phrase.isEmpty()) {
+    if (phrase.isEmpty()) {
         return;
     }
     
@@ -189,6 +203,7 @@ void TranslationWidget::focusInputWidget() {
 
 void TranslationWidget::clearDisplay() {
     historyInput->clearEditText();
+    m_searchEngine->cancelSearch();
     displayHtml(m_htmlGenerator->emptyPage());
 }
 

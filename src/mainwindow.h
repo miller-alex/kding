@@ -37,6 +37,7 @@ public:
     ~MainWindow();
 
 public slots:
+    void translateClipboard(bool &flag);
     void translateClipboard();
     void translateWord();
     void translate(QString phrase);

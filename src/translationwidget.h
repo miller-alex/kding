@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -43,7 +44,8 @@ public:
     void clearDisplay();
     void focusInputWidget();
     QString dictionaryVersion() const;
-    
+    bool checkSearchTerm(QString phrase) const;
+
 public slots:
     void translate(QString phrase);
     

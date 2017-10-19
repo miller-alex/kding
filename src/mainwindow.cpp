@@ -112,8 +112,8 @@ void MainWindow::initGui() {
 
     // create system tray icon
     m_systemTrayIcon = new SystemTrayIcon(this);
-    connect(m_systemTrayIcon, SIGNAL(translateClipboardRequested()),
-	    this, SLOT(translateClipboard()));
+    connect(m_systemTrayIcon, SIGNAL(translateClipboardRequested(bool&)),
+	    this, SLOT(translateClipboard(bool&)));
     // use a QueuedConnection because KStatusNotifierItem moves the window, too
     connect(m_systemTrayIcon, SIGNAL(activateRequested(bool, const QPoint&)),
             this, SLOT(iconActivated(bool)), Qt::QueuedConnection);
@@ -181,12 +181,25 @@ void MainWindow::showRaised() {
     raise();
 }
 
-void MainWindow::translateClipboard() {
+/**
+ * Translates the clipboard contents if it differs from the last search
+ * phrase or if @p flag is set when the function is called.
+ * The @p flag will be set on return if a new search was started.
+ */
+void MainWindow::translateClipboard(bool &flag) {
     QClipboard::Mode mode = QApplication::clipboard()->supportsSelection() ?
         QClipboard::Selection : QClipboard::Clipboard;
     QString phrase = QApplication::clipboard()->text(mode);
 
-    translate(phrase);
+    if (flag || m_translationWidget->checkSearchTerm(phrase)) {
+        flag = true;
+        translate(phrase);
+    }
+}
+
+void MainWindow::translateClipboard() {
+    bool always = true;
+    translateClipboard(always);
 }
 
 void MainWindow::translateWord() {
@@ -197,6 +210,7 @@ void MainWindow::translateWord() {
 
 void MainWindow::translate(QString phrase) {
     m_translationWidget->clearDisplay();
+    statusBar()->clearMessage();
     showRaised();
     m_translationWidget->translate(phrase);
 }
