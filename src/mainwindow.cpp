@@ -117,6 +117,8 @@ void MainWindow::initGui() {
     // use a QueuedConnection because KStatusNotifierItem moves the window, too
     connect(m_systemTrayIcon, SIGNAL(activateRequested(bool, const QPoint&)),
             this, SLOT(iconActivated(bool)), Qt::QueuedConnection);
+    connect(m_systemTrayIcon, SIGNAL(scrollRequested(int, Qt::Orientation)),
+            m_translationWidget, SLOT(scrollResults(int, Qt::Orientation)));
 
     if (Settings::self()->windowPlacement() !=
         Settings::EnumWindowPlacement::NoSpecialHandling) {

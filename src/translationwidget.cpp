@@ -166,6 +166,23 @@ void TranslationWidget::translate(QString phrase) {
 }
 
 /**
+ * Scrolls the results in the @c KHTMLPart by @p delta units verically
+ * or horzontally depending on @p orientation. Call this slot to handle
+ * input events which request scrolling.
+ */
+void TranslationWidget::scrollResults(int delta, Qt::Orientation orientation) {
+    if (!isVisible() || window()->isMinimized()) {
+        return;
+    }
+
+    if (orientation == Qt::Horizontal) {
+        m_htmlPart->view()->scrollBy(-delta, 0);
+    } else {
+        m_htmlPart->view()->scrollBy(0, -delta);
+    }
+}
+
+/**
  * This method fetches the @c #ResultList from the @c SearchEngine and employs
  * the @c HtmlGenerator to create a HTML representation of it, suitable to be
  * displayed in the @c KHTMLPart.

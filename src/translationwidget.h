@@ -48,6 +48,7 @@ public:
 
 public slots:
     void translate(QString phrase);
+    void scrollResults(int delta, Qt::Orientation orientation);
     
 signals:
     void statusMessage(QString message);
