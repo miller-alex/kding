@@ -11,6 +11,7 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS
     Widgets
 )
 find_package(KF5 REQUIRED COMPONENTS
+    Completion
     Config
     ConfigWidgets
     CoreAddons

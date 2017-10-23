@@ -26,6 +26,7 @@ target_link_libraries(kding
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
+    KF5::Completion
     KF5::ConfigCore
     KF5::ConfigGui
     KF5::ConfigWidgets
