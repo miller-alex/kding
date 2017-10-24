@@ -35,8 +35,6 @@ TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searc
     initGui();
     
     m_searchEngine = new SearchEngine(this);
-    connect(m_searchEngine, SIGNAL(searchStarted()), busyAnimation, SLOT(start()));
-    connect(m_searchEngine, SIGNAL(searchFinished()), busyAnimation, SLOT(stop()));
     connect(m_searchEngine, SIGNAL(searchFinished()), this, SLOT(processSearchResults()));
     connect(m_searchEngine, SIGNAL(searchRunning()), this, SLOT(anotherSearchRunning()));
     connect(m_searchEngine, SIGNAL(statusMessage(QString)), this, SIGNAL(statusMessage(QString)));
@@ -64,10 +62,15 @@ void TranslationWidget::initGui() {
     connect(buttonIcon, SIGNAL(clicked()),
             parentWidget(), SLOT(translateClipboard()));
 
-    const int baIconSize = qMin(busyAnimation->iconSize().width(), busyAnimation->iconSize().height());
-    busyAnimation->setAnimationPath(KIconLoader::global()->iconPath("process-working", -baIconSize));
-    
-    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
+    //m_buttonTranslateIcon = QIcon::fromTheme("go-jump-locationbar");
+    m_buttonTranslateIcon = buttonTranslate->icon();
+    const QSize iconSize = buttonTranslate->iconSize();
+    // load animation displayed when busy
+    buttonTranslate->setAnimationPath(
+            KIconLoader::global()->iconPath("process-working",
+                -qMin(iconSize.width(), iconSize.height())));
+    // restore default icon
+    buttonTranslate->setIcon(m_buttonTranslateIcon);
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
     
     // set up the HTML view
@@ -118,16 +121,15 @@ void TranslationWidget::startSearch() {
  */
 void TranslationWidget::stopSearch() {
     m_searchEngine->cancelSearch();
-    
+    emit statusMessage(i18n("Search cancelled."));
+
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
-    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
-    
-    busyAnimation->stop();
-    
+
+    buttonTranslate->stop();
+    buttonTranslate->setIcon(m_buttonTranslateIcon);
+
     focusInputWidget();
-    
-    emit statusMessage(i18n("Search cancelled."));
 }
 
 void TranslationWidget::anotherSearchRunning() {
@@ -161,8 +163,8 @@ void TranslationWidget::translate(QString phrase) {
     
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
-    buttonTranslate->setIcon(QIcon::fromTheme("process-stop"));
-    
+    buttonTranslate->start();
+
     historyInput->setEditText(phrase);
     m_searchEngine->search(phrase);
 }
@@ -192,8 +194,9 @@ void TranslationWidget::scrollResults(int delta, Qt::Orientation orientation) {
 void TranslationWidget::processSearchResults() {
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
-    buttonTranslate->setIcon(QIcon::fromTheme("go-jump-locationbar"));
-    
+    buttonTranslate->stop();
+    buttonTranslate->setIcon(m_buttonTranslateIcon);
+
     ResultList resultList = m_searchEngine->results();
     QString searchTerm = m_searchEngine->searchTerm();
     

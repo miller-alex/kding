@@ -20,8 +20,9 @@
 #define TRANSLATIONWIDGET_H
 
 #include "ui_translationwidgetbase.h"
-#include <QWidget>
+#include <QIcon>
 #include <QString>
+#include <QWidget>
 
 class SearchEngine;
 class HtmlGenerator;
@@ -69,6 +70,7 @@ private:
     KHTMLPart* m_htmlPart;
     SearchEngine* m_searchEngine;
     HtmlGenerator* m_htmlGenerator;
+    QIcon m_buttonTranslateIcon;
 };
 
 #endif

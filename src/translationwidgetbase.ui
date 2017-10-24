@@ -54,38 +54,21 @@
        </item>
       </layout>
      </item>
-     <item>
-      <layout class="QVBoxLayout" name="layoutButtons">
-       <item>
-        <widget class="KAnimatedButton" name="busyAnimation">
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="buttonTranslate">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <item alignment="Qt::AlignBottom">
+      <widget class="KAnimatedButton" name="buttonTranslate">
+       <property name="toolTip">
+        <string>Start/cancel search</string>
+       </property>
+       <property name="icon">
+        <iconset theme="go-jump"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
