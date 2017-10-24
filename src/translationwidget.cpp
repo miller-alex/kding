@@ -59,9 +59,11 @@ void TranslationWidget::initGui() {
     historyInput->setHistoryItems(Settings::recent(), true);    // set history and completion list
     connect(historyInput, SIGNAL(cleared()), this, SLOT(saveSettings()));
     connect(historyInput, SIGNAL(returnPressed()), this, SLOT(startSearch()));
-    
-    labelIcon->setPixmap(QIcon::fromTheme("kding").pixmap(48,48));
-    
+
+    //buttonIcon->setIcon(QIcon::fromTheme("kding"));
+    connect(buttonIcon, SIGNAL(clicked()),
+            parentWidget(), SLOT(translateClipboard()));
+
     const int baIconSize = qMin(busyAnimation->iconSize().width(), busyAnimation->iconSize().height());
     busyAnimation->setAnimationPath(KIconLoader::global()->iconPath("process-working", -baIconSize));
     

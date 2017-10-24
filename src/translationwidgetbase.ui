@@ -6,28 +6,23 @@
    <item>
     <layout class="QHBoxLayout" name="layoutInfo">
      <item>
-      <widget class="QLabel" name="labelIcon">
-       <property name="minimumSize">
+      <widget class="QToolButton" name="buttonIcon">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string>Translate clipboard content</string>
+       </property>
+       <property name="icon">
+        <iconset theme="kding"/>
+       </property>
+       <property name="iconSize">
         <size>
          <width>48</width>
          <height>48</height>
         </size>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>48</width>
-         <height>48</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <!--
-       <property name="pixmap">
-        <pixmap>../resources/icons/48-apps-kding.png</pixmap>
-       </property>
-       -->
-       <property name="scaledContents">
+       <property name="autoRaise">
         <bool>true</bool>
        </property>
       </widget>
