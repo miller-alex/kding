@@ -251,7 +251,7 @@ msgstr ""
 #. i18n: file: src/translationwidgetbase.ui:47
 #. i18n: ectx: property (text), widget (QLabel, labelText)
 #: build/src/ui_translationwidgetbase.h:123 rc.cpp:128 rc.cpp:128
-msgid "Enter the word or phrase you want to translate"
+msgid "Enter the word or phrase you want to transl&ate:"
 msgstr ""
 
 #. i18n: file: src/translationwidgetbase.ui:87

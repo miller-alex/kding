@@ -277,8 +277,8 @@ msgstr "Formulář"
 #. i18n: file: src/translationwidgetbase.ui:47
 #. i18n: ectx: property (text), widget (QLabel, labelText)
 #: build/src/ui_translationwidgetbase.h:123 rc.cpp:128
-msgid "Enter the word or phrase you want to translate"
-msgstr "Zadejte slovo nebo výraz, který chcete přeložit"
+msgid "Enter the word or phrase you want to transl&ate:"
+msgstr "&Zadejte slovo nebo výraz, který chcete přeložit:"
 
 #. i18n: file: src/translationwidgetbase.ui:87
 #. i18n: ectx: property (text), widget (QLabel, labelSearch)

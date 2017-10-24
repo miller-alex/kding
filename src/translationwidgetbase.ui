@@ -2,17 +2,6 @@
 <ui version="4.0">
  <class>TranslationWidgetBase</class>
  <widget class="QWidget" name="TranslationWidgetBase">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>611</width>
-    <height>95</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QVBoxLayout" name="layoutMain">
    <item>
     <layout class="QHBoxLayout" name="layoutInfo">
@@ -33,86 +22,75 @@
        <property name="text">
         <string/>
        </property>
+       <!--
        <property name="pixmap">
-        <pixmap>../icons/48-apps-kding.png</pixmap>
+        <pixmap>../resources/icons/48-apps-kding.png</pixmap>
        </property>
+       -->
        <property name="scaledContents">
         <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelText">
-       <property name="text">
-        <string>Enter the word or phrase you want to translate</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="layoutInput">
+       <item>
+        <widget class="QLabel" name="labelSearch">
+         <property name="text">
+          <string>Enter the word or phrase you want to transl&amp;ate:</string>
+         </property>
+         <property name="buddy">
+          <cstring>historyInput</cstring>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignBottom|Qt::AlignLeft</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KHistoryComboBox" name="historyInput">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="KAnimatedButton" name="busyAnimation">
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="layoutInput">
-     <item>
-      <widget class="QLabel" name="labelSearch">
-       <property name="text">
-        <string>Se&amp;arch word:</string>
-       </property>
-       <property name="buddy">
-        <cstring>historyInput</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KHistoryComboBox" name="historyInput">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="buttonTranslate">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="layoutButtons">
+       <item>
+        <widget class="KAnimatedButton" name="busyAnimation">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="buttonTranslate">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -123,6 +101,11 @@
    <class>KAnimatedButton</class>
    <extends>QToolButton</extends>
    <header>kanimatedbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KHistoryComboBox</class>
