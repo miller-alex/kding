@@ -41,7 +41,8 @@ SystemTrayIcon::~SystemTrayIcon() {
 void SystemTrayIcon::initGui() {
     setIconByName("kding");
     setStatus(KStatusNotifierItem::Active);
-    setToolTipTitle(i18n("KDing - Translation tool"));
+    setToolTipTitle(i18n("KDing"));
+    setToolTipSubTitle(i18n("Translation tool"));
 
     // our base class already calls activate(), so we only have to
     // connect to secondaryActivateRequest()
