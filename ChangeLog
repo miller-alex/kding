@@ -1,3 +1,17 @@
+2017-11-24  Alexander Miller  <alex.miller@gmx.de>
+
+        * release v0.7.1
+        * make main window UI more compact (removing redundant label and
+          separate animation)
+        * clicking the big icon in the main window translates selection
+        * align corresponding rows of multi-line dictionary entries
+        * second click on status icon closes window unless selection has changed
+        * mouse wheel on status icon scrolls results
+        * stop installing dictionary's readme into datadir
+        * support startup notification
+        * improve po template generation
+        * update translations
+
 2017-10-13  Alexander Miller  <alex.miller@gmx.de>
 
         * release v0.7
