@@ -65,7 +65,7 @@
 
             <para>
                 &kding; ist ein KDE-Port von
-                <ulink url="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
+                <ulink url="https://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
                 einem Programm zur Suche in W&ouml;rterb&uuml;chern. Es liegt im
                 Systembereich der Kontrolleiste und kann bei Aktivierung den
                 aktuellen Inhalt der Zwischenablage &uuml;bersetzen. Der

@@ -193,7 +193,7 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
 /**
  * Sorts the results by priority.
  * The algorithm to determine the priority of an item is taken from
- * <a href="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>.
+ * <a href="https://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>.
  *
  * @param resultList a pointer to the @c #ResultList to sort
  */

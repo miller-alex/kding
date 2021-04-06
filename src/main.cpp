@@ -4,13 +4,13 @@
  * @section desc Description
  *
  * KDing is a KDE port of
- * <a href="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>, a dictionary
+ * <a href="https://www-user.tu-chemnitz.de/~fri/ding/">Ding</a>, a dictionary
  * lookup program. It sits in KDE's system tray and can translate the current
  * clipboard content. Users can also enter single words or phrases for
  * translation. It is intended to be used for translating between German and
  * English, but can be used with every language for which a word list is
  * available for
- * <a href="http://www-user.tu-chemnitz.de/~fri/ding/#other">Ding</a>.
+ * <a href="https://www-user.tu-chemnitz.de/~fri/ding/#other">Ding</a>.
  *
  * @section license License
  *
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
     about.addCredit(i18n("Frank Richter"),
                     i18n("Author of Ding, for the inspiration for KDing "
                          "and the dictionary"),
-                    0, "http://www-user.tu-chemnitz.de/~fri/ding/");
+                    0, "https://www-user.tu-chemnitz.de/~fri/ding/");
     about.addCredit(i18n("Alexander Stein"), i18n("Initial port to KDE4"),
                     "alexander.stein@informatik.tu-chemnitz.de");
 

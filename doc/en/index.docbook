@@ -63,7 +63,7 @@
 
             <para>
                 &kding; is a KDE port of
-                <ulink url="http://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
+                <ulink url="https://www-user.tu-chemnitz.de/~fri/ding/">Ding</ulink>,
                 a dictionary lookup program. It is a simple program sitting in
                 KDE's system tray that can translate the current clipboard
                 content. The user can also enter a single word or a phrase for
