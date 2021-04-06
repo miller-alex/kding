@@ -15,7 +15,7 @@
  * @section license License
  *
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
- * Copyright (c) 2017 Alexander Miller <alex.miller@gmx.de>
+ * Copyright (c) 2017, 2021 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -61,13 +61,13 @@ int main(int argc, char* argv[]) {
     KLocalizedString::setApplicationDomain("kding");
 
     // add About dialog data
-    KAboutData about("kding", i18n("KDing"), "0.7.2-dev");
+    KAboutData about("kding", i18n("KDing"), "0.7.2");
     about.setShortDescription(i18n("KDE port of Ding, "
                                    "the DIctionary Nice Grep"));
     about.setLicense(KAboutLicense::GPL_V2);
     about.setCopyrightStatement(i18n(
         "(c) 2005-2009, Michael Rex\n"
-        "(c) 2017, Alexander Miller\n"
+        "(c) 2017, 2021, Alexander Miller\n"
         "Dictionary (c) 1995-2020, Frank Richter"));
     about.setHomepage("https://github.com/miller-alex/kding");
     about.setBugAddress("alex.miller@gmx.de");

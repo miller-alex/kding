@@ -1,3 +1,9 @@
+2021-04-06  Alexander Miller  <alex.miller@gmx.de>
+
+        * release v0.7.2
+        * update dictionary to version 1.9 [Frank Richter]
+	* use https for links to tu-chemnitz.de
+
 2017-11-24  Alexander Miller  <alex.miller@gmx.de>
 
         * release v0.7.1
