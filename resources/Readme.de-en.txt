@@ -10,7 +10,7 @@ de-en.txt is used by
   * Some other programs ...
 
 The German-English dictionary file "de-en.txt" has been maintained 
-over the last twenty years. All your comments are welcome. In fact,
+over the last twenty-five years. All your comments are welcome. In fact,
 your questions, comments, corrections, and new words are the source
 where this dictionary evolves from. Keep them going...
 
