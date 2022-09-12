@@ -33,7 +33,7 @@
             <label>What backend to use for dictionary lookups?</label>
             <default>egrep</default>
             <tooltip>This selects the backend to use for dictionary lookups.</tooltip>
-            <whatsthis>This option determines the program that is used to search the dictionary. egrep is a standard tool that should be installed on every system and supports basic searching. agrep is an advanced tool which supports approximate matching and thus enables KDing to find a phrase even when it is misspelled. When using agrep, you can set the number of errors permitted in the "Advanced Options" section.</whatsthis>
+            <whatsthis>This option determines the program that is used to search the dictionary. grep is a standard tool that should be installed on every system and supports basic searching. agrep is an advanced tool which supports approximate matching and thus enables KDing to find a phrase even when it is misspelled. When using agrep, you can set the number of errors permitted in the "Advanced Options" section.</whatsthis>
             <choices>
                 <choice name="egrep"/>
                 <choice name="agrep"/>

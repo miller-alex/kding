@@ -29,7 +29,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Basic search (egrep)</string>
+         <string>Basic search (grep -E)</string>
         </property>
         <attribute name="buttonGroup">
          <string>searchCommandGroup</string>

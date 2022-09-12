@@ -35,7 +35,7 @@ msgstr ""
 
 #. ectx: property (text), widget (QRadioButton, radioEgrep)
 #: src/backendsettingsbase.ui:32
-msgid "Basic search (egrep)"
+msgid "Basic search (grep -E)"
 msgstr ""
 
 #. ectx: property (text), widget (QRadioButton, radioAgrep)
@@ -188,7 +188,7 @@ msgstr ""
 #: src/kding.kcfg:36
 msgid ""
 "This option determines the program that is used to search the dictionary. "
-"egrep is a standard tool that should be installed on every system and "
+"grep is a standard tool that should be installed on every system and "
 "supports basic searching. agrep is an advanced tool which supports "
 "approximate matching and thus enables KDing to find a phrase even when it is "
 "misspelled. When using agrep, you can set the number of errors permitted in "
