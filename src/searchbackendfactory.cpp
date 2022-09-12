@@ -20,14 +20,15 @@
 #include <QProcess>
 #include <QDebug>
 
-const QString SearchBackendFactory::EGREP_CMD = "egrep";
-const QStringList SearchBackendFactory::EGREP_DEFAULT_ARGS = QStringList() \
-    << "-h";    /* do not display filenames */
-
+const QString SearchBackendFactory::EGREP_CMD = "grep";
+const QStringList SearchBackendFactory::EGREP_DEFAULT_ARGS = {
+    "-E",   // egrep variant (extended REs)
+    "-h",   // do not display filenames
+};
 const QString SearchBackendFactory::AGREP_CMD = "agrep";
-const QStringList SearchBackendFactory::AGREP_DEFAULT_ARGS = QStringList() \
-    << "-h";    /* do not display filenames */
-
+const QStringList SearchBackendFactory::AGREP_DEFAULT_ARGS = {
+    "-h",   // do not display filenames
+};
 const QString SearchBackendFactory::CASE_INSENSITIVE_ARG = "-i";
 const QString SearchBackendFactory::WHOLE_WORDS_ARG = "-w";
 const QString SearchBackendFactory::MAXIMUM_ERROR_NUMBER_ARG = "-%1";
@@ -37,7 +38,6 @@ SearchBackendFactory::SearchBackendFactory(QObject* parent) : QObject(parent) {
 }
 
 SearchBackendFactory::~SearchBackendFactory() {
-    
 }
 
 /**

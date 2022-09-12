@@ -36,8 +36,8 @@ msgstr "Příkaz pro hledání"
 
 #. ectx: property (text), widget (QRadioButton, radioEgrep)
 #: src/backendsettingsbase.ui:32
-msgid "Basic search (egrep)"
-msgstr "Jednoduché hledání (egrep)"
+msgid "Basic search (grep -E)"
+msgstr "Jednoduché hledání (grep -E)"
 
 #. ectx: property (text), widget (QRadioButton, radioAgrep)
 #: src/backendsettingsbase.ui:48
@@ -200,13 +200,13 @@ msgstr "Tímto se vybere program, který se použije pro hledání ve slovníku"
 #: src/kding.kcfg:36
 msgid ""
 "This option determines the program that is used to search the dictionary. "
-"egrep is a standard tool that should be installed on every system and "
+"grep is a standard tool that should be installed on every system and "
 "supports basic searching. agrep is an advanced tool which supports "
 "approximate matching and thus enables KDing to find a phrase even when it is "
 "misspelled. When using agrep, you can set the number of errors permitted in "
 "the \"Advanced Options\" section."
 msgstr ""
-"Touto volbou se určí program, se kterým se bude slovník prohledávat. Egrep "
+"Touto volbou se určí program, se kterým se bude slovník prohledávat. Grep "
 "je obvyklým nástrojem, který by měl být instalován na každém systémua nabízí "
 "základní vyhledávací funkce. Agrep je pokročilým nástrojem, který umožňuje "
 "vyhledávání podobných slov. Tímto je pro KDing možné najít výraz i tehdy, "
