@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
     about.setCopyrightStatement(i18n(
         "(c) 2005-2009, Michael Rex\n"
         "(c) 2017, 2021, Alexander Miller\n"
-        "Dictionary (c) 1995-2023, Frank Richter"));
+        "Dictionary (c) 1995-2024, Frank Richter"));
     about.setHomepage("https://github.com/miller-alex/kding");
     about.setBugAddress("alex.miller@gmx.de");
 
