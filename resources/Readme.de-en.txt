@@ -1,6 +1,6 @@
 de-en.txt is a file with German - English translations.
 
- Copyright (c) Frank Richter <frank.richter@hrz.tu-chemnitz.de> 1995-2023
+ Copyright (c) Frank Richter <frank.richter@hrz.tu-chemnitz.de> 1995-2024
  GNU General Public License version 2 or later, see COPYING for details
  It comes with ABSOLUTELY NO WARRANTY.
 
