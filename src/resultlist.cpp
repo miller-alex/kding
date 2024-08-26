@@ -72,4 +72,4 @@ bool ResultItem::operator<(const ResultItem& other) const {
     return result;
 }
 
-#include "resultlist.moc"
+#include "moc_resultlist.cpp"

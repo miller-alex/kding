@@ -31,4 +31,4 @@ BackendSettings::~BackendSettings() {
     
 }
 
-#include "backendsettings.moc"
+#include "moc_backendsettings.cpp"

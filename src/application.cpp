@@ -67,4 +67,4 @@ void Application::newInstance(const QStringList &arguments, bool first) {
     }
 }
 
-#include "application.moc"
+#include "moc_application.cpp"

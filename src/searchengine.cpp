@@ -355,4 +355,4 @@ void SearchEngine::updateSearchBackend() const {
     m_backendFactory->generate();
 }
 
-#include "searchengine.moc"
+#include "moc_searchengine.cpp"

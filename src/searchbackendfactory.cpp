@@ -140,4 +140,4 @@ QStringList SearchBackendFactory::argumentList() const {
     return m_argumentList;
 }
 
-#include "searchbackendfactory.moc"
+#include "moc_searchbackendfactory.cpp"

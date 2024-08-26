@@ -25,4 +25,4 @@ GeneralSettings::~GeneralSettings() {
     
 }
 
-#include "generalsettings.moc"
+#include "moc_generalsettings.cpp"

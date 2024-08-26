@@ -274,4 +274,4 @@ QString HtmlGenerator::loadFile(const QString filename) const {
     return contents;
 }
 
-#include "htmlgenerator.moc"
+#include "moc_htmlgenerator.cpp"

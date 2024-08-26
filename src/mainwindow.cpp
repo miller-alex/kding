@@ -281,4 +281,4 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     }
 }
 
-#include "mainwindow.moc"
+#include "moc_mainwindow.cpp"

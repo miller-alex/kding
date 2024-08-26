@@ -91,4 +91,4 @@ void SystemTrayIcon::updateSettings() {
     m_translateOnLeftClick = Settings::self()->translateOnLeftClick();
 }
 
-#include "systemtrayicon.moc"
+#include "moc_systemtrayicon.cpp"

@@ -249,4 +249,4 @@ void TranslationWidget::updateSearchBackend() {
     m_searchEngine->updateSearchBackend();
 }
 
-#include "translationwidget.moc"
+#include "moc_translationwidget.cpp"
