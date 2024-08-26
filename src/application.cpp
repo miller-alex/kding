@@ -55,7 +55,7 @@ void Application::newInstance(const QStringList &arguments, bool first) {
     if (first) {
         KStartupInfo::appStarted();
     } else {
-        KStartupInfo::setNewStartupId(m_mainWindow, KStartupInfo::startupId());
+        KStartupInfo::setNewStartupId(m_mainWindow->windowHandle(), KStartupInfo::startupId());
     }
 
     // no need for a command line parser here
