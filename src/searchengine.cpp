@@ -28,7 +28,7 @@
 #include <QRegExp>
 #include <QStandardPaths>
 #include <QMutableListIterator>
-#include <QtAlgorithms>
+#include <algorithm>
 
 const QRegExp SearchEngine::MULTI_LINE = QRegExp("\\|");    ///< RegExp to match line break markers
 const QRegExp SearchEngine::ABBREVIATION = QRegExp(" : ");  ///< RegExp to match abbreviation markers
@@ -247,7 +247,7 @@ void SearchEngine::sortResultsByPriority(ResultList* resultList) const {
         iterator.setValue(item);
     }
     
-    qStableSort(*resultList);
+    std::stable_sort(resultList->begin(), resultList->end());
 }
 
 QString SearchEngine::searchTerm() const {
