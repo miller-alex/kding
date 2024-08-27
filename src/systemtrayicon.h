@@ -38,7 +38,7 @@ signals:
     void translateClipboardRequested(bool &flag);
 
 private slots:
-    void activate(const QPoint &pos);
+    void activate(const QPoint &pos) override;
     void activateSecondary(const QPoint &pos);
     void updateSettings();
     
