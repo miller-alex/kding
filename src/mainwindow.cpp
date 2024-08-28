@@ -255,7 +255,7 @@ void MainWindow::showShortcuts() {
     globalActions.addAction("kding_translate_clipboard", actionCollection()->action("kding_translate_clipboard"));
     globalActions.addAction("kding_translate_word", actionCollection()->action("kding_translate_word"));
     
-    KShortcutsDialog::configure(&globalActions);
+    KShortcutsDialog::showDialog(&globalActions);
 }
 
 void MainWindow::toggleMenuBar() {
