@@ -3,6 +3,18 @@
  <class>TranslationWidgetBase</class>
  <widget class="QWidget" name="TranslationWidgetBase">
   <layout class="QVBoxLayout" name="layoutMain">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="layoutInfo">
      <item>
@@ -71,6 +83,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="textBrowser"/>
    </item>
   </layout>
  </widget>

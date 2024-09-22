@@ -19,7 +19,6 @@ find_package(KF5 REQUIRED COMPONENTS
     GlobalAccel
     I18n
     IconThemes
-    KHtml
     Notifications
     WidgetsAddons
     WindowSystem

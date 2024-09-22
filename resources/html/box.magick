@@ -1,0 +1,32 @@
+#!/bin/env magick-script
+
+-size 48x48 -depth 8
+canvas:none
+
+-draw 'roundrectangle 7,7 40,40, 4,4'
+( +clone -blur 7x3 )
+( -clone 0 -blur 7x5 )
+-fx (u[2]*(1-u[1]))^0.8
+
+-draw 'fill #c0c0c080 roundrectangle 8,8 39,39, 4,4'
+( canvas:none
+  -draw 'fill none stroke white roundrectangle 8,8 39,39, 4,4'
+  -channel RGB
+  -fx u*(clamp((16-j)/8)*0.1+0.9)*(clamp((40-j)/8)*0.4+0.6)*(clamp((64-i-j)/32)*0.2+0.8)
+  -channel all
+) -composite
+
+# preview:
+#( canvas:teal -clone 0 -composite -write show: +delete )
+
+-crop 16x16 +repage
+#-write box-%d.png
+( +clone -write box-bottom-right.png	+delete ) +delete
+( +clone -write box-bottom-middle.png	+delete ) +delete
+( +clone -write box-bottom-left.png	+delete ) +delete
+( +clone -write box-middle-right.png	+delete ) +delete
+( +clone -write box-center.png		+delete ) +delete
+( +clone -write box-middle-left.png	+delete ) +delete
+( +clone -write box-top-right.png	+delete ) +delete
+( +clone -write box-top-middle.png	+delete ) +delete
+( +clone -write box-top-left.png	+delete ) +delete

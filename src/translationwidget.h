@@ -26,7 +26,6 @@
 
 class SearchEngine;
 class HtmlGenerator;
-class KHTMLPart;
 
 /**
  * This class implements the translation widget.
@@ -67,7 +66,6 @@ private:
     void initGui();
     void displayHtml(QString html);
     
-    KHTMLPart* m_htmlPart;
     SearchEngine* m_searchEngine;
     HtmlGenerator* m_htmlGenerator;
     QIcon m_buttonTranslateIcon;

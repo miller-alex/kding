@@ -1,45 +1,189 @@
-/* General settings */
+/*** General settings ***/
 
 body {
     margin: 0px;
 }
 
+table {
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+/*
 h1 {
     text-align: center;
 }
+*/
 
-/* Result settings */
+
+/*** Result settings ***/
 
 .keyword {
     color: blue;
 }
 
-table {
+.alternate, tbody.alternate > tr {
+    background-color: palette(alternate-base);
+}
+
+.result table {
     width: 100%;
     height: 100%;
-    border-spacing: 0px;
-    border-collapse: collapse;
-    margin-bottom: 1px; /* or else the border may not show */
 }
 
-th {
+.result th {
     color: black;
     background-color: silver;
-    border-bottom: 1px dotted gray;
+    padding: 0px 4px 2px;
 }
 
-tbody {
-    vertical-align: top;
-    border-bottom: 1px dotted silver;
+.result td {
+    border-top: 1px solid /*dotted*/ silver;
+    padding: 0px 4px 1px;
 }
 
-tr.continued > td, div.continued {
+.result thead + tbody td {
+    border-top: none;
+}
+.result tr.continued > td {
+    border-top: 1px dotted palette(alternate-base);
     padding-left: 1em;
+}
+.result .alternate tr.continued > td {
+    border-top: 1px dotted palette(base);
 }
 
 /*
-td.title {
-    vertical-align: middle;
-    border: 0px;
-}
+Use a minimum size footer row with a top border to add a border to the
+table bottom because :last-child isn't supported.
 */
+.result tfoot {
+    font-size: 1px;
+    line-height: 1px;
+}
+.result tfoot > tr > td {
+    border-top: 1px solid silver;
+    padding: 0px;
+}
+
+
+
+/*** Infopage settings ***/
+
+/*
+    Replaces kde_infopage.css for the simplified welcome.html and
+    nomatches.html pages.  See note in welcome.html for more info.
+*/
+
+body.infopage {
+    background-color: #062A4B;
+    background-image: url(body-background.png);
+    color: #111111;
+}
+
+/* Infopage header */
+
+#header {
+    background-image: url(top-middle.png);
+    border-collapse: separate; /* or else background doesn't show */
+    width: 100%;
+    height: 131px;
+}
+
+#headerL {
+    height: 131px;
+    width: 147px;
+    /* background-image: url(top-left-kding.png);
+    -- size isn't honored, insert image in foreground to set cell size */
+    text-align: left;
+    vertical-align: middle;
+}
+
+#headerR {
+    height: 131px;
+    /* width: 430px; */
+    text-align: right;
+    vertical-align: middle;
+}
+
+#title {
+    font-size: xx-large;
+}
+#tagline {
+    font-size: large;
+}
+#title, #tagline {
+    color: #151515;
+    text-align: right;
+    font-weight: bold;
+    /* text-shadow: #FFFFFF 0px 0px 5px; -- unsupported; use gradient instead */
+    padding: 0px 32px;
+    background-color: qradialgradient(cx:0.5 cy:0.5 radius:0.5 fx:0.5 fy:0.55 stop:0 rgba(255,255,255,160) stop:0.33 rgba(255,255,255,127) stop:0.6 rgba(255,255,255,63) stop:0.8 rgba(255,255,255,23) stop:1 rgba(255,255,255,0));
+}
+
+/* Infopage bar */
+
+#barCenter {
+    text-align: center;
+    /*background-color: #F5F5F4;*/
+    color: #B0B0B0;
+    font-weight: bold;
+    font-size: small;
+    /*
+    padding-top: 0.5ex;
+    padding-bottom: 0.5ex;
+    -- padding only supported for table cells; use margin instead
+    */
+    margin: 0.5ex;
+}
+
+/* Infopage main box */
+
+#box {
+    margin: 10px 32px;
+    width: 100%;
+}
+
+#boxT, #boxB {
+    font-size: 1px; /* avoid gaps due to empty cells with still 1em height */
+    height: 16px;
+}
+
+#boxTL, #boxTR, #boxBL, #boxBR {
+    width: 16px;
+    height: 16px;
+    /* background-image: url(box-{top,bottom}-{left,right}.png);
+    -- use fg images in the corners to get correct cell size */
+    background-image: none;
+}
+
+#boxTC {
+    height: 16px;
+    background-image: url(box-top-middle.png);
+    /* stretching background images isn't supported */
+}
+
+#boxL {
+    width: 16px;
+    background-image: url(box-middle-left.png);
+}
+
+#boxCenter {
+    background-image: url(box-center.png);
+    text-align: left;
+}
+
+#boxR {
+    width: 16px;
+    background-image: url(box-middle-right.png);
+}
+
+#boxBC {
+    height: 16px;
+    background-image: url(box-bottom-middle.png);
+}
+
+.error_text {
+    font-weight: bold;
+    text-align: center;
+}

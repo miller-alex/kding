@@ -229,6 +229,17 @@ QUrl HtmlGenerator::styleSheetUrl() const {
 }
 
 /**
+ * Returns the path where resources referenced by HTML pages and style sheets
+ * can reside, e.g. images and CSS files.
+ */
+QStringList HtmlGenerator::resourcePaths() {
+    return QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)
+        .replaceInStrings(QRegExp("$"), "/html")
+        + QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation)
+        .replaceInStrings(QRegExp("$"), "/kf5/infopage");
+}
+
+/**
  * Convert all strings in @p list to HTML and mark all occurrences of
  * @p searchTerm and phrases in brackets with appropriate tags.
  */

@@ -1,60 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <!-- Note:
+        The rich text support in QTextDocument is not adequate to display
+        a KDE infopage (no absolute positioning, limited element sizing
+        support, no streched background images, no text shadow, ...).
+        Moreover the CSS parser chokes on kde_infopage.css and stops parsing
+        in the middle of the file.
+        Therefore, re-create a page with similar structure with simplified
+        graphics, using a table-based design (ugly hack, but it works).
+        The relevant CSS is added to kding.css, so kde_infopage.css isn't
+        used anymore, but the page still uses some of the original images.
+    -->
     <style type="text/css">
-    /*<![CDATA[*/
-        @import "%1"; /* kde_infopage.css */
+        /* @import "%1"; -- kde_infopage.css */
+        @import "kding.css";
         %2 /* maybe @import "kde_infopage_rtl.css"; */
-        @import "%8";
-        body { font-size: %3px; }
-    /*]]>*/
+        /* body { font-size: %3px; } */
     </style>
 
     <title>KDing</title>
 </head>
 
-<body>
-    <div id="header">
-        <div id="headerL"/>
-        <div id="headerR"/>
+<body class="infopage">
+    <!-- the header -->
+    <table id="header" width="100%">
+        <tr>
+            <td id="headerL" width="147"><img src="top-left-kding.png"/></td>
+            <td id="headerR">
+                <!-- nested tables for proper background size -->
+                <table><tr><td id="title">%4<!-- Application name --></td></tr></table>
 
-        <div id="title">
-            %4 <!-- Application name -->
-        </div>
-
-        <div id="tagline">
-            %5 <!-- Catchphrase -->
-        </div>
-    </div>
+                <table><tr><td id="tagline">%5<!-- Catchphrase --></td></tr></table>
+            </td>
+        </tr>
+    </table>
 
     <!-- the bar -->
     <div id="bar">
+        <!--
         <div id="barT"><div id="barTL"/><div id="barTR"/><div id="barTC"/></div>
         <div id="barL">
         <div id="barR">
+        -->
             <div id="barCenter" class="bar_text">
                 %6 <!-- Short description -->
             </div>
+        <!--
         </div>
         </div>
         <div id="barB"><div id="barBL"/><div id="barBR"/><div id="barBC"/></div>
+        -->
     </div>
 
     <!-- the main text box -->
-    <div id="box">
-        <div id="boxT"><div id="boxTL"/><div id="boxTR"/><div id="boxTC"/></div>
-        <div id="boxL">
-        <div id="boxR">
-            <div id="boxCenter">
-                %7 <!--Description -->
-            </div>
-        </div>
-        </div>
-        <div id="boxB"><div id="boxBL"/><div id="boxBR"/><div id="boxBC"/></div>
-    </div>
-
+    <table id="box" width="100%">
+        <tr id="boxT">
+            <td id="boxTL" width="16"><img src="box-top-left.png"></td>
+            <td id="boxTC"/>
+            <td id="boxTR" width="16"><img src="box-top-right.png"></td>
+        </tr><tr>
+            <td id="boxL"/>
+            <td id="boxCenter"><div class="main_text">
+                %7 <!-- Description -->
+            </div></td>
+            <td id="boxR"/>
+        </tr><tr id="boxB">
+            <td id="boxBL"><img src="box-bottom-left.png"></td>
+            <td id="boxBC"/>
+            <td id="boxBR"><img src="box-bottom-right.png"></td>
+        </tr>
+    </table>
+    <!--
     <div id="footer"><div id="footerL"/><div id="footerR"/></div>
+    -->
 </body>
 </html>

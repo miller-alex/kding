@@ -21,14 +21,15 @@
 #include "htmlgenerator.h"
 #include "settings.h"
 #include <KAnimatedButton>
-#include <KIconLoader>
-#include <KHTMLPart>
-#include <KHTMLView>
 #include <QFontDatabase>
 #include <QIcon>
+#include <KIconLoader>
+#include <QLineEdit>
+#include <QRegExp>
+#include <QScrollBar>
 #include <QSize>
 #include <QString>
-#include <QLineEdit>
+#include <QTextEdit>
 
 TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searchEngine(0), m_htmlGenerator(0) {
     setupUi(this);
@@ -41,9 +42,15 @@ TranslationWidget::TranslationWidget(QWidget* parent) : QWidget(parent), m_searc
     
     // calculate pixel size from point size
     int pointSize = QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
-    int pixelSize = (pointSize * m_htmlPart->view()->logicalDpiY() + 36) / 72;
+    int pixelSize = (pointSize * textBrowser->logicalDpiY() + 36) / 72;
     m_htmlGenerator = new HtmlGenerator(pixelSize, this);
     
+    // set resource search paths, needed to find images/CSS w/ relative URIs
+    textBrowser->setSearchPaths(m_htmlGenerator->resourcePaths());
+
+    // leave full control over margins to style sheet, no extra border
+    textBrowser->document()->setDocumentMargin(0);
+
     // display the initial "Welcome" page
     displayHtml(m_htmlGenerator->welcomePage());
 }
@@ -73,32 +80,18 @@ void TranslationWidget::initGui() {
     buttonTranslate->setIcon(m_buttonTranslateIcon);
     connect(buttonTranslate, SIGNAL(clicked()), this, SLOT(startSearch()));
     
-    // set up the HTML view
-    m_htmlPart = new KHTMLPart(this);
-    layoutMain->addWidget(m_htmlPart->view());
-    m_htmlPart->setJScriptEnabled(false);
-    m_htmlPart->setJavaEnabled(false);
-    m_htmlPart->setMetaRefreshEnabled(false);
-    m_htmlPart->setPluginsEnabled(false);
-    
     focusInputWidget();
 }
 
 /**
- * Display the given HTML page in the @c KHTMLPart.
+ * Display the given HTML page in the @c QTextBrowser.
  *
  * @param html HTML code to display
  *
  * @see HtmlGenerator
  */
 void TranslationWidget::displayHtml(QString html) {
-    m_htmlPart->begin();
-    //m_htmlPart->setUserStyleSheet(m_htmlGenerator->styleSheetUrl());
-    m_htmlPart->write(html);
-    m_htmlPart->end();
-    
-    // scroll to the top of the view
-    m_htmlPart->view()->ensureVisible(0, 0);
+    textBrowser->setHtml(html);
 }
 
 /**
@@ -170,7 +163,7 @@ void TranslationWidget::translate(QString phrase) {
 }
 
 /**
- * Scrolls the results in the @c KHTMLPart by @p delta units verically
+ * Scrolls the HTML page in the @c QTextBrowser by @p delta units verically
  * or horzontally depending on @p orientation. Call this slot to handle
  * input events which request scrolling.
  */
@@ -179,17 +172,19 @@ void TranslationWidget::scrollResults(int delta, Qt::Orientation orientation) {
         return;
     }
 
-    if (orientation == Qt::Horizontal) {
-        m_htmlPart->view()->scrollBy(-delta, 0);
-    } else {
-        m_htmlPart->view()->scrollBy(0, -delta);
-    }
+    QScrollBar *sb;
+    if (orientation == Qt::Horizontal)
+        sb = textBrowser->horizontalScrollBar();
+    else
+        sb = textBrowser->verticalScrollBar();
+
+    sb->setValue(sb->value() - delta);
 }
 
 /**
- * This method fetches the @c #ResultList from the @c SearchEngine and employs
- * the @c HtmlGenerator to create a HTML representation of it, suitable to be
- * displayed in the @c KHTMLPart.
+ * This method fetches the @c #ResultList from the @c SearchEngine,
+ * employs the @c HtmlGenerator to create a HTML representation of it,
+ * and displays it in the @c QTextBrowser.
  */
 void TranslationWidget::processSearchResults() {
     disconnect(buttonTranslate, SIGNAL(clicked()), this, SLOT(stopSearch()));

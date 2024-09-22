@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <style type="text/css">
-    /*<![CDATA[*/
         @import "%1";
+        /*
         body {
             font-family: "%2",helvetica,sans-serif;
             font-size: %3px;
             color: %4;
         }
-        .alternate {
+        .alternate, tbody.alternate > tr {
             background-color: %5;
         }
-    /*]]>*/
+        */
     </style>
 </head>
-<body>
+<body class="result">
     <table>
         <thead><tr><th width="50%">%6</th><th width="50%">%7</th></tr></thead>
         %8
+        <tfoot><tr><td></td><td></td></tr></tfoot><!-- bottom border -->
     </table>
 </body>
 </html>

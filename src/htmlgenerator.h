@@ -28,7 +28,7 @@
 /**
  * This class implements the HTML Generator.
  * The HTML Generator is responsible for creating the HTML code that is
- * displayed in the @c TranslationWidget 's @c KHTMLPart. It uses different
+ * displayed in the @c TranslationWidget 's @c QTextBrowser. It uses different
  * templates to generate the HTML code, depending on what to display.
  *
  * @see welcomePage()
@@ -48,6 +48,7 @@ public:
     QString resultPage(const QString searchTerm, const ResultList resultList) const;
     QString noMatchesPage() const;
     QUrl styleSheetUrl() const;
+    static QStringList resourcePaths();
     
 private:
     static const QRegExp SPLITTER;
