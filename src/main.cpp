@@ -15,7 +15,7 @@
  * @section license License
  *
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
- * Copyright (c) 2017, 2021 Alexander Miller <alex.miller@gmx.de>
+ * Copyright (c) 2017-2024 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
     about.setLicense(KAboutLicense::GPL_V2);
     about.setCopyrightStatement(i18n(
         "(c) 2005-2009, Michael Rex\n"
-        "(c) 2017, 2021, Alexander Miller\n"
+        "(c) 2017-2024, Alexander Miller\n"
         "Dictionary (c) 1995-2024, Frank Richter"));
     about.setHomepage("https://github.com/miller-alex/kding");
     about.setBugAddress("alex.miller@gmx.de");
