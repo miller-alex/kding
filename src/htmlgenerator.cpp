@@ -250,6 +250,9 @@ void HtmlGenerator::formatFragments(QStringList &list,
     // use newline as special marker since text is a single line
     list.replaceInStrings(searchTerm, QStringLiteral("\n[\\1\n]"));
 
+    // <> becomes left right arrow
+    list.replaceInStrings(QStringLiteral("<>"), QChar(0x2194));
+
     for (QString &s : list) s = s.toHtmlEscaped();
 
     list.replaceInStrings(QStringLiteral("\n["),
