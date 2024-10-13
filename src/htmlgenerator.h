@@ -51,19 +51,8 @@ public:
     static QStringList resourcePaths();
     
 private:
-    static const QRegExp SPLITTER;
-    static const QRegExp OPEN_BRACKETS;
-    static const QRegExp CLOSE_BRACKETS;
-
     static void formatFragments(QStringList &list, const QRegExp &SearchTerm);
 
-    const QString CSS_FILE_URL;
-    const QString WELCOME_FILE;
-    const QString RESULT_FILE;
-    const QString NO_MATCHES_FILE;
-    
-    QString loadFile(const QString filename) const;
-    
     int m_fontSize;
     QString m_fontFamily;
     QString m_textColor;

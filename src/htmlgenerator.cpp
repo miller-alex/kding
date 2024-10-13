@@ -31,16 +31,16 @@
 #include <QPalette>
 #include <QBrush>
 
-const QRegExp HtmlGenerator::SPLITTER = QRegExp("(.*) :: (.*)");    ///< capture left and right side of a line (the German and the English part) in groups
-const QRegExp HtmlGenerator::OPEN_BRACKETS = QRegExp("([[{])");    ///< match opening brackets: { [
-const QRegExp HtmlGenerator::CLOSE_BRACKETS = QRegExp("([]}])");    ///< match closing brackets: } ]
-
 static inline QString locateAppData(const QString &fileName) {
     return QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
 }
 
 static inline QString locateGenericData(const QString &fileName) {
     return QStandardPaths::locate(QStandardPaths::GenericDataLocation, fileName);
+}
+
+static inline QString locatePage(const QString &fileName) {
+    return locateAppData(QStringLiteral("html/") + fileName);
 }
 
 static inline QString fileUrl(const QString &fileName) {
@@ -56,6 +56,41 @@ static inline QString infopageUrl(const QString &fileName) {
                                      + fileName));
 }
 
+static QString simplePage(const QString &body) {
+    return QStringLiteral("<html><body>")
+         + body
+         + QStringLiteral("</body></html>");
+}
+
+/**
+ * This function reads a file in and returns its contents.
+ *
+ * @param filename the file to read
+ *
+ * @return content of the file to read, or an empty string in case an error
+ *         occurred while trying to read the file
+ */
+static QString loadFile(const QString &filename) {
+    QFile file(filename);
+
+    if (!file.open(QFile::ReadOnly)) {
+        qCritical() << "Failed to open" << filename;
+        return QString();
+    }
+
+    QTextStream stream(&file);
+    return stream.readAll();
+}
+
+static QString loadPage(const QString &filename, const QString &fallback) {
+    QString html = loadFile(locatePage(filename));
+
+    if (html.isNull())
+        return simplePage(fallback);
+
+    return html;
+}
+
 /**
  * This creates a new instance of @c HtmlGenerator.
  * It takes the font size to be used in the HTML code and, optionally, a parent
@@ -66,10 +101,6 @@ static inline QString infopageUrl(const QString &fileName) {
  */
 HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent)
   : QObject(parent),
-    CSS_FILE_URL(appDataUrl("html/kding.css")),
-    WELCOME_FILE(locateAppData("html/welcome.html")),
-    RESULT_FILE(locateAppData("html/result.html")),
-    NO_MATCHES_FILE(locateAppData("html/nomatches.html")),
     m_fontSize(fontSize),
     m_fontFamily(QFontDatabase::systemFont(QFontDatabase::GeneralFont).family())
 {
@@ -85,7 +116,6 @@ HtmlGenerator::HtmlGenerator(int fontSize, QObject* parent)
 }
 
 HtmlGenerator::~HtmlGenerator() {
-    
 }
 
 /**
@@ -95,11 +125,10 @@ HtmlGenerator::~HtmlGenerator() {
  * @return HTML code of the welcome page
  */
 QString HtmlGenerator::welcomePage() const {
-    QString html = loadFile(WELCOME_FILE);
-    
-    if(html.isEmpty()) {
-        html = emptyPage();
-    } else {
+    QString html = loadPage("welcome.html",
+            "<!-- %1 %2 %3 --><h1>%4</h1><h2>%5</h2><h3>%6</h3>%7");
+
+    if (1) {
         SearchEngine searchEngine;
 
         // replace placeholders
@@ -119,7 +148,6 @@ QString HtmlGenerator::welcomePage() const {
         html = html.arg(infocss, rtlcss, fontSize, appTitle, catchPhrase,
                         shortDescription, description, welcomeCss);
     }
-    
     return html;
 }
 
@@ -143,11 +171,13 @@ QString HtmlGenerator::emptyPage() const {
  * @return HTML code of the result page
  */
 QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList resultList) const {
-    QString html = loadFile(RESULT_FILE);
+    // captures left and right side of a line (the German and the English part) in groups
+    static const QRegExp SPLITTER = QRegExp("(.*) :: (.*)");
+
+    QString html = loadPage("result.html",
+            "<!-- %1 %2 %3 %4 %5 --><table><tr><th>%6</th><th>%7</th></tr>%8</table>");
     
-    if(html.isEmpty()) {
-        html = emptyPage();
-    } else {
+    if (1) {
         bool alt_bg = false; // for alternating background colors
         QString table;
         // matches & captures the search term:
@@ -186,11 +216,12 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
         }
         
         // replace placeholders
+        QString cssUrl = appDataUrl("html/kding.css");
         QString fontSize = QString::number(m_fontSize); // %3
         QString captionGerman = i18nc("result table caption", "German"); // %6
         QString captionEnglish = i18nc("result table caption", "English"); // %7
 
-        html = html.arg(CSS_FILE_URL, m_fontFamily, fontSize,
+        html = html.arg(cssUrl, m_fontFamily, fontSize,
                         m_textColor, m_alternateBackgroundColor,
                         captionGerman, captionEnglish, table);
     }
@@ -205,18 +236,16 @@ QString HtmlGenerator::resultPage(const QString searchTerm, const ResultList res
  * @return HTML code of the failure page
  */
 QString HtmlGenerator::noMatchesPage() const {
-    QString html = loadFile(NO_MATCHES_FILE);
+    QString html = loadPage("nomatches.html", "<!-- %1 %2 %3 -->%4");
     
-    if(html.isEmpty()) {
-        html = emptyPage();
-    } else {
+    if (1) {
         // replace placeholders
         QString infocss = infopageUrl("kde_infopage.css"); // %1
         QString rtlcss = QApplication::isRightToLeft()
             ? QString("@import \"%1\"").arg(infopageUrl("kde_infopage_rtl.css"))
             : ""; // %2
         QString fontSize = QString::number(m_fontSize); // %3
-        QString message = i18n("No matches found"); // %74
+        QString message = i18n("No matches found"); // %4
 
         html = html.arg(infocss, rtlcss, fontSize, message);
     }
@@ -225,7 +254,7 @@ QString HtmlGenerator::noMatchesPage() const {
 }
 
 QUrl HtmlGenerator::styleSheetUrl() const {
-    return QUrl(CSS_FILE_URL);
+    return QUrl(appDataUrl("html/kding.css"));
 }
 
 /**
@@ -246,6 +275,11 @@ QStringList HtmlGenerator::resourcePaths() {
 void HtmlGenerator::formatFragments(QStringList &list,
                                     const QRegExp &searchTerm)
 {
+    // matches opening brackets: { [
+    static const QRegExp OPEN_BRACKETS = QRegExp("([[{])");
+    // matches closing brackets: } ]
+    static const QRegExp CLOSE_BRACKETS = QRegExp("([]}])");
+
     // mark search term before escaping, replace with tags afterwards;
     // use newline as special marker since text is a single line
     list.replaceInStrings(searchTerm, QStringLiteral("\n[\\1\n]"));
@@ -263,29 +297,6 @@ void HtmlGenerator::formatFragments(QStringList &list,
         .replaceInStrings(OPEN_BRACKETS, QStringLiteral("<i>\\1"))
         .replaceInStrings(QStringLiteral(" <i>"), QStringLiteral("&nbsp;<i>"))
         .replaceInStrings(CLOSE_BRACKETS, QStringLiteral("\\1</i>"));
-}
-
-/**
- * This method reads in a file and returns its contents.
- *
- * @param filename the file to read
- *
- * @return content of the file to read, or an empty string in case an error
- *         occurred while trying to read the file
- */
-QString HtmlGenerator::loadFile(const QString filename) const {
-    QString contents = "";
-    QFile file(filename);
-    
-    if(file.open(QFile::ReadOnly)) {
-        QTextStream stream(&file);
-        contents = stream.readAll();
-        file.close();
-    } else {
-        qCritical() << "Failed to open" << filename;
-    }
-    
-    return contents;
 }
 
 #include "moc_htmlgenerator.cpp"
