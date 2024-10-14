@@ -6,7 +6,6 @@ set(kding_SRCS
     searchengine.cpp
     searchbackendfactory.cpp
     htmlgenerator.cpp
-    resultlist.cpp
     application.cpp
     generalsettings.cpp
     backendsettings.cpp

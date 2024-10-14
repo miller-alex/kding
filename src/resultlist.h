@@ -28,19 +28,24 @@
  */
 class ResultItem {
 public:
-    ResultItem(QString text = QString(), int prio = 0);
-    ResultItem(const ResultItem& other);
-    ~ResultItem();
+    ResultItem(QString text = QString(), int prio = 0)
+      : m_text(text), m_priority(prio) {}
+    ResultItem(const ResultItem& other) = default;
+    ~ResultItem() = default;
     
-    ResultItem& operator=(const ResultItem& other);
+    ResultItem& operator=(const ResultItem& other) = default;
     
-    QString text() const;
-    void setText(const QString& text);
-    int priority() const;
-    void setPriority(const int priority);
-    void addToPriority(const int priority);
+    QString text() const { return m_text; }
+    void setText(const QString& text) { m_text = text; }
+
+    int priority() const { return m_priority; }
+    void setPriority(const int priority) { m_priority = priority; }
+    void addToPriority(const int priority) { m_priority += priority; }
     
-    bool operator<(const ResultItem& other) const;
+    bool operator<(const ResultItem& other) const {
+        // items with higher priority should be sorted first, hence the inversion
+        return priority() > other.priority();
+    }
     
 private:
     QString m_text;
