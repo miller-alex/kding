@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2024 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -19,18 +20,15 @@
 #define RESULTLIST_H
 
 #include <QList>
-#include <QObject>
 #include <QString>
 
 /**
  * A @c ResultItem holds an entry from the dictionary as well as the priority
  * assigned to this entry for a given request.
  */
-class ResultItem : public QObject {
-    Q_OBJECT
-
+class ResultItem {
 public:
-    ResultItem(QObject* parent = 0);
+    ResultItem(QString text = QString(), int prio = 0);
     ResultItem(const ResultItem& other);
     ~ResultItem();
     
@@ -50,7 +48,7 @@ private:
 };
 
 /**
- * Define a @c #ResultList as a @c QList of @c ResultItem s.
+ * A @c #ResultList is a @c QList of @c ResultItem s.
  */
 typedef QList<ResultItem> ResultList;
 

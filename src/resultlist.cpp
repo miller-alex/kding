@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2024 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -17,21 +18,20 @@
 
 #include "resultlist.h"
 
-ResultItem::ResultItem(QObject* parent) : QObject(parent), m_text(QString()), m_priority(0) {
-    
-}
+ResultItem::ResultItem(QString text, int prio)
+  : m_text(text),
+    m_priority(prio)
+{}
 
-ResultItem::ResultItem(const ResultItem& other) : QObject(other.parent()) {
-    m_text = other.m_text;
-    m_priority = other.m_priority;
-}
+ResultItem::ResultItem(const ResultItem& other)
+  : m_text(other.m_text),
+    m_priority(other.m_priority)
+{}
 
 ResultItem::~ResultItem() {
-    
 }
 
 ResultItem& ResultItem::operator=(const ResultItem& other) {
-    setParent(other.parent());
     m_text = other.m_text;
     m_priority = other.m_priority;
     
@@ -59,17 +59,6 @@ void ResultItem::addToPriority(const int priority) {
 }
 
 bool ResultItem::operator<(const ResultItem& other) const {
-    bool result = false;
-    
-    // check if the values are different, so we do not falsely state that, of
-    // two equal values, one is bigger than the other (because of the negation
-    // of the actual comparison's result)
-    if(priority() != other.priority()) {
-        // we want it to be sorted by priority, descending, hence the negation
-        result = !(priority() < other.priority());
-    }
-    
-    return result;
+    // items with higher priority should be sorted first, hence the inversion
+    return priority() > other.priority();
 }
-
-#include "moc_resultlist.cpp"
