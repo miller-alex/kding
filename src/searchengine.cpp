@@ -30,17 +30,12 @@
 #include <QMutableListIterator>
 #include <algorithm>
 
-const QRegExp SearchEngine::MULTI_LINE = QRegExp("\\|");    ///< RegExp to match line break markers
-const QRegExp SearchEngine::ABBREVIATION = QRegExp(" : ");  ///< RegExp to match abbreviation markers
-const QRegExp SearchEngine::ROUND_BRACKETS = QRegExp(" \\([^.\\)]*\\)");    ///< RegExp to match text in round brackets
-const QRegExp SearchEngine::CURLY_BRACKETS = QRegExp(" \\{[^.\\}]*\\}");    ///< RegExp to match text in curly brackets
-const QRegExp SearchEngine::SQUARE_BRACKETS = QRegExp(" \\[[^\\]]*\\]");    ///< RegExp to match text in square brackets
+static QString getDictionary() {
+    return QStandardPaths::locate(QStandardPaths::AppDataLocation, "de-en.txt");
+}
 
 SearchEngine::SearchEngine(QObject* parent)
   : QObject(parent),
-    DEFAULT_DICTIONARY(QStandardPaths::locate(QStandardPaths::AppDataLocation,
-                                              "de-en.txt")),
-    DICTIONARY_VERSION(determineDictionaryVersion()),
     m_process(0),
     m_resultList(0)
 {
@@ -122,7 +117,7 @@ void SearchEngine::search(QString phrase) {
     m_process->setArguments(m_backendFactory->argumentList() << phrase);
 
     // pass the dictionary to stdin
-    m_process->setStandardInputFile(DEFAULT_DICTIONARY);
+    m_process->setStandardInputFile(getDictionary());
 
     // finally start searching
     emit statusMessage(i18n("Searching for '%1'...", m_searchTerm));
@@ -181,7 +176,7 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
         m_resultList->append(item);
     }
     
-    sortResultsByPriority(m_resultList);
+    sortResultsByPriority();
     
     // clean up
     delete m_process;
@@ -197,7 +192,17 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
  *
  * @param resultList a pointer to the @c #ResultList to sort
  */
-void SearchEngine::sortResultsByPriority(ResultList* resultList) const {
+void SearchEngine::sortResultsByPriority() {
+    // the following expressions are independent of the search term
+    // and thus can be defined as static const
+
+    // matches line break markers
+    static const QChar MULTI_LINE('|');
+    // matches abbreviation markers (obsolete)
+    static const QLatin1String ABBREVIATION(" : ");
+    // matches text in round/curly/square brackets
+    static const QRegExp IN_BRACKETS(" (?:\\([^.)]*\\)|\\{[^.}]*\\}|\\[[^]]*\\])");
+
     // the result starts with the search term
     QRegExp startsWith_DE("^" + m_searchTerm + "(;| ::)", Qt::CaseInsensitive);
     QRegExp startsWith_EN(":: (to )?" + m_searchTerm + "(;|$)", Qt::CaseInsensitive);
@@ -211,18 +216,20 @@ void SearchEngine::sortResultsByPriority(ResultList* resultList) const {
     QRegExp firstLine_DE("^[^|]*" + m_searchTerm + ".*\\|.* ::", Qt::CaseInsensitive);
     QRegExp firstLine_EN(":: [^|]*" + m_searchTerm + ".*\\|", Qt::CaseInsensitive);
     
-    QMutableListIterator<ResultItem> iterator(*resultList);
+    // values that are added to the result's priority depending on the
+    // outcome of various regexp tests
+    enum SortPriority { STARTS_WITH = 100, CONTAINS = 80, IS_ABBREVIATION = 10 };
+
+    QMutableListIterator<ResultItem> iterator(*m_resultList);
     while(iterator.hasNext()) {
         ResultItem item = iterator.next();
         QString text = item.text();
         
         // remove all text in brackets
-        text.replace(ROUND_BRACKETS, "");
-        text.replace(CURLY_BRACKETS, "");
-        text.replace(SQUARE_BRACKETS, "");
+        text.replace(IN_BRACKETS, "");
         
-        if(text.contains(MULTI_LINE)) { // this item is a multi line result
-            const int LINE_COUNT = text.count(MULTI_LINE);
+        const int LINE_COUNT = text.count(MULTI_LINE);
+        if (LINE_COUNT > 0) { // this item is a multi line result
             item.setPriority(0);
             
             if(text.contains(startsWith_multiLine_DE) || text.contains(startsWith_multiLine_EN)) {
@@ -247,7 +254,7 @@ void SearchEngine::sortResultsByPriority(ResultList* resultList) const {
         iterator.setValue(item);
     }
     
-    std::stable_sort(resultList->begin(), resultList->end());
+    std::stable_sort(m_resultList->begin(), m_resultList->end());
 }
 
 QString SearchEngine::searchTerm() const {
@@ -309,45 +316,38 @@ void SearchEngine::processFailed(QProcess::ProcessError error) const {
 }
 
 QString SearchEngine::dictionaryVersion() const {
-    return DICTIONARY_VERSION;
-}
-
-QString SearchEngine::backendVersion() const {
-    return "";
-}
-
-QString SearchEngine::determineDictionaryVersion() {
-    // The version of the dictionary is given in the first line of the file.
+    // The version of the dictionary is given in the first line of the file,
+    // but for robustness it's accepted anywhere in the initial comment section.
     // As of v1.5 it is of the form
     //   # Version :: 1.5 2007-04-09
     // for release versions or
     //   # Version :: devel 2007-06-10
     // for development versions of the dictionary.
+    static const QRegExp ver("#+\\s*Version\\s*::\\s*(\\S(?:.*\\S)?)?\\s*",
+                             Qt::CaseInsensitive);
     
-    QString version(i18nc("dictionary version", "unknown"));
-    
-    QFile dictFile(DEFAULT_DICTIONARY);
-    if(dictFile.open(QIODevice::ReadOnly)) {
+    QFile dictFile(getDictionary());
+    if (dictFile.open(QIODevice::ReadOnly)) {
         QTextStream stream(&dictFile);
+        stream.setCodec("UTF-8");
+
         QString line;
-        
-        line = stream.readLine();
-        if(line != 0) {
-            int pos = line.indexOf("::");
-            if(pos != -1) {
-                version = line.mid(pos + 2).trimmed();
+        do {
+            line = stream.readLine();
+            if (ver.exactMatch(line)) {
+                return ver.cap(1);
             }
-        }
-        
-        dictFile.close();
+        } while (line.startsWith('#'));
+    } else if (dictFile.fileName().isEmpty()) {
+        qCritical() << "Dictionary not found";
     } else {
         qCritical() << "Failed to open dictionary" << dictFile.fileName();
     }
     
-    return version;
+    return i18nc("dictionary version", "unknown");
 }
 
-QString SearchEngine::determineBackendVersion() {
+QString SearchEngine::backendVersion() const {
     return "";
 }
 

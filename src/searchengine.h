@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009 Michael Rex <me@rexi.org>
+ * Copyright (c) 2024 Alexander Miller <alex.miller@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -25,7 +26,6 @@
 #include <QProcess>
 #include <QRegExp>
 
-class MainWindow;
 class SearchBackendFactory;
 
 /**
@@ -61,27 +61,7 @@ private slots:
     void monitorProcess(QProcess::ProcessState newState) const;
     
 private:
-    /// This enum defines values that are added to the result's priority
-    /// depending on the outcome of various regexp tests
-    enum SortPriority { STARTS_WITH = 100, CONTAINS = 80, IS_ABBREVIATION = 10 };
-    
-    // the following regular expressions are independent of the search term
-    // and thus can be defined at class level
-    static const QRegExp MULTI_LINE;
-    static const QRegExp ABBREVIATION;
-    static const QRegExp ROUND_BRACKETS;
-    static const QRegExp CURLY_BRACKETS;
-    static const QRegExp SQUARE_BRACKETS;
-    
-    // cannot make this a static member because an application instance
-    // is needed to use QStandardPaths
-    const QString DEFAULT_DICTIONARY;
-    
-    const QString DICTIONARY_VERSION;
-    
-    void sortResultsByPriority(ResultList* resultList) const;
-    QString determineDictionaryVersion();
-    QString determineBackendVersion();
+    void sortResultsByPriority();
     
     QProcess* m_process;
     QString m_searchTerm;
