@@ -323,7 +323,9 @@ QString SearchEngine::dictionaryVersion() const {
     // for release versions or
     //   # Version :: devel 2007-06-10
     // for development versions of the dictionary.
-    static const QRegExp ver("#+\\s*Version\\s*::\\s*(\\S(?:.*\\S)?)?\\s*",
+    // On 2024-10-15, the format changed to:
+    //   # Version: devel 2024-10-15
+    static const QRegExp ver("#+\\s*Version\\s*:+\\s*(\\S(?:.*\\S)?)?\\s*",
                              Qt::CaseInsensitive);
     
     QFile dictFile(getDictionary());
