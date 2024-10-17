@@ -1,0 +1,32 @@
+Maintenance:
+* replace or remove deprecated KF5 interfaces:
+  KStartupInfo::startupId(), KWindowSystem::windowRemoved(WId)
+* port to Qt6/KF6
+* replace stuff deprecated in Qt6
+
+Bugs:
+* "Remember window position" still doesn't work correctly on X11
+  (on wayland, window placement isn't possible anyway)
+
+Features:
+* improve keyboard handling (scrolling results)
+* better html template engine with named substitutions (simple map or
+  grantlee/ktexttemplate)
+* integrate abbreviations (as tooltips and/or show all)
+* allow selecting different dictionaries
+* add other search engines (spell checker, thesaurus, dict, fortune, wtf,
+  search in message catalogs, word lists, ...)
+* optionally use builtin regex engine as search backend
+* limit # of results shown (configurable)
+* improve speed and memory usage when showing large result lists
+
+Dictionaries:
+* include more dictionaries?
+* ding website links to a small de-es dictionary and scripts to convert
+  wiktionary data into ding dictionaries
+* the other dictionaries that powered Beolingus (de-es and de-pt) seem
+  not to be available under a free license;
+  see also <https://github.com/haukex/de-en-dict/issues/6>
+* other sources?
+* separate code and dictionaries? (different branches? separate archives
+  for releases only?)
