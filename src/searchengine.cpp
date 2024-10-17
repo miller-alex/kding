@@ -173,7 +173,8 @@ void SearchEngine::processFinished(int exitCode, QProcess::ExitStatus exitStatus
     while(m_process->canReadLine()) {
         ResultItem item;
         item.setText(QString::fromUtf8(m_process->readLine()).trimmed());
-        m_resultList->append(item);
+        if (!item.text().startsWith('#')) // skip header comments
+            m_resultList->append(item);
     }
     
     sortResultsByPriority();
